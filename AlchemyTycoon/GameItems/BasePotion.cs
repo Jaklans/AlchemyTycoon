@@ -9,14 +9,15 @@ namespace AlchemyTycoon.GameItems
     class BasePotion : GameItem
     {
         //Feilds
-        string effect;
+        private string effect;
+        private int[] potionHashValue;
 
         //Constructor
-        public BasePotion(string name, int value, string flavorText, int[] color, int hashValue, string effect) 
-            : base(name, value, flavorText, color, hashValue)
+        public BasePotion(string name, int value, string flavorText, string effect, int[] potionHashValue) 
+            : base(name, value, flavorText)
         {
             this.effect = effect;
-            int[] ary = new int[3];
+            this.potionHashValue = potionHashValue;
         }
         
     }

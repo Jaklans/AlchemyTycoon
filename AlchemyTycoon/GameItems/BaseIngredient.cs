@@ -9,13 +9,13 @@ namespace AlchemyTycoon.GameItems
     class BaseIngredient : GameItem
     {
         //Feilds
-        
+        int ingredientHashValue;
 
         //Constructor
-        public BaseIngredient(string name, int value, string flavorText, int[] color, int hashValue, string effect) 
-            : base(name, value, flavorText, color, hashValue)
+        public BaseIngredient(int ingredientHashValue, string name, int value, string flavorText) 
+            : base(name, value, flavorText)
         {
-            
+            this.ingredientHashValue = ingredientHashValue;
         }
     }
 }

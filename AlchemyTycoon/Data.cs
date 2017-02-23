@@ -41,25 +41,55 @@ namespace AlchemyTycoon
                         // (i) Potion Data
                         for (int i = 0; i < potionCount; i++)
                         {
-                            potions.Add
-                            (
+                            // (a, b, c, d) Hash Value (composed of the four component's hash values)
+                            int[] hashValue = new int[4]
+                            {
+                                reader.ReadInt32(),
+                                reader.ReadInt32(),
+                                reader.ReadInt32(),
+                                reader.ReadInt32(),
+                            };
+                            
+                            GameItems.BasePotion potion =
                                 new GameItems.BasePotion
                                     (
-                                        // (a) Name
+                                        // (b) Name
                                         reader.ReadString(),
-                                        // (b) Value
+                                        // (c) Value
                                         reader.ReadInt32(),
-                                        // (c) Flavor Text
+                                        // (d) Flavor Text
                                         reader.ReadString(),
-                                        // (d) Color (three numbers, in the order of Red, Green, Blue)
-                                        new int[reader.ReadUInt32(), reader.ReadUInt32(), reader.ReadUInt32()],
-                                        // (e) Hash Value
-                                        reader.ReadUInt32(),
-                                        // (f) String of Effect Description
+                                        // (e) String of Effect Description
+                                        reader.ReadString(),
+                                        // (-) Portion Hash Value
+                                        hashValue
+                                    );
+                            potions.Add(hashValue, potion);
+                        }
+
+                        // (ii) Ingrediant Data
+                        for (int i = 0; i < ingrediantCount; i++)
+                        {
+                            ingrediants.Add
+                            (
+                                i,
+                                new GameItems.BaseIngredient
+                                    (
+                                        // (a) Ingrediant Hash Value
+                                        reader.ReadInt32(),
+                                        // (b) Name
+                                        reader.ReadString(),
+                                        // (c) Value
+                                        reader.ReadInt32(),
+                                        // (d) Flavor Text
                                         reader.ReadString()
                                     )
-                            )
+                            );
                         }
+                        // (iii) Recipie Data
+
+                            // TO DO: Implement Recipies (Lower Priority)
+
             }
             finally
             {

@@ -11,16 +11,12 @@ namespace AlchemyTycoon.GameItems
         protected string name;
         protected int value;
         protected string flavorText;
-        protected int[] color;
-        protected int hashValue;
 
-        public GameItem(string name, int value, string flavorText, int[] color, int hashValue)
+        public GameItem(string name, int value, string flavorText)
         {
             this.name = name;
             this.value = value;
             this.flavorText = flavorText;
-            this.color = color;
-            this.hashValue = hashValue;
         }
     }
 }
