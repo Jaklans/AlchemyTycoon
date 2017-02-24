@@ -90,7 +90,7 @@ namespace AlchemyTycoon
                         }
                         // (iii) Recipie Data
 
-                            // TO DO: Implement Recipies (Lower Priority)
+                            // TO DO: Implement Recipies (Medium Priority)
 
             }
             finally
@@ -110,7 +110,17 @@ namespace AlchemyTycoon
         {
             int[] potion = new int[4] {input1.HashValue, input2.HashValue, input3.HashValue, input4.HashValue};
 
+            Array.Sort(potion);
 
+            if (potions.ContainsKey(potion))
+            {
+                return potions[potion];
+            }
+            else
+            {
+                return null; 
+                //TO DO: Return a bad potion (Low Priority)
+            }
         }
     }
 }
