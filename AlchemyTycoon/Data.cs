@@ -53,13 +53,15 @@ namespace AlchemyTycoon
                             GameItems.BasePotion potion =
                                 new GameItems.BasePotion
                                     (
-                                        // (b) Name
-                                        reader.ReadString(),
-                                        // (c) Value
+                                        // (e) Hash Value
                                         reader.ReadInt32(),
-                                        // (d) Flavor Text
+                                        // (f) Name
                                         reader.ReadString(),
-                                        // (e) String of Effect Description
+                                        // (g) Value
+                                        reader.ReadInt32(),
+                                        // (h) Flavor Text
+                                        reader.ReadString(),
+                                        // (i) String of Effect Description
                                         reader.ReadString(),
                                         // (-) Portion Hash Value
                                         hashValue
@@ -98,6 +100,15 @@ namespace AlchemyTycoon
                 inStream.Close();
                 reader.Close();
             }
+        }
+
+        public GameItems.BasePotion CreatePotion(
+            GameItems.BaseIngredient input1,
+            GameItems.BaseIngredient input2,
+            GameItems.BaseIngredient input3,
+            GameItems.BaseIngredient input4)
+        {
+            int[] potion = new int[4] {input1. };
         }
     }
 }

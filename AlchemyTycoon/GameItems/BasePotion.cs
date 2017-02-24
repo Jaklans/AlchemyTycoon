@@ -13,8 +13,8 @@ namespace AlchemyTycoon.GameItems
         private int[] potionHashValue;
 
         //Constructor
-        public BasePotion(string name, int value, string flavorText, string effect, int[] potionHashValue) 
-            : base(name, value, flavorText)
+        public BasePotion(int hashValue, string name, int value, string flavorText, string effect, int[] potionHashValue) 
+            : base(hashValue, name, value, flavorText)
         {
             this.effect = effect;
             this.potionHashValue = potionHashValue;

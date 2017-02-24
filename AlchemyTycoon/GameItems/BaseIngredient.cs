@@ -12,10 +12,10 @@ namespace AlchemyTycoon.GameItems
         int ingredientHashValue;
 
         //Constructor
-        public BaseIngredient(int ingredientHashValue, string name, int value, string flavorText) 
-            : base(name, value, flavorText)
+        public BaseIngredient(int hashValue, string name, int value, string flavorText) 
+            : base(hashValue, name, value, flavorText)
         {
-            this.ingredientHashValue = ingredientHashValue;
+
         }
     }
 }
