@@ -108,7 +108,9 @@ namespace AlchemyTycoon
             GameItems.BaseIngredient input3,
             GameItems.BaseIngredient input4)
         {
-            int[] potion = new int[4] {input1. };
+            int[] potion = new int[4] {input1.HashValue, input2.HashValue, input3.HashValue, input4.HashValue};
+
+
         }
     }
 }

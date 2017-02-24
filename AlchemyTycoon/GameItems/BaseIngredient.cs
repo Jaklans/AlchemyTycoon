@@ -9,7 +9,13 @@ namespace AlchemyTycoon.GameItems
     class BaseIngredient : GameItem
     {
         //Feilds
-        int ingredientHashValue;
+        protected int ingredientHashValue;
+
+        //Properties
+        public int IngredientHashValue
+        {
+            get { return ingredientHashValue; }
+        }
 
         //Constructor
         public BaseIngredient(int hashValue, string name, int value, string flavorText) 
