@@ -12,40 +12,52 @@ namespace AlchemyTycoon.GameItems
     //Handles either a potion or ingredient inventory
     class Inventory<T> where T : GameItems.GameItem
     {
-        //A list to hold game items
+        //A list to hold game items/potions
         private List<T> data;
 
-        //Constructor
+        //Constructor/Initializator
         public Inventory()
         {
             //Performs initialization
             data = new List<T>();
         }
         
-        //RemoveItem Method
+        //RemoveItem Method - For when the player sells a potion
         public T RemoveItem(int index)
         {
-            //Removes item from a specific index
+            //Removes item from a specific index of the list
             T temp = data[index];
             data.RemoveAt(index);
             return temp;
         }
 
-        //AddItem Method
+        //AddItem Method - For when the player creates a potion
         public void AddItem(T item)
         {
             
-            //Add a new item to the list
+            //Adds a new item to the list
             if(item.HashValue > data[data.Count / 2].HashValue)
             {
-                //Recursion???
+                //Adds the item using Add method
+                data.Add(item);
+
+                //Sorts the list after adding the item
+                data.Sort();
             }
         }
 
-        //Draw method - Not implenmented yet
-        public void Draw(SpriteBatch sb)
+        //Draw method 
+        public void Draw(SpriteBatch sb, Vector2 position, int rows, int coloumns)
         {
-            //sb.Draw();
+            int index = 0;
+            for(int i = 0; i < coloumns; i++)
+            {
+                for(int j = 0; j < rows; j++)
+                {
+                    data[index].draw();
+                    index++;
+                }
+            }
         }
     }
 }
