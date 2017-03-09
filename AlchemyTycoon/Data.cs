@@ -9,10 +9,17 @@ namespace AlchemyTycoon
 {
     class Data
     {
-        //Declair Structures
-        private Dictionary<int[], GameItems.BasePotion> potions;
+        //Declare Structures
+
+            //All items have a hash value, which they are stored by here
+        private Dictionary<int, GameItems.BasePotion> potions;
         private Dictionary<int, GameItems.BaseIngredient> ingrediants;
 
+            //Potions have a potionHashValue comprised of their components,
+            //which is mapped to their hash value here
+        private Dictionary<int[], int> potionHashValues;
+        
+        
         //Constructor and Initialization
         public Data(string targetFileName)
         {
@@ -41,32 +48,31 @@ namespace AlchemyTycoon
                         // (i) Potion Data
                         for (int i = 0; i < potionCount; i++)
                         {
-                            // (a, b, c, d) Hash Value (composed of the four component's hash values)
-                            int[] hashValue = new int[4]
-                            {
-                                reader.ReadInt32(),
-                                reader.ReadInt32(),
-                                reader.ReadInt32(),
-                                reader.ReadInt32(),
-                            };
-                            
                             GameItems.BasePotion potion =
                                 new GameItems.BasePotion
                                     (
-                                        // (e) Hash Value
+                                        // (a) Hash Value
                                         reader.ReadInt32(),
-                                        // (f) Name
+                                        // (b) Name
                                         reader.ReadString(),
-                                        // (g) Value
+                                        // (c) Value
                                         reader.ReadInt32(),
-                                        // (h) Flavor Text
+                                        // (d) Flavor Text
                                         reader.ReadString(),
-                                        // (i) String of Effect Description
+                                        // (e) String of Effect Description
                                         reader.ReadString(),
-                                        // (-) Portion Hash Value
-                                        hashValue
+                                        // (f, g, h, i) Portion Hash Value
+                                            // Comprised of the hash values 
+                                            // of the potions ingrediants
+                                        new int[4]
+                                        {
+                                            reader.ReadInt32(),
+                                            reader.ReadInt32(),
+                                            reader.ReadInt32(),
+                                            reader.ReadInt32(),
+                                        }
                                     );
-                            potions.Add(hashValue, potion);
+                            potions.Add(potion.HashValue, potion);
                         }
 
                         // (ii) Ingrediant Data
@@ -77,7 +83,7 @@ namespace AlchemyTycoon
                                 i,
                                 new GameItems.BaseIngredient
                                     (
-                                        // (a) Ingrediant Hash Value
+                                        // (a) Hash Value
                                         reader.ReadInt32(),
                                         // (b) Name
                                         reader.ReadString(),
@@ -102,6 +108,7 @@ namespace AlchemyTycoon
             }
         }
 
+        //
         public GameItems.BasePotion CreatePotion(
             GameItems.BaseIngredient input1,
             GameItems.BaseIngredient input2,
@@ -112,9 +119,9 @@ namespace AlchemyTycoon
 
             Array.Sort(potion);
 
-            if (potions.ContainsKey(potion))
+            if (potionHashValues.ContainsKey(potion))
             {
-                return potions[potion];
+                return potions[potionHashValues[potion]];
             }
             else
             {
