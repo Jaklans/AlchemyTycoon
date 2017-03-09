@@ -12,17 +12,24 @@ namespace AlchemyTycoon
     public class Night
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        //these will be used to get the varables we need
         Texture2D img { get; set; }
         Rectangle imgRec { get; set; }
 
+        //get all data for in game text
         string imgFileName { get; set; }
-        KeyboardState kbs { get; set; }
+        SpriteFont nightFont { get; set; }
+        string nightText { get; set; }
+        Vector2 nighTextLocation { get; set; }
+        Color nightTextColor { get; set; }
+        //KeyboardState kbs { get; set; }
         //public Night()
         //{
         //    graphics = new GraphicsDeviceManager(this);
         //    Cont
         //}
+
+        //then use constructors to take the data from child into this class so that we can use them
         public Night(Texture2D image, Rectangle imageRec)
         {
             img = image;
@@ -32,11 +39,18 @@ namespace AlchemyTycoon
         {
             imgFileName = imageFileName;
         }
-        public Night(KeyboardState kbState)
+        public Night(SpriteFont font, string text, Vector2 textlocation, Color tcolor)
         {
-            kbState = kbs;
+            nightFont = font;
+            nightText = text;
+            nighTextLocation = textlocation;
+            nightTextColor = tcolor;
         }
-
+        //public Night(KeyboardState kbState)
+        //{
+        //    kbState = kbs;
+        //}
+        //
         //protected void LoadContent()
         //{
         //    spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -45,20 +59,15 @@ namespace AlchemyTycoon
         //    spriteSheet = Content.Load<Texture2D>(imgFileName);
         //}
         //
-        protected void Draw(GameTime gameTime)
+        protected void Draw(SpriteBatch spriteBatch)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
-
+            
             spriteBatch.Draw(img, imgRec, Color.White);
-            spriteBatch.DrawString(SpriteFont,"",0,Color)
+            spriteBatch.DrawString(nightFont, nightText, nighTextLocation, nightTextColor);
 
-            spriteBatch.End();
-
-
-            base.Draw(gameTime);
         }
     }
 }
