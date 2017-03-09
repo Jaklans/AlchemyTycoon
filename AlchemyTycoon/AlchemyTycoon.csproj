@@ -43,6 +43,7 @@
     <Compile Include="GameItems\BasePotion.cs" />
     <Compile Include="GameItems\GameItem.cs" />
     <Compile Include="GameItems\BaseIngredient.cs" />
+    <Compile Include="Inventory.cs" />
     <Compile Include="PlayerData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
