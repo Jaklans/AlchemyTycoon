@@ -43,7 +43,15 @@
     <Compile Include="GameItems\BasePotion.cs" />
     <Compile Include="GameItems\GameItem.cs" />
     <Compile Include="GameItems\BaseIngredient.cs" />
+    <Compile Include="GameStates\Day.cs" />
+    <Compile Include="GameStates\DayMenu.cs" />
+    <Compile Include="GameStates\MainMenu.cs" />
+    <Compile Include="GameStates\NightInventory.cs" />
+    <Compile Include="GameStates\NightKit.cs" />
+    <Compile Include="GameStates\NightMenu.cs" />
+    <Compile Include="GameStates\NightRecipies.cs" />
     <Compile Include="Inventory.cs" />
+    <Compile Include="GameStates\Night.cs" />
     <Compile Include="PlayerData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,6 +69,7 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
