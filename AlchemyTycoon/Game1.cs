@@ -11,6 +11,21 @@ namespace AlchemyTycoon
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Rectangle screenPos;
+        Texture2D screen;
+
+        enum GlobalGameState
+        {
+            MainMenu,
+            Playing,
+        }
+
+        GlobalGameState CurrentGameState = GlobalGameState.MainMenu;
+
+        int screenWidth = 1280;
+        int screenHeight = 800;
+        Button button;
+
 
         public Game1()
         {
@@ -27,7 +42,7 @@ namespace AlchemyTycoon
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            screenPos = new Rectangle(0, 0, screenWidth, screenHeight);
             base.Initialize();
         }
 
@@ -41,6 +56,15 @@ namespace AlchemyTycoon
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            //will set out initial game screen size
+            graphics.PreferredBackBufferWidth = screenWidth;
+            graphics.PreferredBackBufferHeight = screenHeight;
+
+            graphics.ApplyChanges();
+            IsMouseVisible = true;
+            button = new Button(Content.Load < Texture2D > ("TempButton"), graphics.GraphicsDevice);
+            button.setPos(new Vector2(screenWidth, screenHeight));
+            screen = Content.Load<Texture2D>("TempMenu");
         }
 
         /// <summary>
@@ -63,6 +87,24 @@ namespace AlchemyTycoon
                 Exit();
 
             // TODO: Add your update logic here
+            //gets mouse position
+            MouseState mouse = Mouse.GetState();
+
+            switch (CurrentGameState)
+            {
+                case GlobalGameState.MainMenu:
+                    //if clicked goto playing screen
+                    if (button.isClicked == true)
+                    {
+                        CurrentGameState = GlobalGameState.Playing;
+                    }
+                    break;
+                case GlobalGameState.Playing:
+                    break;
+                default:
+                    break;
+            }
+
 
             base.Update(gameTime);
         }
@@ -76,7 +118,21 @@ namespace AlchemyTycoon
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            spriteBatch.Begin();
 
+            switch (CurrentGameState)
+            {
+                case GlobalGameState.MainMenu:
+                    spriteBatch.Draw(screen, screenPos, Color.White);
+                    button.Draw(spriteBatch);
+                    break;
+                case GlobalGameState.Playing:
+                    break;
+                default:
+                    break;
+            }
+
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }

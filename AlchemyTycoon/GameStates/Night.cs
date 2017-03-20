@@ -61,8 +61,6 @@ namespace AlchemyTycoon
         //
         protected void Draw(SpriteBatch spriteBatch)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
             // TODO: Add your drawing code here
             
             spriteBatch.Draw(img, imgRec, Color.White);
