@@ -142,6 +142,8 @@ namespace AlchemyTycoon
                 case GlobalGameState.MainMenu:
                     spriteBatch.Draw(screen, screenPos, Color.White);
                     playit.Draw(spriteBatch);
+                    fS.Draw(spriteBatch);
+                    exit.Draw(spriteBatch);
                     break;
                 case GlobalGameState.Playing:
                     break;
