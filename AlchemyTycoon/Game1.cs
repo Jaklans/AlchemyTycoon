@@ -18,13 +18,17 @@ namespace AlchemyTycoon
         {
             MainMenu,
             Playing,
+            Fullscreen,
+            Exit,
         }
 
         GlobalGameState CurrentGameState = GlobalGameState.MainMenu;
 
         int screenWidth = 1280;
         int screenHeight = 800;
-        Button button;
+        Button playit;
+        Button fS;
+        Button exit;
 
 
         public Game1()
@@ -62,8 +66,12 @@ namespace AlchemyTycoon
 
             graphics.ApplyChanges();
             IsMouseVisible = true;
-            button = new Button(Content.Load < Texture2D > ("TempButton"), graphics.GraphicsDevice);
-            button.setPos(new Vector2(screenWidth, screenHeight));
+            playit = new Button(Content.Load<Texture2D>("TempButton"), graphics.GraphicsDevice);
+            playit.setPos(new Vector2(screenWidth, screenHeight));
+            fS = new Button(Content.Load<Texture2D>("TempButton"), graphics.GraphicsDevice);
+            fS.setPos(new Vector2(screenWidth, screenHeight - 50));
+            exit = new Button(Content.Load<Texture2D>("TempButton"), graphics.GraphicsDevice);
+            exit.setPos(new Vector2(screenWidth, screenHeight - 100));
             screen = Content.Load<Texture2D>("TempMenu");
         }
 
@@ -94,9 +102,18 @@ namespace AlchemyTycoon
             {
                 case GlobalGameState.MainMenu:
                     //if clicked goto playing screen
-                    if (button.isClicked == true)
+                    if (playit.isClicked == true)
                     {
                         CurrentGameState = GlobalGameState.Playing;
+                    }
+                    if (fS.isClicked == true)
+                    {
+                        screenHeight = GraphicsDevice.Viewport.Height;
+                        screenWidth = GraphicsDevice.Viewport.Width;
+                    }
+                    if (exit.isClicked == true)
+                    {
+                        Exit();
                     }
                     break;
                 case GlobalGameState.Playing:
@@ -124,7 +141,7 @@ namespace AlchemyTycoon
             {
                 case GlobalGameState.MainMenu:
                     spriteBatch.Draw(screen, screenPos, Color.White);
-                    button.Draw(spriteBatch);
+                    playit.Draw(spriteBatch);
                     break;
                 case GlobalGameState.Playing:
                     break;
