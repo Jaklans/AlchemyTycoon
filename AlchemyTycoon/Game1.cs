@@ -117,6 +117,7 @@ namespace AlchemyTycoon
                     }
                     break;
                 case GlobalGameState.Playing:
+                    GameManager.
                     break;
                 default:
                     break;

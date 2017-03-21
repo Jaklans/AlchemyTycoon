@@ -44,6 +44,7 @@
     <Compile Include="GameItems\BasePotion.cs" />
     <Compile Include="GameItems\GameItem.cs" />
     <Compile Include="GameItems\BaseIngredient.cs" />
+    <Compile Include="GameStates\GameManager.cs" />
     <Compile Include="GameStates\Day.cs" />
     <Compile Include="GameStates\DayMenu.cs" />
     <Compile Include="GameStates\MainMenu.cs" />
