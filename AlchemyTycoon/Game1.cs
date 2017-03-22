@@ -23,9 +23,10 @@ namespace AlchemyTycoon
         }
 
         GlobalGameState CurrentGameState = GlobalGameState.MainMenu;
-
+        //set the initial game screen size
         int screenWidth = 1280;
         int screenHeight = 800;
+        //make the buttons for menu
         Button playit;
         Button fS;
         Button exit;
@@ -46,7 +47,13 @@ namespace AlchemyTycoon
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            //set the prefered window size to the values (Can be changed
+            graphics.PreferredBackBufferWidth = screenWidth;
+            graphics.PreferredBackBufferHeight = screenHeight;
+
             screenPos = new Rectangle(0, 0, screenWidth, screenHeight);
+
+            graphics.ApplyChanges();
             base.Initialize();
         }
 
@@ -61,17 +68,14 @@ namespace AlchemyTycoon
 
             // TODO: use this.Content to load your game content here
             //will set out initial game screen size
-            graphics.PreferredBackBufferWidth = screenWidth;
-            graphics.PreferredBackBufferHeight = screenHeight;
 
-            graphics.ApplyChanges();
             IsMouseVisible = true;
             playit = new Button(Content.Load<Texture2D>("TempButton"), graphics.GraphicsDevice);
-            playit.setPos(new Vector2(screenWidth, screenHeight));
+            playit.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
             fS = new Button(Content.Load<Texture2D>("TempButton"), graphics.GraphicsDevice);
-            fS.setPos(new Vector2(screenWidth, screenHeight - 50));
+            fS.setPos(new Vector2(screenWidth / 2, screenHeight / 2 + 50));
             exit = new Button(Content.Load<Texture2D>("TempButton"), graphics.GraphicsDevice);
-            exit.setPos(new Vector2(screenWidth, screenHeight - 100));
+            exit.setPos(new Vector2(screenWidth / 2, screenHeight / 2 + 100));
             screen = Content.Load<Texture2D>("TempMenu");
         }
 
@@ -89,6 +93,16 @@ namespace AlchemyTycoon
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        /// 
+        //used to change the screen size
+        void UpdateScreen(int width, int height)
+        {
+            screenWidth = width;
+            screenHeight = height;
+            graphics.ApplyChanges();
+
+            Initialize();
+        }
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -101,6 +115,10 @@ namespace AlchemyTycoon
             switch (CurrentGameState)
             {
                 case GlobalGameState.MainMenu:
+
+                    playit.Update(mouse);
+                    fS.Update(mouse);
+                    exit.Update(mouse);
                     //if clicked goto playing screen
                     if (playit.isClicked == true)
                     {
@@ -108,8 +126,18 @@ namespace AlchemyTycoon
                     }
                     if (fS.isClicked == true)
                     {
-                        screenHeight = GraphicsDevice.Viewport.Height;
-                        screenWidth = GraphicsDevice.Viewport.Width;
+                        //if the screen is FullScreen reverse Change
+                        if (graphics.IsFullScreen == true)
+                        {
+                            graphics.IsFullScreen = false;
+                            UpdateScreen(1280, 800);
+                        }//if windowed make full screen
+                        else
+                        {
+                            graphics.IsFullScreen = true;
+                            UpdateScreen(1920, 1080);
+                        }
+
                     }
                     if (exit.isClicked == true)
                     {
@@ -117,7 +145,6 @@ namespace AlchemyTycoon
                     }
                     break;
                 case GlobalGameState.Playing:
-                    GameManager.
                     break;
                 default:
                     break;
@@ -137,6 +164,7 @@ namespace AlchemyTycoon
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
+
 
             switch (CurrentGameState)
             {

@@ -19,7 +19,7 @@ namespace AlchemyTycoon
             //which is mapped to their hash value here
         private Dictionary<int[], int> potionHashValues;
         
-        
+
         //Constructor and Initialization
         public Data(string targetFileName)
         {
@@ -70,7 +70,9 @@ namespace AlchemyTycoon
                                             reader.ReadInt32(),
                                             reader.ReadInt32(),
                                             reader.ReadInt32(),
-                                        }
+                                        },
+                                        reader.ReadString()
+
                                     );
                             potions.Add(potion.HashValue, potion);
                         }
@@ -108,7 +110,7 @@ namespace AlchemyTycoon
             }
         }
 
-        //
+        //Potion Creation
         public GameItems.BasePotion CreatePotion(
             GameItems.BaseIngredient input1,
             GameItems.BaseIngredient input2,
