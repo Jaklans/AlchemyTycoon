@@ -12,9 +12,29 @@ namespace AlchemyTycoon
     public class Night
     {
         GraphicsDeviceManager graphics;
-        //these will be used to get the varables we need
+        //these will be used to get the variables we need
         Texture2D img { get; set; }
         Rectangle imgRec { get; set; }
+
+        SpriteBatch spriteBatch;
+
+        //Enum for Night's states
+        enum nightState
+        {
+            Default,
+            Inventory,
+            Kit,
+            Recipies
+        }
+
+        //Current state
+        nightState currentState = nightState.Default;
+
+        //Screen size
+        int screenWidth = 1280;
+        int screenHeight = 800;
+
+        //Buttons???
 
         //get all data for in game text
         string imgFileName { get; set; }
@@ -59,12 +79,48 @@ namespace AlchemyTycoon
         //    spriteSheet = Content.Load<Texture2D>(imgFileName);
         //}
         //
+
+        //LoadContent method
+        protected void LoadContent()
+        {
+            // Create a new SpriteBatch, which can be used to draw textures
+            
+            switch(currentState)
+            {
+                case nightState.Default:
+                    break;
+                case nightState.Inventory:
+                    break;
+                case nightState.Kit:
+                    break;
+                case nightState.Recipies:
+                    break;
+                default:
+                    break;
+            }
+        }
+
         protected void Draw(SpriteBatch spriteBatch)
         {
             // TODO: Add your drawing code here
             
             spriteBatch.Draw(img, imgRec, Color.White);
             spriteBatch.DrawString(nightFont, nightText, nighTextLocation, nightTextColor);
+
+            switch(currentState)
+            {
+                case nightState.Default
+                    spriteBatch.Draw()
+                    break;
+                case nightState.Inventory:
+                    break;
+                case nightState.Kit:
+                    break;
+                case nightState.Recipies:
+                    break;
+                default:
+                    break;
+            }
 
         }
     }

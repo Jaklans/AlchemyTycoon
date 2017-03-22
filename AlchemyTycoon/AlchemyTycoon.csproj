@@ -66,6 +66,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\backroom.png" />
+    <Content Include="Content\daytime.png" />
+    <Content Include="Content\ingredients.png" />
+    <Content Include="Content\kit.png" />
+    <Content Include="Content\recipebook.png" />
     <Content Include="Content\TempButton.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
