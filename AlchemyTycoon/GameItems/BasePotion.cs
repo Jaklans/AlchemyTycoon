@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Graphics;
+
 
 namespace AlchemyTycoon.GameItems
 {
@@ -23,8 +25,8 @@ namespace AlchemyTycoon.GameItems
         }
 
         //Constructor
-        public BasePotion(int hashValue, string name, int value, string flavorText, string effect, int[] potionHashValue) 
-            : base(hashValue, name, value, flavorText)
+        public BasePotion(int hashValue, string name, int value, string flavorText, string effect, int[] potionHashValue, Texture2D texture) 
+            : base(hashValue, name, value, flavorText, texture)
         {
             this.effect = effect;
             this.potionHashValue = potionHashValue;
