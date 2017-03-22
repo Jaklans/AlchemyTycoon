@@ -14,8 +14,8 @@ namespace AlchemyTycoon
         Texture2D texture;
         Vector2 position;
         Rectangle rec;
-        Color color = new Color(0, 0, 0, 255);
-        
+        Color color = new Color(255, 255, 255, 255);
+
         public Vector2 size;
         public Button(Texture2D nTexture, GraphicsDevice graphics)
         {
@@ -23,6 +23,10 @@ namespace AlchemyTycoon
             texture = nTexture;
             size = new Vector2(graphics.Viewport.Width / 10, graphics.Viewport.Height / 20);
 
+        }
+        public void setPos(Vector2 newPos)
+        {
+            position = newPos;
         }
         bool colortest;
         public bool isClicked;
@@ -34,8 +38,8 @@ namespace AlchemyTycoon
             if (mouseRec.Intersects(rec))
             {
                 //this will make the button highlight and blink red when hovered
-                if (color.R == 0) colortest = false;
-                if (color.R == 255) colortest = true;
+                if (color.R >= 0) colortest = false;
+                if (color.R <= 255) colortest = true;
                 if (colortest) color.R += 5;
                 else color.R -= 5;
                 //if clicked will turn isClicked true
@@ -51,13 +55,10 @@ namespace AlchemyTycoon
                 }
             }
         }
-        public void setPos(Vector2 newPos)
-        {
-            position = newPos;
-        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, rec, color);
+            spriteBatch.Draw(texture, position, color);
         }
 
     }

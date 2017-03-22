@@ -67,11 +67,11 @@ namespace AlchemyTycoon
             graphics.ApplyChanges();
             IsMouseVisible = true;
             playit = new Button(Content.Load<Texture2D>("TempButton"), graphics.GraphicsDevice);
-            playit.setPos(new Vector2(screenWidth, screenHeight));
+            playit.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
             fS = new Button(Content.Load<Texture2D>("TempButton"), graphics.GraphicsDevice);
-            fS.setPos(new Vector2(screenWidth, screenHeight - 50));
+            fS.setPos(new Vector2(screenWidth / 2, screenHeight / 2 + 50));
             exit = new Button(Content.Load<Texture2D>("TempButton"), graphics.GraphicsDevice);
-            exit.setPos(new Vector2(screenWidth, screenHeight - 100));
+            exit.setPos(new Vector2(screenWidth / 2, screenHeight / 2 + 100));
             screen = Content.Load<Texture2D>("TempMenu");
         }
 
@@ -101,6 +101,10 @@ namespace AlchemyTycoon
             switch (CurrentGameState)
             {
                 case GlobalGameState.MainMenu:
+
+                    playit.Update(mouse);
+                    fS.Update(mouse);
+                    exit.Update(mouse);
                     //if clicked goto playing screen
                     if (playit.isClicked == true)
                     {
@@ -110,6 +114,8 @@ namespace AlchemyTycoon
                     {
                         screenHeight = GraphicsDevice.Viewport.Height;
                         screenWidth = GraphicsDevice.Viewport.Width;
+                        Initialize();
+
                     }
                     if (exit.isClicked == true)
                     {
@@ -117,7 +123,6 @@ namespace AlchemyTycoon
                     }
                     break;
                 case GlobalGameState.Playing:
-                    GameManager.
                     break;
                 default:
                     break;
@@ -137,6 +142,7 @@ namespace AlchemyTycoon
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
+
 
             switch (CurrentGameState)
             {
