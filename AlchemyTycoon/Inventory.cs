@@ -54,6 +54,9 @@ namespace AlchemyTycoon.GameItems
         {
             if (bounds.Contains(new Point(mouseState.X, mouseState.Y)))
             {
+                Vector2 mouse = mouseState.Position.ToVector2();
+                mouse.X -= bounds.X;
+                mouse.Y -= bounds.Y;
 
             }
         }
