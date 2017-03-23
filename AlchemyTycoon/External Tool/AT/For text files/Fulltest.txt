@@ -1,0 +1,10 @@
+101
+Test Advanced
+100
+1011
+1110
+1111
+1111
+A potion designed to test the full extent of this editor.
+When imbibed, fills the drinker with a deep and impending sense of mild panic.
+Thetexture.png

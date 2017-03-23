@@ -1,0 +1,6 @@
+111
+Test Potion
+50
+0
+A potion first conceived by deep alchemists within the Greystone Range, that was eventually stolen by enterprising goblin thugs.
+Upon consuming, the potion fills the imbiber with an intense, burning desire to get off their couch and do work on their GDD projects.
