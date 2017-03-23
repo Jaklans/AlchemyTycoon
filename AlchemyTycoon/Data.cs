@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace AlchemyTycoon
 {
@@ -71,8 +73,8 @@ namespace AlchemyTycoon
                                             reader.ReadInt32(),
                                             reader.ReadInt32(),
                                         },
+                                        // (j) Name of Texture File
                                         reader.ReadString()
-
                                     );
                             potions.Add(potion.HashValue, potion);
                         }
@@ -92,6 +94,8 @@ namespace AlchemyTycoon
                                         // (c) Value
                                         reader.ReadInt32(),
                                         // (d) Flavor Text
+                                        reader.ReadString(),
+                                        // (e) Name of Texture File
                                         reader.ReadString()
                                     )
                             );
@@ -108,6 +112,28 @@ namespace AlchemyTycoon
                 inStream.Close();
                 reader.Close();
             }
+        }
+
+        //Texture Loading
+        public bool LoadContent(ContentManager content)
+        {
+            try
+            {
+                foreach (GameItems.GameItem i in potions.Values)
+                {
+                    i.Texture = content.Load<Texture2D>(i.TextureName);
+                }
+                foreach (GameItems.GameItem i in ingrediants.Values)
+                {
+                    i.Texture = content.Load<Texture2D>(i.TextureName);
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
         }
 
         //Potion Creation

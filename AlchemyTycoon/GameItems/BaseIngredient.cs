@@ -19,8 +19,8 @@ namespace AlchemyTycoon.GameItems
         }
 
         //Constructor
-        public BaseIngredient(int hashValue, string name, int value, string flavorText, Texture2D texture) 
-            : base(hashValue, name, value, flavorText, texture)
+        public BaseIngredient(int hashValue, string name, int value, string flavorText, string textureName) 
+            : base(hashValue, name, value, flavorText, textureName)
         {
 
         }

@@ -25,8 +25,8 @@ namespace AlchemyTycoon.GameItems
         }
 
         //Constructor
-        public BasePotion(int hashValue, string name, int value, string flavorText, string effect, int[] potionHashValue, Texture2D texture) 
-            : base(hashValue, name, value, flavorText, texture)
+        public BasePotion(int hashValue, string name, int value, string flavorText, string effect, int[] potionHashValue, string textureName) 
+            : base(hashValue, name, value, flavorText, textureName)
         {
             this.effect = effect;
             this.potionHashValue = potionHashValue;

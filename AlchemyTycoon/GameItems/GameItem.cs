@@ -15,6 +15,7 @@ namespace AlchemyTycoon.GameItems
         protected string name;
         protected int value;
         protected string flavorText;
+        protected string textureName;
         protected Texture2D texture;
 
         //Properties
@@ -34,19 +35,24 @@ namespace AlchemyTycoon.GameItems
         {
             get { return flavorText; }
         }
+        public string TextureName
+        {
+            get { return textureName; }
+        }
         public Texture2D Texture
         {
             get { return texture; }
+            set { texture = value; }
         }
 
         //Constructor
-        public GameItem(int hashValue, string name, int value, string flavorText, Texture2D texture)
+        public GameItem(int hashValue, string name, int value, string flavorText, string textureName)
         {
             this.hashValue = hashValue;
             this.name = name;
             this.value = value;
             this.flavorText = flavorText;
-            this.texture = texture;
+            this.textureName = textureName;
         }
 
         //Draw
