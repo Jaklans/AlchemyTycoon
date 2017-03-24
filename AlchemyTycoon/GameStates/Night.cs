@@ -58,7 +58,7 @@ namespace AlchemyTycoon
         nightState currentState = nightState.Default;
 
         //LoadContent method
-        protected void LoadContent(ContentManager content, GraphicsDevice graphics)
+        protected void LoadContent(ContentManager content, GraphicsDeviceManager graphics)
         {
             //Load in the screens
             defaultScreen = content.Load<Texture2D>("backroom");
@@ -68,33 +68,33 @@ namespace AlchemyTycoon
 
             //Load in the buttons for each screen
             //Default screen
-            inventoryButton = new Button(content.Load<Texture2D>("invButton"), graphics);
+            inventoryButton = new Button(content.Load<Texture2D>("invButton"), graphics.GraphicsDevice);
             inventoryButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
-            kitButton = new Button(content.Load<Texture2D>("kitButton"), graphics);
+            kitButton = new Button(content.Load<Texture2D>("kitButton"), graphics.GraphicsDevice);
             kitButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
-            recipeBookButton = new Button(content.Load<Texture2D>("rbButton"), graphics);
+            recipeBookButton = new Button(content.Load<Texture2D>("rbButton"), graphics.GraphicsDevice);
             recipeBookButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
 
             //Kit screen
-            makeButton = new Button(content.Load<Texture2D>("makeButton"), graphics);
+            makeButton = new Button(content.Load<Texture2D>("makeButton"), graphics.GraphicsDevice);
             makeButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
-            clearButton = new Button(content.Load<Texture2D>("clearButton"), graphics);
+            clearButton = new Button(content.Load<Texture2D>("clearButton"), graphics.GraphicsDevice);
             clearButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
 
             //Recipe book screen
-            recipesButton = new Button(content.Load<Texture2D>("recipesButton"), graphics);
+            recipesButton = new Button(content.Load<Texture2D>("recipesButton"), graphics.GraphicsDevice);
             recipesButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
-            guideButton = new Button(content.Load<Texture2D>("guideButton"), graphics);
+            guideButton = new Button(content.Load<Texture2D>("guideButton"), graphics.GraphicsDevice);
             guideButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
-            availableButton = new Button(content.Load<Texture2D>("availButton"), graphics);
+            availableButton = new Button(content.Load<Texture2D>("availButton"), graphics.GraphicsDevice);
             availableButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
-            yourRecipeButton = new Button(content.Load<Texture2D>("yourButton"), graphics);
+            yourRecipeButton = new Button(content.Load<Texture2D>("yourButton"), graphics.GraphicsDevice);
             yourRecipeButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
 
             //Inventory/Ingredient screen
-            storeButton = new Button(content.Load<Texture2D>("storeButton"), graphics);
+            storeButton = new Button(content.Load<Texture2D>("storeButton"), graphics.GraphicsDevice);
             storeButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
-            guide2Button = new Button(content.Load<Texture2D>("guide2Button"), graphics);
+            guide2Button = new Button(content.Load<Texture2D>("guide2Button"), graphics.GraphicsDevice);
             guide2Button.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
 
         }
