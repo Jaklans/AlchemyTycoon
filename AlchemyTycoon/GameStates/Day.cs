@@ -12,30 +12,54 @@ namespace AlchemyTycoon.GameStates
 {
     class Day
     {
+        //Background image
         Texture2D bgScreen;
         Rectangle ScreePos;
 
-        KeyboardState kbState;
+        //Buttons
+        Button stockButton;
+
+        //Text
         Text gold;
         Text time;
         Text stock;
         Text dialouge;
         Text npcInfo;
-        
 
-        protected void LoadContent(ContentManager content)
+        //Set the initial game screen size
+        int screenWidth = 1280;
+        int screenHeight = 800;
+
+        //LoadContent method
+        protected void LoadContent(ContentManager content, GraphicsDevice graphics)
         {
             //gold = new Text()
+            //Load in the screen
             bgScreen = content.Load<Texture2D>("daytime");
+
+            //Load in the button
+            stockButton = new Button(content.Load<Texture2D>("stockButton"), graphics);
+            stockButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
         }
 
+        //Update method
         protected void Update()
         {
+            //Get the mouse position
+            MouseState mouse = Mouse.GetState();
 
+            stockButton.Update(mouse);
+
+            //When clicked, will go to inventory of potions the player made for sale
+            if(stockButton.isClicked == true)
+            {
+
+            }
         }
         protected void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(bgScreen, ScreePos, Color.White);
+            stockButton.Draw(spriteBatch);
         }
 
     }
