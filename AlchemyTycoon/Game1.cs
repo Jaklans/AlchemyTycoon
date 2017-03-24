@@ -11,12 +11,6 @@ namespace AlchemyTycoon
         Fullscreen,
         Exit,
 
-        Day,
-        Nightroom,
-        NightRecipies,
-        NightKit,
-        NightIngredients
-
     }
     /// <summary>
     /// This is the main type for your game.
@@ -165,6 +159,7 @@ namespace AlchemyTycoon
                     if (kbs.IsKeyDown(Keys.Back))
                     {
                         CurrentGameState = GlobalGameState.MainMenu;
+
                     }
                     break;
                 default:
