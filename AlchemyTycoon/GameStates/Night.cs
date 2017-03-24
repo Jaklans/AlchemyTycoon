@@ -28,7 +28,7 @@ namespace AlchemyTycoon
             Default,
             Inventory,
             Kit,
-            Recipies
+            Recipes
         }
 
         //Current state
@@ -38,32 +38,12 @@ namespace AlchemyTycoon
         int screenWidth = 1280;
         int screenHeight = 800;
 
-        //Buttons???
-
         //get all data for in game text
         string imgFileName;
         SpriteFont nightFont;
         string nightText;
         Vector2 nighTextLocation;
         Color nightTextColor;
-
-        //then use constructors to take the data from child into this class so that we can use them
-        //public Night(Texture2D image, Rectangle imageRec)
-        //{
-        //    img = image;
-        //    imgRec = imageRec;
-        //}
-        //public Night(string imageFileName)
-        //{
-        //    imgFileName = imageFileName;
-        //}
-        //public Night(SpriteFont font, string text, Vector2 textlocation, Color tcolor)
-        //{
-        //    nightFont = font;
-        //    nightText = text;
-        //    nighTextLocation = textlocation;
-        //    nightTextColor = tcolor;
-        //}
 
         //LoadContent method
         protected void LoadContent()
@@ -78,7 +58,7 @@ namespace AlchemyTycoon
                     break;
                 case nightState.Kit:
                     break;
-                case nightState.Recipies:
+                case nightState.Recipes:
                     break;
                 default:
                     break;
@@ -95,13 +75,16 @@ namespace AlchemyTycoon
             switch(currentState)
             {
                 case nightState.Default:
-                    spriteBatch.Draw()
+                    spriteBatch.Draw(defaultScreen, dsRec, Color.White);
                     break;
                 case nightState.Inventory:
+                    spriteBatch.Draw(inventoryScreen, invRec, Color.White);
                     break;
                 case nightState.Kit:
+                    spriteBatch.Draw(kitScreen, ksRec, Color.White);
                     break;
-                case nightState.Recipies:
+                case nightState.Recipes:
+                    spriteBatch.Draw(recipeScreen, rsRec, Color.White);
                     break;
                 default:
                     break;
