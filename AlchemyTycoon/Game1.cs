@@ -12,7 +12,6 @@ namespace AlchemyTycoon
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
         
         KeyboardState kbs;
         //set the initial game screen size
@@ -26,6 +25,9 @@ namespace AlchemyTycoon
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
+        //Create the Objects
+        GameStates.MainMenu mM = new GameStates.MainMenu();
+        GameManager gM = new GameManager();
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -37,15 +39,13 @@ namespace AlchemyTycoon
         {
             //call the initialize from content
 
-            //// TODO: Add your initialization logic here
-            ////set the prefered window size to the values (Can be changed
-            //graphics.PreferredBackBufferWidth = screenWidth;
-            //graphics.PreferredBackBufferHeight = screenHeight;
-            ////be ablle to change the desired screen size
-            //screenPos = new Rectangle(0, 0, screenWidth, screenHeight);
-            //
-            //graphics.ApplyChanges();
-            //base.Initialize();
+            // TODO: Add your initialization logic here
+            //set the prefered window size to the values (Can be changed
+            graphics.PreferredBackBufferWidth = screenWidth;
+            graphics.PreferredBackBufferHeight = screenHeight;
+            
+            graphics.ApplyChanges();
+            base.Initialize();
         }
 
         /// <summary>
@@ -58,10 +58,9 @@ namespace AlchemyTycoon
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            //will set out initial game screen size
+            gM.Load(Content, graphics);
 
             IsMouseVisible = true;
-
         }
 
         /// <summary>
@@ -79,8 +78,7 @@ namespace AlchemyTycoon
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         /// 
-
-        //used to change the screen size
+        
 
         protected override void Update(GameTime gameTime)
         {
@@ -96,9 +94,7 @@ namespace AlchemyTycoon
             }
 
             //start calling from game manager
-
-
-            base.Update(gameTime);
+            gM.Update(gameTime, graphics, screenWidth, screenHeight);
         }
 
         /// <summary>
@@ -112,7 +108,7 @@ namespace AlchemyTycoon
             // TODO: Add your drawing code here
             spriteBatch.Begin();
 
-
+            gM.Draw(spriteBatch);
 
             spriteBatch.End();
             base.Draw(gameTime);

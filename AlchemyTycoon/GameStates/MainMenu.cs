@@ -34,19 +34,17 @@ namespace AlchemyTycoon.GameStates
 
         GlobalGameState CurrentGameState = GlobalGameState.MainMenu;
 
-        protected void Initialize()
-        {
-            // TODO: Add your initialization logic here
-            //set the prefered window size to the values (Can be changed
-            graphics.PreferredBackBufferWidth = screenWidth;
-            graphics.PreferredBackBufferHeight = screenHeight;
-            //be ablle to change the desired screen size
-            screenPos = new Rectangle(0, 0, screenWidth, screenHeight);
-
-            graphics.ApplyChanges();
-            base.Initialize();
-        }
-        protected void LoadContent(ContentManager Content)
+        //protected void Initialize(GraphicsDevice graphics)
+        //{
+        //    // TODO: Add your initialization logic here
+        //    //set the prefered window size to the values (Can be changed
+        //    graphics.PreferredBackBufferWidth = screenWidth;
+        //    graphics.PreferredBackBufferHeight = screenHeight;
+        //
+        //    graphics.ApplyChanges();
+        //    base.Initialize();
+        //}
+        public void LoadContent(ContentManager Content, GraphicsDeviceManager graphics)
         {
             //Load the Temp Buttons
             playit = new Button(Content.Load<Texture2D>("TempButton"), graphics.GraphicsDevice);
@@ -56,18 +54,20 @@ namespace AlchemyTycoon.GameStates
             exit = new Button(Content.Load<Texture2D>("TempButton"), graphics.GraphicsDevice);
             exit.setPos(new Vector2(screenWidth / 2, screenHeight / 2 + 100));
             screen = Content.Load<Texture2D>("TempMenu");
+            screenPos = new Rectangle(0, 0, screenWidth, screenHeight);
+
         }
-        void UpdateScreen(int width, int height)
+        public void UpdateScreen(GraphicsDeviceManager graphics, int width, int height)
         {
             //sets the new size using update
             screenWidth = width;
             screenHeight = height;
             graphics.ApplyChanges();
-
-            Initialize();
+            
+            
+            //Initialize();
         }
-
-        protected void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, GraphicsDeviceManager graphics)
         {
             MouseState mouse = Mouse.GetState();
             KeyboardState newKeyState = Keyboard.GetState();
@@ -94,18 +94,23 @@ namespace AlchemyTycoon.GameStates
                         if (graphics.IsFullScreen == true)
                         {
                             graphics.IsFullScreen = false;
-                            UpdateScreen(1280, 800);
+                            screenHeight = 800;
+                            screenWidth = 1280;
+                            //UpdateScreen(graphics, 1280, 800);
                         }//if windowed make full screen
                         else
                         {
                             graphics.IsFullScreen = true;
-                            UpdateScreen(1920, 1080);
+                            screenHeight = 1080;
+                            screenWidth = 1920;
+                            //UpdateScreen(graphics, 1920, 1080);
                         }
 
                     }
                     if (exit.isClicked == true)
                     {
-                        Exit();
+                        
+                        //Exit();
                     }
                     break;
                 case GlobalGameState.Playing:
@@ -119,7 +124,7 @@ namespace AlchemyTycoon.GameStates
                     break;
             }
         }
-        protected void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
 
             switch (CurrentGameState)
@@ -139,4 +144,4 @@ namespace AlchemyTycoon.GameStates
 
     }
 }
-}
+
