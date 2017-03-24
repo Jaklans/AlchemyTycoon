@@ -4,6 +4,13 @@ using Microsoft.Xna.Framework.Input;
 
 namespace AlchemyTycoon
 {
+    enum GlobalGameState
+    {
+        MainMenu,
+        Playing,
+        Fullscreen,
+        Exit,
+    }
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
@@ -14,13 +21,8 @@ namespace AlchemyTycoon
         Rectangle screenPos;
         Texture2D screen;
 
-        enum GlobalGameState
-        {
-            MainMenu,
-            Playing,
-            Fullscreen,
-            Exit,
-        }
+
+        KeyboardState kbs;
 
         GlobalGameState CurrentGameState = GlobalGameState.MainMenu;
         //set the initial game screen size
@@ -50,7 +52,7 @@ namespace AlchemyTycoon
             //set the prefered window size to the values (Can be changed
             graphics.PreferredBackBufferWidth = screenWidth;
             graphics.PreferredBackBufferHeight = screenHeight;
-
+            //be ablle to change the desired screen size
             screenPos = new Rectangle(0, 0, screenWidth, screenHeight);
 
             graphics.ApplyChanges();
@@ -70,6 +72,7 @@ namespace AlchemyTycoon
             //will set out initial game screen size
 
             IsMouseVisible = true;
+            //Load the Temp Buttons
             playit = new Button(Content.Load<Texture2D>("TempButton"), graphics.GraphicsDevice);
             playit.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
             fS = new Button(Content.Load<Texture2D>("TempButton"), graphics.GraphicsDevice);
@@ -94,9 +97,11 @@ namespace AlchemyTycoon
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         /// 
+
         //used to change the screen size
         void UpdateScreen(int width, int height)
         {
+            //sets the new size using update
             screenWidth = width;
             screenHeight = height;
             graphics.ApplyChanges();
@@ -112,6 +117,11 @@ namespace AlchemyTycoon
             //gets mouse position
             MouseState mouse = Mouse.GetState();
 
+            KeyboardState newKeyState = Keyboard.GetState();
+            if (kbs != null)
+            {
+                kbs = newKeyState;
+            }
             switch (CurrentGameState)
             {
                 case GlobalGameState.MainMenu:
@@ -145,6 +155,10 @@ namespace AlchemyTycoon
                     }
                     break;
                 case GlobalGameState.Playing:
+                    if (kbs.IsKeyDown(Keys.Back))
+                    {
+                        CurrentGameState = GlobalGameState.MainMenu;
+                    }
                     break;
                 default:
                     break;
