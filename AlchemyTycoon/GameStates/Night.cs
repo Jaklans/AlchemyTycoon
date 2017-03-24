@@ -6,13 +6,17 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Content;
 
 namespace AlchemyTycoon
 {
     public class Night
     {
         GraphicsDeviceManager graphics;
-        //these will be used to get the variables we need
+
+        ContentManager content;
+
+        //Background images
         Texture2D defaultScreen;
         Rectangle dsRec;
         Texture2D inventoryScreen;
@@ -21,6 +25,29 @@ namespace AlchemyTycoon
         Rectangle ksRec;
         Texture2D recipeScreen;
         Rectangle rsRec;
+
+        //Buttons on default/after hours menu screen
+        Button inventoryButton;
+        Button kitButton;
+        Button recipeBookButton;
+
+        //Buttons on kit screen
+        Button makeButton;
+        Button clearButton;
+
+        //Buttons on recipe book screen
+        Button recipesButton;
+        Button guideButton;
+        Button availableButton;
+        Button yourRecipeButton;
+
+        //Buttons on inventory/ingredients screen
+        Button storeButton;
+        Button guide2Button;
+
+        //Set the initial game screen size
+        int screenWidth = 1280;
+        int screenHeight = 800;
 
         //Enum for Night's states
         enum nightState
@@ -33,22 +60,72 @@ namespace AlchemyTycoon
 
         //Current state
         nightState currentState = nightState.Default;
-        
-
 
         //LoadContent method
-        protected void LoadContent()
+        protected void LoadContent(ContentManager content)
         {
-            // Create a new SpriteBatch, which can be used to draw textures
-            
+            //Load in the screens
+            defaultScreen = content.Load<Texture2D>("backroom");
+            inventoryScreen = content.Load<Texture2D>("ingredients");
+            kitScreen = content.Load<Texture2D>("kit");
+            recipeScreen = content.Load<Texture2D>("recipebook");
+
+            //Load in the buttons for each screen
+            //Default screen
+            inventoryButton = new Button(content.Load<Texture2D>("invButton"), graphics.GraphicsDevice);
+            inventoryButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
+            kitButton = new Button(content.Load<Texture2D>("kitButton"), graphics.GraphicsDevice);
+            kitButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
+            recipeBookButton = new Button(content.Load<Texture2D>("rbButton"), graphics.GraphicsDevice);
+            recipeBookButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
+
+            //Kit screen
+            makeButton = new Button(content.Load<Texture2D>("makeButton"), graphics.GraphicsDevice);
+            makeButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
+            clearButton = new Button(content.Load<Texture2D>("clearButton"), graphics.GraphicsDevice);
+            clearButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
+
+            //Recipe book screen
+            recipesButton = new Button(content.Load<Texture2D>("recipesButton"), graphics.GraphicsDevice);
+            recipesButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
+            guideButton = new Button(content.Load<Texture2D>("guideButton"), graphics.GraphicsDevice);
+            guideButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
+            availableButton = new Button(content.Load<Texture2D>("availButton"), graphics.GraphicsDevice);
+            availableButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
+            yourRecipeButton = new Button(content.Load<Texture2D>("yourButton"), graphics.GraphicsDevice);
+            yourRecipeButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
+
+            //Inventory/Ingredient screen
+            storeButton = new Button(content.Load<Texture2D>("storeButton"), graphics.GraphicsDevice);
+            storeButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
+            guide2Button = new Button(content.Load<Texture2D>("guide2Button"), graphics.GraphicsDevice);
+            guide2Button.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
+
         }
+
+        //Update method
         protected void Update(GameTime gameTime)
         {
+            //Get the mouse position
+            MouseState mouse = Mouse.GetState();
+
+            //Changing the states based on where the player clicks on
             switch (currentState)
             {
                 case nightState.Default:
+                    inventoryButton.Update(mouse);
+                    kitButton.Update(mouse);
+                    recipeBookButton.Update(mouse);
+
+                    //If clicked, go to the inventory/ingredients screen
+                    if (inventoryButton.isClicked == true)
+                    {
+                        currentState = nightState.Inventory;
+                    }
                     break;
                 case nightState.Inventory:
+                    storeButton.Update(mouse);
+                    guide2Button.Update(mouse);
                     break;
                 case nightState.Kit:
                     break;
@@ -61,11 +138,11 @@ namespace AlchemyTycoon
         protected void Draw(SpriteBatch spriteBatch)
         {
             // TODO: Add your drawing code here
-            
+
             //spriteBatch.Draw(img, imgRec, Color.White);
             //spriteBatch.DrawString(nightFont, nightText, nighTextLocation, nightTextColor);
 
-            switch(currentState)
+            switch (currentState)
             {
                 case nightState.Default:
                     spriteBatch.Draw(defaultScreen, dsRec, Color.White);
