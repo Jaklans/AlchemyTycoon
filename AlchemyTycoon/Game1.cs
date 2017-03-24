@@ -10,6 +10,13 @@ namespace AlchemyTycoon
         Playing,
         Fullscreen,
         Exit,
+
+        Day,
+        Nightroom,
+        NightRecipies,
+        NightKit,
+        NightIngredients
+
     }
     /// <summary>
     /// This is the main type for your game.
