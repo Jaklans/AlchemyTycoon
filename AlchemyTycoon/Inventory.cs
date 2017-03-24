@@ -16,7 +16,12 @@ namespace AlchemyTycoon.GameItems
         private List<T> data;
         private int movingItemIndex;// The index of an item that is being dragged by the mouse
         private bool active;
+
+        private int xDepth;
+        private int yDepth;
         private Rectangle bounds;
+
+        private MouseState previousMousestate;
 
             //Constructor
         public Inventory()
@@ -52,30 +57,45 @@ namespace AlchemyTycoon.GameItems
 
         public void Update(MouseState mouseState)
         {
-            if (bounds.Contains(new Point(mouseState.X, mouseState.Y)))
+            if (bounds.Contains(new Point(mouseState.X, mouseState.Y)) && mouseState.LeftButton == ButtonState.Pressed)
             {
                 Vector2 mouse = mouseState.Position.ToVector2();
+
+                //Deals with only the distance from top left
                 mouse.X -= bounds.X;
                 mouse.Y -= bounds.Y;
 
+                //Divides by image dimmentions, resulting in only the cords on a grid
+                mouse.X /= data[0].Texture.Width;
+                mouse.Y /= data[0].Texture.Height;
+
+                movingItemIndex = 0;
+                movingItemIndex += (xDepth * (int)mouse.Y);
+                movingItemIndex += (int)mouse.X;
             }
+            else
+            previousMousestate = mouseState;
         }
         
-        public void Draw(SpriteBatch sb, Vector2 position, int rows, int coloumns)
+        public void Draw(SpriteBatch sb, Vector2 position, int vXDepth, int vYDepth)
         {
+            xDepth = vXDepth;
+            yDepth = vYDepth;
+
             bounds = new Rectangle(
                 (int)position.X,
                 (int)position.Y,
-                rows * data[0].Texture.Width,
-                coloumns * data[0].Texture.Height
+                xDepth * data[0].Texture.Width,
+                yDepth * data[0].Texture.Height
                 );
-                //Could be optimized to only do once
+            //Could be optimized to only do once
+            
 
             //Handles the drawing of static item grid
             int index = 0;
-            for(int i = 0; i < rows; i++)
+            for(int i = 0; i < yDepth; i++)
             {
-                for(int j = 0; j < coloumns; j++)
+                for(int j = 0; j < xDepth; j++)
                 {
                     if (index != movingItemIndex && index < data.Count)
                     {
