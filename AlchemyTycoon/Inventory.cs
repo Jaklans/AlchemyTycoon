@@ -14,7 +14,7 @@ namespace AlchemyTycoon.GameItems
     {
             //Feilds
         private List<T> data;
-        //private int movingItemIndex;
+        private int selectedItemIndex;
         private bool active;
 
         private int xDepth;
@@ -27,9 +27,8 @@ namespace AlchemyTycoon.GameItems
         public Inventory()
         {
             data = new List<T>();
-            
-            //movingItemIndex = -1;
-            // -1 signifies no item is being moved
+
+            selectedItemIndex = -1;
         }
 
             //Methods
@@ -55,13 +54,21 @@ namespace AlchemyTycoon.GameItems
             }
         }
         
-        public T Update(MouseState mouseState)
+        /// <summary>
+        /// This version of update only gets called when there are two 
+        /// inventories on screen. It handles the swap if an item is 
+        /// clicked
+        /// </summary>
+        /// <param name="mouseState">Mousestate for selection</param>
+        /// <param name="otherInventory">The other inventory on screen
+        /// that items will transfer too when clicked on</param>
+        /// <returns></returns>
+        public void Update(MouseState mouseState, Inventory<T> otherInventory)
         {
             if (bounds.Contains(new Point(mouseState.X, mouseState.Y)) &&
                 mouseState.LeftButton == ButtonState.Released &&
                 previousMousestate.LeftButton == ButtonState.Pressed)
             {
-                
                 Vector2 mouse = mouseState.Position.ToVector2();
 
                 //Deals with only the distance from top left
@@ -77,22 +84,54 @@ namespace AlchemyTycoon.GameItems
                 targetItemIndex += (xDepth * (int)mouse.Y);
                 targetItemIndex += (int)mouse.X;
 
+                otherInventory.AddItem(RemoveItem(targetItemIndex));
 
                 previousMousestate = mouseState;
+            }
 
+            previousMousestate = mouseState;
+        }
 
-                return data[targetItemIndex];
+        /// <summary>
+        ///This version of update gets called when only one inventory is on
+        ///screen. It returns an object that is clicked on
+        /// </summary>
+        /// <param name="mouseState">Mousestate for selection</param>
+        /// <returns></returns>
+        public T Update(MouseState mouseState)
+        {
+            if (bounds.Contains(new Point(mouseState.X, mouseState.Y)) &&
+                mouseState.LeftButton == ButtonState.Released &&
+                previousMousestate.LeftButton == ButtonState.Pressed)
+            {
 
-                /*
-                if (movingItemIndex != targetItemIndex)
+                Vector2 mouse = mouseState.Position.ToVector2();
+
+                //Deals with only the distance from top left
+                mouse.X -= bounds.X;
+                mouse.Y -= bounds.Y;
+
+                //Divides by image dimmentions, resulting in only the cords on a grid
+                mouse.X /= data[0].Texture.Width;
+                mouse.Y /= data[0].Texture.Height;
+
+                int targetItemIndex = 0;
+
+                targetItemIndex += (xDepth * (int)mouse.Y);
+                targetItemIndex += (int)mouse.X;
+                
+                previousMousestate = mouseState;
+                
+                if (selectedItemIndex != targetItemIndex)
                 {
-                    movingItemIndex = targetItemIndex;
+                    selectedItemIndex = targetItemIndex;
                 }
                 else
                 {
-                    movingItemIndex = -1;
+                    selectedItemIndex = -1;
                 }
-                */
+
+                return data[selectedItemIndex];
             }
             else
             {
@@ -101,7 +140,7 @@ namespace AlchemyTycoon.GameItems
                 return null;
             }
         }
-        
+
         public void Draw(SpriteBatch sb, Vector2 position, int vXDepth, int vYDepth)
         {
             xDepth = vXDepth;
