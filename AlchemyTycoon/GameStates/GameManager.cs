@@ -12,6 +12,14 @@ namespace AlchemyTycoon
 {
     class GameManager
     {
+        enum PlayingEnum
+        {
+            Day,
+            Night
+        }
+        //start the gae in the NightMenu
+        PlayingEnum current = PlayingEnum.Night;
+
         public void Load(ContentManager content)
         {
 
