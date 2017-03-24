@@ -117,19 +117,85 @@ namespace AlchemyTycoon
                     kitButton.Update(mouse);
                     recipeBookButton.Update(mouse);
 
-                    //If clicked, go to the inventory/ingredients screen
-                    if (inventoryButton.isClicked == true)
+                    //When clicked, go to the inventory/ingredients screen
+                    if(inventoryButton.isClicked == true)
                     {
                         currentState = nightState.Inventory;
+                    }
+
+                    //When clicked, go to the kit screen
+                    if(kitButton.isClicked == true)
+                    {
+                        currentState = nightState.Kit;
+                    }
+
+                    //When clicked, go to the recipe book screen
+                    if(recipeBookButton.isClicked == true)
+                    {
+                        currentState = nightState.Recipes;
                     }
                     break;
                 case nightState.Inventory:
                     storeButton.Update(mouse);
                     guide2Button.Update(mouse);
+
+                    //When clicked, will take you to the store
+                    if(storeButton.isClicked == true)
+                    {
+
+                    }
+
+                    //When clicked, will take you to the field guide
+                    if(guide2Button.isClicked == true)
+                    {
+
+                    }
                     break;
                 case nightState.Kit:
+                    makeButton.Update(mouse);
+                    clearButton.Update(mouse);
+
+                    //When clicked, will allow player to make potions
+                    if(makeButton.isClicked == true)
+                    {
+
+                    }
+
+                    //When clicked, will clear out the ingredients used to make a potion
+                    if(clearButton.isClicked == true)
+                    {
+
+                    }
                     break;
                 case nightState.Recipes:
+                    recipesButton.Update(mouse);
+                    guideButton.Update(mouse);
+                    availableButton.Update(mouse);
+                    yourRecipeButton.Update(mouse);
+
+                    //When clicked, will take player to recipes they can get
+                    if(recipesButton.isClicked == true)
+                    {
+
+                    }
+
+                    //When clicked, will take player to the field guide
+                    if(guideButton.isClicked == true)
+                    {
+
+                    }
+
+                    //When clicked, will take player to the recipes that are available to them
+                    if(availableButton.isClicked == true)
+                    {
+
+                    }
+
+                    //When clicked, will take player to the recipes they have purchased/learned
+                    if(yourRecipeButton.isClicked == true)
+                    {
+
+                    }
                     break;
                 default:
                     break;
@@ -146,15 +212,25 @@ namespace AlchemyTycoon
             {
                 case nightState.Default:
                     spriteBatch.Draw(defaultScreen, dsRec, Color.White);
+                    inventoryButton.Draw(spriteBatch);
+                    kitButton.Draw(spriteBatch);
                     break;
                 case nightState.Inventory:
                     spriteBatch.Draw(inventoryScreen, invRec, Color.White);
+                    storeButton.Draw(spriteBatch);
+                    guide2Button.Draw(spriteBatch);
                     break;
                 case nightState.Kit:
                     spriteBatch.Draw(kitScreen, ksRec, Color.White);
+                    makeButton.Draw(spriteBatch);
+                    clearButton.Draw(spriteBatch);
                     break;
                 case nightState.Recipes:
                     spriteBatch.Draw(recipeScreen, rsRec, Color.White);
+                    recipesButton.Draw(spriteBatch);
+                    guideButton.Draw(spriteBatch);
+                    availableButton.Draw(spriteBatch);
+                    yourRecipeButton.Draw(spriteBatch);
                     break;
                 default:
                     break;
