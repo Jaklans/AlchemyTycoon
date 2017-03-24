@@ -14,7 +14,7 @@ namespace AlchemyTycoon.GameItems
     {
             //Feilds
         private List<T> data;
-        private int movingItemIndex;// The index of an item that is being dragged by the mouse
+        //private int movingItemIndex;
         private bool active;
 
         private int xDepth;
@@ -28,7 +28,7 @@ namespace AlchemyTycoon.GameItems
         {
             data = new List<T>();
             
-            movingItemIndex = -1;
+            //movingItemIndex = -1;
             // -1 signifies no item is being moved
         }
 
@@ -54,11 +54,14 @@ namespace AlchemyTycoon.GameItems
                 data.Sort();
             }
         }
-
-        public void Update(MouseState mouseState)
+        
+        public T Update(MouseState mouseState)
         {
-            if (bounds.Contains(new Point(mouseState.X, mouseState.Y)) && mouseState.LeftButton == ButtonState.Pressed)
+            if (bounds.Contains(new Point(mouseState.X, mouseState.Y)) &&
+                mouseState.LeftButton == ButtonState.Released &&
+                previousMousestate.LeftButton == ButtonState.Pressed)
             {
+                
                 Vector2 mouse = mouseState.Position.ToVector2();
 
                 //Deals with only the distance from top left
@@ -69,12 +72,34 @@ namespace AlchemyTycoon.GameItems
                 mouse.X /= data[0].Texture.Width;
                 mouse.Y /= data[0].Texture.Height;
 
-                movingItemIndex = 0;
-                movingItemIndex += (xDepth * (int)mouse.Y);
-                movingItemIndex += (int)mouse.X;
+                int targetItemIndex = 0;
+
+                targetItemIndex += (xDepth * (int)mouse.Y);
+                targetItemIndex += (int)mouse.X;
+
+
+                previousMousestate = mouseState;
+
+
+                return data[targetItemIndex];
+
+                /*
+                if (movingItemIndex != targetItemIndex)
+                {
+                    movingItemIndex = targetItemIndex;
+                }
+                else
+                {
+                    movingItemIndex = -1;
+                }
+                */
             }
             else
-            previousMousestate = mouseState;
+            {
+                previousMousestate = mouseState;
+
+                return null;
+            }
         }
         
         public void Draw(SpriteBatch sb, Vector2 position, int vXDepth, int vYDepth)
@@ -97,7 +122,7 @@ namespace AlchemyTycoon.GameItems
             {
                 for(int j = 0; j < xDepth; j++)
                 {
-                    if (index != movingItemIndex && index < data.Count)
+                    if (index < data.Count)
                     {
                         data[index].Draw(
                             new Vector2(
@@ -109,13 +134,24 @@ namespace AlchemyTycoon.GameItems
                             sb
                             );
                     }
+                    /*else if(index < data.Count)
+                    {
+                        //Selected Item will be Aqua for now
+                        sb.Draw(
+                            data[index].Texture,
+                            new Vector2(
+                                position.X +
+                                j * data[index].Texture.Width,
+                                position.Y +
+                                i * data[index].Texture.Height
+                                ),
+                            Color.Aqua
+                            );
+                    }*/
                     index++;
                 }
             }
-            //Handles Click and Drag drawing functions
-            // (tied to update method)
 
         }
-        
     }
 }

@@ -22,6 +22,9 @@ namespace AlchemyTycoon
         Texture2D recipeScreen;
         Rectangle rsRec;
 
+        //Text
+        SpriteFont text;
+
         //Buttons on default/after hours menu screen
         Button inventoryButton;
         Button kitButton;
@@ -65,6 +68,9 @@ namespace AlchemyTycoon
             inventoryScreen = content.Load<Texture2D>("ingredients");
             kitScreen = content.Load<Texture2D>("kit");
             recipeScreen = content.Load<Texture2D>("recipebook");
+
+            //Load in text
+            text = content.Load<SpriteFont>("Tahoma_40.xnb");
 
             //Load in the buttons for each screen
             //Default screen
