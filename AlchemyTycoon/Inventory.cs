@@ -41,16 +41,7 @@ namespace AlchemyTycoon
         
         public void AddItem(T item)
         {
-            
-            //Adds a new item to the list
-            if(item.HashValue > data[data.Count / 2].HashValue)
-            {
-                //Adds the item using Add method
-                data.Add(item);
-
-                //Sorts the list after adding the item
-                data.Sort();
-            }
+            data.Add(item);
         }
         
         /// <summary>
@@ -129,8 +120,14 @@ namespace AlchemyTycoon
                 {
                     selectedItemIndex = -1;
                 }
-
-                return data[selectedItemIndex];
+                if (selectedItemIndex != -1)
+                {
+                    return data[selectedItemIndex];
+                }
+                else
+                {
+                    return null;
+                }
             }
             else
             {

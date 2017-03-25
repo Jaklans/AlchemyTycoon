@@ -22,6 +22,26 @@ namespace AlchemyTycoon
         private Dictionary<int[], int> potionHashValues;
 
 
+        //Accessors
+        public GameItems.BasePotion Potions(int hash)
+        {
+            if (potions.ContainsKey(hash))
+            {
+                return potions[hash];
+            }
+            return null;
+        }
+        public GameItems.BaseIngredient Ingrediants(int hash)
+        {
+            if (ingrediants.ContainsKey(hash))
+            {
+                return ingrediants[hash];
+            }
+            return null;
+        }
+
+
+
         //Constructor and Initialization
         public Data(string targetFolderName)
         {
@@ -104,13 +124,13 @@ namespace AlchemyTycoon
         List<string> ingredientFiles = new List<string>();
 
         // Reads every file in the folder, so they can be sorted
-        public void ReadAll(string folder)
+        private void ReadAll(string folder)
         {
             allFiles = Directory.GetFiles(folder).Select(Path.GetFileName).ToList(); // Getfiles("") will have the directory where we'll be storing files
         }
 
         // Adds potions strings to be used
-        public void ReadPotions()
+        private void ReadPotions()
         {
             foreach(string file in allFiles)
             {
@@ -122,7 +142,7 @@ namespace AlchemyTycoon
         }
 
         // Adds ingredients strings to then be pulled 
-        public void ReadIngredients()
+        private void ReadIngredients()
         {
             foreach(string file in allFiles)
             {
@@ -134,7 +154,7 @@ namespace AlchemyTycoon
         }
 
         // Adds potion objects to the list of potions
-        public void AddPotions(string directory)
+        private void AddPotions(string directory)
         {
             foreach (string pFileName in potionFiles)
             {
@@ -174,7 +194,7 @@ namespace AlchemyTycoon
         }
 
         // Adds ingredient objects the list of ingredients
-        public void AddIngredients(string directory)
+        private void AddIngredients(string directory)
         {
             foreach (string iFileName in ingredientFiles)
             {

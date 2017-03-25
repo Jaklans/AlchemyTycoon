@@ -22,6 +22,7 @@ namespace AlchemyTycoon
 
         //Test Enviro Vars
         protected Inventory<GameItems.BaseIngredient> testInventory = new Inventory<GameItems.BaseIngredient>();
+        protected Data testData = new Data("../../../../itemfolder");
 
         GameStates.MainMenu mM = new GameStates.MainMenu();
         GameStates.Day day = new GameStates.Day();
@@ -34,12 +35,19 @@ namespace AlchemyTycoon
         {
 
             mM.LoadContent(Content, graphics);
-            
+
+            //TestEnvironment
+            testData.LoadContent(Content, "../../../../itemfolder/Textures");
+            testInventory.AddItem(testData.Ingrediants(005));
+            testInventory.AddItem(testData.Ingrediants(001));
+            testInventory.AddItem(testData.Ingrediants(002));
+            testInventory.AddItem(testData.Ingrediants(003));
+            testInventory.AddItem(testData.Ingrediants(004));
         }
 
         public void Update(GameTime gameTime, GraphicsDeviceManager graphics, int screenWidth, int screenHeight)
         {
-
+            MouseState ms = Mouse.GetState();
 
             switch (current)
             {
@@ -59,7 +67,10 @@ namespace AlchemyTycoon
                     //mM.UpdateScreen(graphics, screenWidth, screenHeight);
                 break;
                 case PlayingEnum.TestEnvironment:
-                    
+
+                    testInventory.Update(ms);
+
+                    break;
                 default:
                     break;
             }
@@ -79,6 +90,12 @@ namespace AlchemyTycoon
                     break;
                 case PlayingEnum.MainMenu:
                     mM.Draw(spriteBatch);
+
+                    break;
+
+                case PlayingEnum.TestEnvironment:
+
+                    testInventory.Draw(spriteBatch, new Vector2(40, 40), 3, 4);
 
                     break;
                 default:

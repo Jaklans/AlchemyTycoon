@@ -51,9 +51,10 @@ namespace AlchemyTycoon
 
 
             //TestEnvironment
-            testInventory = new Inventory<GameItems.BaseIngredient>();
-            testData = new Data("../../../../itemfolder");
+            //testInventory = new Inventory<GameItems.BaseIngredient>();
+            //testData = new Data("../../../../itemfolder");
 
+            
             base.Initialize();
         }
 
@@ -69,8 +70,8 @@ namespace AlchemyTycoon
             // TODO: use this.Content to load your game content here
             gM.Load(Content, graphics);
 
-            //TestEnvironment
-            testData.LoadContent(Content, "../../../../itemfolder/Textures");
+            ////TestEnvironment
+            //testData.LoadContent(Content, "../../../../itemfolder/Textures");
 
             IsMouseVisible = true;
         }
