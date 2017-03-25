@@ -16,15 +16,19 @@ namespace AlchemyTycoon
         {
             Day,
             Night,
-            MainMenu
+            MainMenu,
+            TestEnvironment
         }
+
+        //Test Enviro Vars
+        protected Inventory<GameItems.BaseIngredient> testInventory = new Inventory<GameItems.BaseIngredient>();
 
         GameStates.MainMenu mM = new GameStates.MainMenu();
         GameStates.Day day = new GameStates.Day();
         Night night = new Night();
 
-        //start the gae in the NightMenu
-        PlayingEnum current = PlayingEnum.MainMenu;
+        //start the game in the NightMenu
+        PlayingEnum current = PlayingEnum.TestEnvironment;
 
         public void Load(ContentManager Content, GraphicsDeviceManager graphics)
         {
@@ -53,8 +57,9 @@ namespace AlchemyTycoon
                         current = PlayingEnum.Night;
                     }
                     //mM.UpdateScreen(graphics, screenWidth, screenHeight);
-
-                    break;
+                break;
+                case PlayingEnum.TestEnvironment:
+                    
                 default:
                     break;
             }
