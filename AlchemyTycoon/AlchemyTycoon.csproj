@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Button.cs" />
+    <Compile Include="sData.cs" />
     <Compile Include="Text.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="Game1.cs" />
