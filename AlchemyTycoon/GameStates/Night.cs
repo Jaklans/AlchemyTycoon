@@ -61,13 +61,17 @@ namespace AlchemyTycoon
         nightState currentState = nightState.Default;
 
         //LoadContent method
-        protected void LoadContent(ContentManager content, GraphicsDeviceManager graphics)
+        public void LoadContent(ContentManager content, GraphicsDeviceManager graphics)
         {
             //Load in the screens
             defaultScreen = content.Load<Texture2D>("backroom");
+            dsRec = new Rectangle(0, 0, screenWidth, screenHeight);
             inventoryScreen = content.Load<Texture2D>("ingredients");
+            invRec = new Rectangle(0, 0, screenWidth, screenHeight);//Wont be real position change  the size and position
             kitScreen = content.Load<Texture2D>("kit");
+            ksRec = new Rectangle(0, 0, screenWidth, screenHeight); ;//Wont be real position change  the size and position
             recipeScreen = content.Load<Texture2D>("recipebook");
+            rsRec = new Rectangle(0, 0, screenWidth, screenHeight); ;//Wont be real position change  the size and position
 
             //Load in text
             text = content.Load<SpriteFont>("Tahoma_40.xnb");
@@ -106,7 +110,7 @@ namespace AlchemyTycoon
         }
 
         //Update method
-        protected void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             //Get the mouse position
             MouseState mouse = Mouse.GetState();
@@ -203,7 +207,7 @@ namespace AlchemyTycoon
                     break;
             }
         }
-        protected void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
             // TODO: Add your drawing code here
 
@@ -216,6 +220,7 @@ namespace AlchemyTycoon
                     spriteBatch.Draw(defaultScreen, dsRec, Color.White);
                     inventoryButton.Draw(spriteBatch);
                     kitButton.Draw(spriteBatch);
+                    recipeBookButton.Draw(spriteBatch);
                     break;
                 case nightState.Inventory:
                     spriteBatch.Draw(inventoryScreen, invRec, Color.White);

@@ -33,23 +33,27 @@ namespace AlchemyTycoon
             
         }
 
-        public void Update(GameTime gameTime, GraphicsDeviceManager graphics, int screenWidth, int screenHeight,)
+        public void Update(GameTime gameTime, GraphicsDeviceManager graphics, int screenWidth, int screenHeight)
         {
 
 
             switch (current)
             {
                 case PlayingEnum.Day:
+                    day.Update();
                     break;
                 case PlayingEnum.Night:
+                    night.Update(gameTime);
                     break;
                 case PlayingEnum.MainMenu:
                     mM.Update(gameTime, graphics);
-                    mM.UpdateScreen(graphics, screenWidth, screenHeight);
-                    
-                    {
 
+                    if (mM.ReturntheState() == GameStates.GlobalGameState.Playing)
+                    {
+                        current = PlayingEnum.Night;
                     }
+                    //mM.UpdateScreen(graphics, screenWidth, screenHeight);
+
                     break;
                 default:
                     break;
@@ -63,11 +67,12 @@ namespace AlchemyTycoon
             switch (current)
             {
                 case PlayingEnum.Day:
+                    day.Draw(spriteBatch);
                     break;
                 case PlayingEnum.Night:
+                    night.Draw(spriteBatch);
                     break;
                 case PlayingEnum.MainMenu:
-
                     mM.Draw(spriteBatch);
 
                     break;

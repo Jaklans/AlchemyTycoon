@@ -31,7 +31,7 @@ namespace AlchemyTycoon.GameStates
         int screenHeight = 800;
 
         //LoadContent method
-        protected void LoadContent(ContentManager content, GraphicsDevice graphics)
+        public void LoadContent(ContentManager content, GraphicsDevice graphics)
         {
             //gold = new Text()
             //Load in the screen
@@ -44,7 +44,7 @@ namespace AlchemyTycoon.GameStates
         }
 
         //Update method
-        protected void Update()
+        public void Update()
         {
             //Get the mouse position
             MouseState mouse = Mouse.GetState();
@@ -57,7 +57,7 @@ namespace AlchemyTycoon.GameStates
 
             }
         }
-        protected void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(bgScreen, screenPos, Color.White);
             stockButton.Draw(spriteBatch);
