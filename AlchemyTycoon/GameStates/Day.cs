@@ -15,6 +15,7 @@ namespace AlchemyTycoon.GameStates
         //Background image
         Texture2D bgScreen;
         Rectangle ScreePos;
+        Rectangle screenPos;
 
         //Buttons
         Button stockButton;
