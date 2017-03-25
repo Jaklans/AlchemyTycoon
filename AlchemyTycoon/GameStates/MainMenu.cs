@@ -67,6 +67,11 @@ namespace AlchemyTycoon.GameStates
             
             //Initialize();
         }
+        public GlobalGameState ReturntheState()
+        {
+            return CurrentGameState;
+        }
+
         public void Update(GameTime gameTime, GraphicsDeviceManager graphics)
         {
             MouseState mouse = Mouse.GetState();

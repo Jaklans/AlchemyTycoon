@@ -47,8 +47,13 @@ namespace AlchemyTycoon
                     break;
                 case PlayingEnum.MainMenu:
                     mM.Update(gameTime, graphics);
+
+                    if (mM.ReturntheState() == GameStates.GlobalGameState.Playing)
+                    {
+                        current = PlayingEnum.Night;
+                    }
                     //mM.UpdateScreen(graphics, screenWidth, screenHeight);
-                    
+
                     break;
                 default:
                     break;
