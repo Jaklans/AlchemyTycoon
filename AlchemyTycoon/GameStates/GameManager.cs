@@ -15,32 +15,65 @@ namespace AlchemyTycoon
         enum PlayingEnum
         {
             Day,
-            Night
+            Night,
+            MainMenu
         }
 
         GameStates.MainMenu mM = new GameStates.MainMenu();
+        GameStates.Day day = new GameStates.Day();
+        Night night = new Night();
+
         //start the gae in the NightMenu
-        PlayingEnum current = PlayingEnum.Night;
+        PlayingEnum current = PlayingEnum.MainMenu;
 
         public void Load(ContentManager Content, GraphicsDeviceManager graphics)
         {
 
             mM.LoadContent(Content, graphics);
+            
         }
 
-        public void Update(GameTime gameTime, GraphicsDeviceManager graphics, int screenWidth, int screenHeight)
+        public void Update(GameTime gameTime, GraphicsDeviceManager graphics, int screenWidth, int screenHeight,)
         {
 
-            mM.Update(gameTime, graphics);
 
-            mM.UpdateScreen(graphics, screenWidth, screenHeight);
+            switch (current)
+            {
+                case PlayingEnum.Day:
+                    break;
+                case PlayingEnum.Night:
+                    break;
+                case PlayingEnum.MainMenu:
+                    mM.Update(gameTime, graphics);
+                    mM.UpdateScreen(graphics, screenWidth, screenHeight);
+                    
+                    {
+
+                    }
+                    break;
+                default:
+                    break;
+            }
+
 
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            switch (current)
+            {
+                case PlayingEnum.Day:
+                    break;
+                case PlayingEnum.Night:
+                    break;
+                case PlayingEnum.MainMenu:
 
-            mM.Draw(spriteBatch);
+                    mM.Draw(spriteBatch);
+
+                    break;
+                default:
+                    break;
+            }
 
         }
 

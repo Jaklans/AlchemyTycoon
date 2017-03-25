@@ -22,7 +22,7 @@ namespace AlchemyTycoon.GameStates
     {
         //make the buttons for menu
         Button playit;
-        Button fS;
+        //Button fS;
         Button exit;
         Rectangle screenPos;
         Texture2D screen;
@@ -49,8 +49,8 @@ namespace AlchemyTycoon.GameStates
             //Load the Temp Buttons
             playit = new Button(Content.Load<Texture2D>("TempButton"), graphics.GraphicsDevice);
             playit.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
-            fS = new Button(Content.Load<Texture2D>("TempButton"), graphics.GraphicsDevice);
-            fS.setPos(new Vector2(screenWidth / 2, screenHeight / 2 + 50));
+            //fS = new Button(Content.Load<Texture2D>("TempButton"), graphics.GraphicsDevice);
+            //fS.setPos(new Vector2(screenWidth / 2, screenHeight / 2 + 50));
             exit = new Button(Content.Load<Texture2D>("TempButton"), graphics.GraphicsDevice);
             exit.setPos(new Vector2(screenWidth / 2, screenHeight / 2 + 100));
             screen = Content.Load<Texture2D>("TempMenu");
@@ -81,36 +81,43 @@ namespace AlchemyTycoon.GameStates
                 case GlobalGameState.MainMenu:
 
                     playit.Update(mouse);
-                    fS.Update(mouse);
+                    //fS.Update(mouse);
                     exit.Update(mouse);
                     //if clicked goto playing screen
                     if (playit.isClicked == true)
                     {
                         CurrentGameState = GlobalGameState.Playing;
+                        playit.isClicked = false;
                     }
-                    if (fS.isClicked == true)
-                    {
-                        //if the screen is FullScreen reverse Change
-                        if (graphics.IsFullScreen == true)
-                        {
-                            graphics.IsFullScreen = false;
-                            screenHeight = 800;
-                            screenWidth = 1280;
-                            //UpdateScreen(graphics, 1280, 800);
-                        }//if windowed make full screen
-                        else
-                        {
-                            graphics.IsFullScreen = true;
-                            screenHeight = 1080;
-                            screenWidth = 1920;
-                            //UpdateScreen(graphics, 1920, 1080);
-                        }
-
-                    }
+                    //if (fS.isClicked == true)
+                    //{
+                    //    //if the screen is FullScreen reverse Change
+                    //    if (graphics.IsFullScreen == true)
+                    //    {
+                    //        graphics.IsFullScreen = false;
+                    //        screenHeight = 800;
+                    //        screenWidth = 1280;
+                    //
+                    //        fS.isClicked = false;
+                    //        //UpdateScreen(graphics, 1280, 800);
+                    //    }//if windowed make full screen
+                    //    else
+                    //    {
+                    //        graphics.IsFullScreen = true;
+                    //        screenHeight = 1080;
+                    //        screenWidth = 1920;
+                    //
+                    //        fS.isClicked = false;
+                    //        //UpdateScreen(graphics, 1920, 1080);
+                    //    }
+                    //
+                    //}
                     if (exit.isClicked == true)
                     {
-                        
+
                         //Exit();
+
+                        playit.isClicked = false;
                     }
                     break;
                 case GlobalGameState.Playing:
@@ -132,7 +139,7 @@ namespace AlchemyTycoon.GameStates
                 case GlobalGameState.MainMenu:
                     spriteBatch.Draw(screen, screenPos, Color.White);
                     playit.Draw(spriteBatch);
-                    fS.Draw(spriteBatch);
+                    //fS.Draw(spriteBatch);
                     exit.Draw(spriteBatch);
                     break;
                 case GlobalGameState.Playing:

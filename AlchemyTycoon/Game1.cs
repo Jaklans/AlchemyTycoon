@@ -95,6 +95,7 @@ namespace AlchemyTycoon
 
             //start calling from game manager
             gM.Update(gameTime, graphics, screenWidth, screenHeight);
+
         }
 
         /// <summary>
