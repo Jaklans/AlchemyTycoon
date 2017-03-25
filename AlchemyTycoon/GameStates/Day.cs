@@ -14,7 +14,6 @@ namespace AlchemyTycoon.GameStates
     {
         //Background image
         Texture2D bgScreen;
-        Rectangle ScreePos;
         Rectangle screenPos;
 
         //Buttons
@@ -37,6 +36,7 @@ namespace AlchemyTycoon.GameStates
             //gold = new Text()
             //Load in the screen
             bgScreen = content.Load<Texture2D>("daytime");
+            screenPos = new Rectangle(0, 0, screenWidth, screenHeight);
 
             //Load in the button
             stockButton = new Button(content.Load<Texture2D>("stockButton"), graphics);
@@ -59,7 +59,7 @@ namespace AlchemyTycoon.GameStates
         }
         protected void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(bgScreen, ScreePos, Color.White);
+            spriteBatch.Draw(bgScreen, screenPos, Color.White);
             stockButton.Draw(spriteBatch);
         }
 
