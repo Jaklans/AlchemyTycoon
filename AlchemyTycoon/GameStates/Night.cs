@@ -61,7 +61,7 @@ namespace AlchemyTycoon
         nightState currentState = nightState.Default;
 
         //LoadContent method
-        protected void LoadContent(ContentManager content, GraphicsDeviceManager graphics)
+        public void LoadContent(ContentManager content, GraphicsDeviceManager graphics)
         {
             //Load in the screens
             defaultScreen = content.Load<Texture2D>("backroom");
@@ -106,7 +106,7 @@ namespace AlchemyTycoon
         }
 
         //Update method
-        protected void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             //Get the mouse position
             MouseState mouse = Mouse.GetState();
@@ -203,7 +203,7 @@ namespace AlchemyTycoon
                     break;
             }
         }
-        protected void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
             // TODO: Add your drawing code here
 
