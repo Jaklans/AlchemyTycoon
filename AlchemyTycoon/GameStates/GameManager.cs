@@ -33,7 +33,7 @@ namespace AlchemyTycoon
             
         }
 
-        public void Update(GameTime gameTime, GraphicsDeviceManager graphics, int screenWidth, int screenHeight,)
+        public void Update(GameTime gameTime, GraphicsDeviceManager graphics, int screenWidth, int screenHeight)
         {
 
 
