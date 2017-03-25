@@ -12,6 +12,9 @@ namespace AlchemyTycoon
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        Data testData;
+        Inventory<GameItems.BaseIngredient> testInventory;
         
         KeyboardState kbs;
         //set the initial game screen size
@@ -45,6 +48,10 @@ namespace AlchemyTycoon
             graphics.PreferredBackBufferHeight = screenHeight;
             
             graphics.ApplyChanges();
+
+            testInventory = new Inventory<GameItems.BaseIngredient>();
+            testData = new Data("../../../../itemfolder");
+
             base.Initialize();
         }
 

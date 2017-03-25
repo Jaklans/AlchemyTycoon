@@ -27,24 +27,28 @@ namespace AlchemyTycoon
         {
             try
             {
-                ReadAll();
+                potions = new Dictionary<int, GameItems.BasePotion>();
+                ingrediants = new Dictionary<int, GameItems.BaseIngredient>();
+                potionHashValues = new Dictionary<int[], int>();
+
+                //Get list of all files in directory
+                ReadAll(targetFileName);
+
+                //Gets lists of all elements starting with "p" and "i"
                 ReadPotions();
                 ReadIngredients();
-                AddPotions();
-                AddIngredients();
+
+                //Adds potions and items to dictionaries
+                AddPotions(targetFileName);
+                AddIngredients(targetFileName);
 
                 
-                // (iii) Recipie Data
-
                 // TO DO: Implement Recipies (Medium Priority)
 
             }
-            finally
+            catch (Exception e)
             {
-                Stream inStream = null;
-                StreamReader reader = null;
-                inStream.Close();
-                reader.Close();
+
             }
         }
 
@@ -100,9 +104,9 @@ namespace AlchemyTycoon
         List<string> ingredientFiles = new List<string>();
 
         // Reads every file in the folder, so they can be sorted
-        public void ReadAll()
+        public void ReadAll(string folder)
         {
-            allFiles = Directory.GetFiles("itemfolder").Select(Path.GetFileName).ToList(); // Getfiles("") will have the directory where we'll be storing files
+            allFiles = Directory.GetFiles(folder).Select(Path.GetFileName).ToList(); // Getfiles("") will have the directory where we'll be storing files
         }
 
         // Adds potions strings to be used
@@ -130,11 +134,11 @@ namespace AlchemyTycoon
         }
 
         // Adds potion objects to the list of potions
-        public void AddPotions()
+        public void AddPotions(string directory)
         {
-            foreach(string pFileName in potionFiles)
+            foreach (string pFileName in potionFiles)
             {
-                Stream inStream = new FileStream(pFileName, FileMode.Open);
+                Stream inStream = new FileStream(directory + "/" + pFileName, FileMode.Open);
                 StreamReader reader = new StreamReader(inStream);
                 GameItems.BasePotion potion =
                     new GameItems.BasePotion
@@ -150,10 +154,10 @@ namespace AlchemyTycoon
                             // of the potions ingrediants
                             new int[4]
                             {
-                                int.Parse(reader.ReadLine()),
-                                int.Parse(reader.ReadLine()),
-                                int.Parse(reader.ReadLine()),
-                                int.Parse(reader.ReadLine()),
+                            int.Parse(reader.ReadLine()),
+                            int.Parse(reader.ReadLine()),
+                            int.Parse(reader.ReadLine()),
+                            int.Parse(reader.ReadLine()),
                             },
                             // (h) Flavor Text
                             reader.ReadLine(),
@@ -162,16 +166,19 @@ namespace AlchemyTycoon
                             // (j) Name of Texture File
                             reader.ReadLine()
                         );
+                inStream.Close();
+                reader.Close();
+
                 potions.Add(potion.HashValue, potion);
             }
         }
 
         // Adds ingredient objects the list of ingredients
-        public void AddIngredients()
+        public void AddIngredients(string directory)
         {
-            foreach(string iFileName in ingredientFiles)
+            foreach (string iFileName in ingredientFiles)
             {
-                Stream inStream = new FileStream(iFileName, FileMode.Open);
+                Stream inStream = new FileStream(directory + "/" + iFileName, FileMode.Open);
                 StreamReader reader = new StreamReader(inStream);
 
                 GameItems.BaseIngredient ingrediant =
@@ -188,6 +195,8 @@ namespace AlchemyTycoon
                             // (e) Name of Texture File
                             reader.ReadLine()
                         );
+                inStream.Close();
+                reader.Close();
 
                 ingrediants.Add(ingrediant.HashValue, ingrediant);
             }

@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace AlchemyTycoon.GameItems
+namespace AlchemyTycoon
 {
     //Handles either a potion or ingredient inventory
     class Inventory<T> where T : GameItems.GameItem
