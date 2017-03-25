@@ -23,7 +23,7 @@ namespace AlchemyTycoon
 
 
         //Constructor and Initialization
-        public Data(string targetFileName)
+        public Data(string targetFolderName)
         {
             try
             {
@@ -32,15 +32,15 @@ namespace AlchemyTycoon
                 potionHashValues = new Dictionary<int[], int>();
 
                 //Get list of all files in directory
-                ReadAll(targetFileName);
+                ReadAll(targetFolderName);
 
                 //Gets lists of all elements starting with "p" and "i"
                 ReadPotions();
                 ReadIngredients();
 
                 //Adds potions and items to dictionaries
-                AddPotions(targetFileName);
-                AddIngredients(targetFileName);
+                AddPotions(targetFolderName);
+                AddIngredients(targetFolderName);
 
                 
                 // TO DO: Implement Recipies (Medium Priority)
@@ -53,17 +53,17 @@ namespace AlchemyTycoon
         }
 
         //Texture Loading
-        public bool LoadContent(ContentManager content)
+        public bool LoadContent(ContentManager content, string targetFolderName)
         {
             try
             {
                 foreach (GameItems.GameItem i in potions.Values)
                 {
-                    i.Texture = content.Load<Texture2D>(i.TextureName);
+                    i.Texture = content.Load<Texture2D>(targetFolderName + "/" + i.TextureName);
                 }
                 foreach (GameItems.GameItem i in ingrediants.Values)
                 {
-                    i.Texture = content.Load<Texture2D>(i.TextureName);
+                    i.Texture = content.Load<Texture2D>(targetFolderName + "/" + i.TextureName);
                 }
                 return true;
             }

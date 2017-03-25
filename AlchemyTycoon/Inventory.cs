@@ -15,7 +15,6 @@ namespace AlchemyTycoon
             //Feilds
         private List<T> data;
         private int selectedItemIndex;
-        private bool active;
 
         private int xDepth;
         private int yDepth;
