@@ -42,14 +42,12 @@ namespace AlchemyTycoon
                 case PlayingEnum.Day:
                     break;
                 case PlayingEnum.Night:
+
                     break;
                 case PlayingEnum.MainMenu:
                     mM.Update(gameTime, graphics);
                     mM.UpdateScreen(graphics, screenWidth, screenHeight);
                     
-                    {
-
-                    }
                     break;
                 default:
                     break;
