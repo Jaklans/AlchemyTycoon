@@ -116,6 +116,27 @@ namespace AlchemyTycoon
             }
         }
 
+        public GameItems.BasePotion CreatePotion2(
+            int input1,
+            int input2,
+            int input3,
+            int input4)
+        {
+            int[] potion = new int[4] { input1, input2, input3, input4 };
+
+            Array.Sort(potion);
+
+            if (potionHashValues.ContainsKey(potion))
+            {
+                return potions[potionHashValues[potion]];
+            }
+            else
+            {
+                return null;
+                //TO DO: Return a bad potion (Low Priority)
+            }
+        }
+
         // READING IN TEXT FILES
 
         // Array with all files from the folder where we'll have all files

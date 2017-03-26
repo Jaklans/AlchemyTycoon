@@ -22,6 +22,8 @@ namespace AlchemyTycoon
 
         private MouseState previousMousestate;
 
+        public Data theData = new Data("../../../../itemfolder");
+
             //Constructor
         public Inventory()
         {
@@ -42,6 +44,28 @@ namespace AlchemyTycoon
         public void AddItem(T item)
         {
             data.Add(item);
+        }
+
+        public GameItems.BasePotion MakePotion()
+        {
+            if(data.Count >= 4)
+            {
+                /*List<int> craftList = new List<int>();
+                craftList.Add(data[0].HashValue);
+                craftList.Add(data[1].HashValue);
+                craftList.Add(data[2].HashValue);
+                craftList.Add(data[3].HashValue);*/
+                
+
+                GameItems.BasePotion thePotion;
+                thePotion = theData.CreatePotion2(data[0].HashValue, data[1].HashValue, data[2].HashValue, data[3].HashValue);
+
+                return thePotion;
+            }
+            else
+            {
+                return null;
+            }
         }
         
         /// <summary>

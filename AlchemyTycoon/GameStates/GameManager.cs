@@ -21,9 +21,10 @@ namespace AlchemyTycoon
         }
 
         //Test Enviro Vars
-        protected Inventory<GameItems.BaseIngredient> testInventory = new Inventory<GameItems.BaseIngredient>();
-        protected Inventory<GameItems.BaseIngredient> testInventory2 = new Inventory<GameItems.BaseIngredient>();
-        protected Inventory<GameItems.BaseIngredient> testInventory3 = new Inventory<GameItems.BaseIngredient>();
+        protected Inventory<GameItems.BaseIngredient> testIngredients = new Inventory<GameItems.BaseIngredient>();
+        protected Inventory<GameItems.BasePotion> testPotions = new Inventory<GameItems.BasePotion>();
+        protected Inventory<GameItems.BasePotion> testOutput = new Inventory<GameItems.BasePotion>();
+        protected Inventory<GameItems.BaseIngredient> testInput = new Inventory<GameItems.BaseIngredient>();
         protected Data testData = new Data("../../../../itemfolder");
 
         GameStates.MainMenu mM = new GameStates.MainMenu();
@@ -40,7 +41,7 @@ namespace AlchemyTycoon
 
             //TestEnvironment
             testData.LoadContent(Content, "../../../../itemfolder/Textures");
-            testInventory.AddItem(testData.Ingrediants(005));
+            /*testInventory.AddItem(testData.Ingrediants(005));
             testInventory.AddItem(testData.Ingrediants(001));
             testInventory.AddItem(testData.Ingrediants(002));
             testInventory.AddItem(testData.Ingrediants(003));
@@ -56,7 +57,13 @@ namespace AlchemyTycoon
             testInventory3.AddItem(testData.Ingrediants(001));
             testInventory3.AddItem(testData.Ingrediants(004));
             testInventory3.AddItem(testData.Ingrediants(003));
-            testInventory3.AddItem(testData.Ingrediants(004));
+            testInventory3.AddItem(testData.Ingrediants(004));*/
+
+            testIngredients.AddItem(testData.Ingrediants(005));
+            testIngredients.AddItem(testData.Ingrediants(001));
+            testIngredients.AddItem(testData.Ingrediants(002));
+            testIngredients.AddItem(testData.Ingrediants(003));
+            testIngredients.AddItem(testData.Ingrediants(004));
         }
 
         public void Update(GameTime gameTime, GraphicsDeviceManager graphics, int screenWidth, int screenHeight)
@@ -82,9 +89,16 @@ namespace AlchemyTycoon
                 break;
                 case PlayingEnum.TestEnvironment:
 
-                    testInventory.Update(ms,testInventory2);
+                    /*testInventory.Update(ms,testInventory2);
                     testInventory2.Update(ms, testInventory);
-                    testInventory3.Update(ms);
+                    testInventory3.Update(ms);*/
+
+                    
+
+                    testIngredients.Update(ms, testInput);
+                    testInput.Update(ms, testIngredients);
+                    testOutput.Update(ms, testPotions);
+                    testPotions.Update(ms);
                     
                     break;
                 default:
@@ -111,9 +125,14 @@ namespace AlchemyTycoon
 
                 case PlayingEnum.TestEnvironment:
 
-                    testInventory.Draw(spriteBatch, new Vector2(40, 40), 3, 4);
+                    /*testInventory.Draw(spriteBatch, new Vector2(40, 40), 3, 4);
                     testInventory2.Draw(spriteBatch, new Vector2(400, 450), 4, 3);
-                    testInventory3.Draw(spriteBatch, new Vector2(600, 40), 4, 4);
+                    testInventory3.Draw(spriteBatch, new Vector2(600, 40), 4, 4);*/
+
+                    testIngredients.Draw(spriteBatch, new Vector2(25, 25), 3, 4);
+                    testInput.Draw(spriteBatch, new Vector2(25, 500), 2, 2);
+                    testOutput.Draw(spriteBatch, new Vector2(500, 500), 1, 1);
+                    testPotions.Draw(spriteBatch, new Vector2(500, 25), 3, 4);
 
                     break;
                 default:
