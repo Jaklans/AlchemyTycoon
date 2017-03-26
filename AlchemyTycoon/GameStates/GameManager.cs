@@ -22,6 +22,8 @@ namespace AlchemyTycoon
 
         //Test Enviro Vars
         protected Inventory<GameItems.BaseIngredient> testInventory = new Inventory<GameItems.BaseIngredient>();
+        protected Inventory<GameItems.BaseIngredient> testInventory2 = new Inventory<GameItems.BaseIngredient>();
+        protected Inventory<GameItems.BaseIngredient> testInventory3 = new Inventory<GameItems.BaseIngredient>();
         protected Data testData = new Data("../../../../itemfolder");
 
         GameStates.MainMenu mM = new GameStates.MainMenu();
@@ -43,6 +45,18 @@ namespace AlchemyTycoon
             testInventory.AddItem(testData.Ingrediants(002));
             testInventory.AddItem(testData.Ingrediants(003));
             testInventory.AddItem(testData.Ingrediants(004));
+
+            testInventory2.AddItem(testData.Ingrediants(003));
+            testInventory2.AddItem(testData.Ingrediants(001));
+            testInventory2.AddItem(testData.Ingrediants(004));
+            testInventory2.AddItem(testData.Ingrediants(003));
+            testInventory2.AddItem(testData.Ingrediants(004));
+
+            testInventory3.AddItem(testData.Ingrediants(003));
+            testInventory3.AddItem(testData.Ingrediants(001));
+            testInventory3.AddItem(testData.Ingrediants(004));
+            testInventory3.AddItem(testData.Ingrediants(003));
+            testInventory3.AddItem(testData.Ingrediants(004));
         }
 
         public void Update(GameTime gameTime, GraphicsDeviceManager graphics, int screenWidth, int screenHeight)
@@ -68,8 +82,10 @@ namespace AlchemyTycoon
                 break;
                 case PlayingEnum.TestEnvironment:
 
-                    testInventory.Update(ms);
-
+                    testInventory.Update(ms,testInventory2);
+                    testInventory2.Update(ms, testInventory);
+                    testInventory3.Update(ms);
+                    
                     break;
                 default:
                     break;
@@ -96,6 +112,8 @@ namespace AlchemyTycoon
                 case PlayingEnum.TestEnvironment:
 
                     testInventory.Draw(spriteBatch, new Vector2(40, 40), 3, 4);
+                    testInventory2.Draw(spriteBatch, new Vector2(240, 240), 2, 4);
+                    testInventory3.Draw(spriteBatch, new Vector2(540, 40), 4, 4);
 
                     break;
                 default:

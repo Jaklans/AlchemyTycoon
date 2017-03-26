@@ -53,11 +53,14 @@ namespace AlchemyTycoon
         /// <param name="otherInventory">The other inventory on screen
         /// that items will transfer too when clicked on</param>
         /// <returns></returns>
-        public void Update(MouseState mouseState, Inventory<T> otherInventory)
+        public Inventory<T> Update(MouseState mouseState, Inventory<T> otherInventory)
         {
+            selectedItemIndex = -1;
+
             if (bounds.Contains(new Point(mouseState.X, mouseState.Y)) &&
                 mouseState.LeftButton == ButtonState.Released &&
-                previousMousestate.LeftButton == ButtonState.Pressed)
+                previousMousestate.LeftButton == ButtonState.Pressed &&
+                data.Count != 0)
             {
                 Vector2 mouse = mouseState.Position.ToVector2();
 
@@ -74,12 +77,16 @@ namespace AlchemyTycoon
                 targetItemIndex += (xDepth * (int)mouse.Y);
                 targetItemIndex += (int)mouse.X;
 
-                otherInventory.AddItem(RemoveItem(targetItemIndex));
-
-                previousMousestate = mouseState;
+                if (targetItemIndex < data.Count)
+                {
+                    otherInventory.AddItem(data[targetItemIndex]);
+                    data.RemoveAt(targetItemIndex);
+                }
             }
 
             previousMousestate = mouseState;
+
+            return otherInventory;
         }
 
         /// <summary>
@@ -120,7 +127,7 @@ namespace AlchemyTycoon
                 {
                     selectedItemIndex = -1;
                 }
-                if (selectedItemIndex != -1)
+                if (selectedItemIndex != -1 && selectedItemIndex < data.Count)
                 {
                     return data[selectedItemIndex];
                 }
@@ -137,56 +144,82 @@ namespace AlchemyTycoon
             }
         }
 
+        /// <summary>
+        /// Draw method for all items in an invntory. Uses the given textures
+        /// size for sizing! Cannot be rescaled, and all elements must have
+        /// same dimentions, or will crash terribly
+        /// </summary>
+        /// <param name="sb">Input SpriteBatch</param>
+        /// <param name="position">The location of the Inventory (Top Left corner)</param>
+        /// <param name="vXDepth">Number of columns desired</param>
+        /// <param name="vYDepth">Number of rows desired</param>
         public void Draw(SpriteBatch sb, Vector2 position, int vXDepth, int vYDepth)
         {
-            xDepth = vXDepth;
-            yDepth = vYDepth;
-
-            bounds = new Rectangle(
-                (int)position.X,
-                (int)position.Y,
-                xDepth * data[0].Texture.Width,
-                yDepth * data[0].Texture.Height
-                );
-            //Could be optimized to only do once
-            
-
-            //Handles the drawing of static item grid
-            int index = 0;
-            for(int i = 0; i < yDepth; i++)
+            if (data.Count != 0)
             {
-                for(int j = 0; j < xDepth; j++)
+                xDepth = vXDepth;
+                yDepth = vYDepth;
+
+                bounds = new Rectangle(
+                    (int)position.X,
+                    (int)position.Y,
+                    xDepth * data[0].Texture.Width,
+                    yDepth * data[0].Texture.Height
+                    );
+                //Could be optimized to only do once
+
+
+                //Handles the drawing of static item grid
+                int index = 0;
+                for (int i = 0; i < yDepth; i++)
                 {
-                    if (index < data.Count)
+                    for (int j = 0; j < xDepth; j++)
                     {
-                        data[index].Draw(
-                            new Vector2(
-                                position.X +
-                                j * data[index].Texture.Width,
-                                position.Y +
-                                i * data[index].Texture.Height
-                                ),
-                            sb
-                            );
+                        if (index < data.Count)
+                        {
+                            if (index != selectedItemIndex)
+                            {
+                                data[index].Draw(
+                                    new Vector2(
+                                        position.X +
+                                        j * data[index].Texture.Width,
+                                        position.Y +
+                                        i * data[index].Texture.Height
+                                        ),
+                                    sb
+                                    );
+                            }
+                            else
+                            {
+                                sb.Draw(
+                                    data[index].Texture,
+                                    new Vector2(
+                                        position.X +
+                                        j * data[index].Texture.Width,
+                                        position.Y +
+                                        i * data[index].Texture.Height
+                                    ),
+                                    Color.Aqua);
+                            }
+                        }
+                        /*else if(index < data.Count)
+                        {
+                            //Selected Item will be Aqua for now
+                            sb.Draw(
+                                data[index].Texture,
+                                new Vector2(
+                                    position.X +
+                                    j * data[index].Texture.Width,
+                                    position.Y +
+                                    i * data[index].Texture.Height
+                                    ),
+                                Color.Aqua
+                                );
+                        }*/
+                        index++;
                     }
-                    /*else if(index < data.Count)
-                    {
-                        //Selected Item will be Aqua for now
-                        sb.Draw(
-                            data[index].Texture,
-                            new Vector2(
-                                position.X +
-                                j * data[index].Texture.Width,
-                                position.Y +
-                                i * data[index].Texture.Height
-                                ),
-                            Color.Aqua
-                            );
-                    }*/
-                    index++;
                 }
             }
-
         }
     }
 }
