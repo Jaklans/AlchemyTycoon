@@ -112,8 +112,8 @@ namespace AlchemyTycoon
                 case PlayingEnum.TestEnvironment:
 
                     testInventory.Draw(spriteBatch, new Vector2(40, 40), 3, 4);
-                    testInventory2.Draw(spriteBatch, new Vector2(240, 240), 2, 4);
-                    testInventory3.Draw(spriteBatch, new Vector2(540, 40), 4, 4);
+                    testInventory2.Draw(spriteBatch, new Vector2(400, 450), 4, 3);
+                    testInventory3.Draw(spriteBatch, new Vector2(600, 40), 4, 4);
 
                     break;
                 default:
