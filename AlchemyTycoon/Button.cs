@@ -21,8 +21,8 @@ namespace AlchemyTycoon
         {
             //get the size of the button and image
             texture = nTexture;
-            size = new Vector2(graphics.Viewport.Width / 10, graphics.Viewport.Height / 20);
-
+            //size = new Vector2(graphics.Viewport.Width / 10, graphics.Viewport.Height / 20);
+            size = new Vector2(nTexture.Width, nTexture.Height);
         }
         public void setPos(Vector2 newPos)
         {
@@ -32,6 +32,11 @@ namespace AlchemyTycoon
         public bool isClicked;
         public void Update(MouseState mouse)
         {
+            if (isClicked)
+            {
+                isClicked = false;
+            }
+
             //set data for the button and mouse
             rec = new Rectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y);
             Rectangle mouseRec = new Rectangle(mouse.X, mouse.Y, 1, 1);
