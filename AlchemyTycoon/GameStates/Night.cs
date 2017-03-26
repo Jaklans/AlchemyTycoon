@@ -25,6 +25,9 @@ namespace AlchemyTycoon
         //Text
         SpriteFont text;
 
+        //Buttons on all screens
+        Button backButton;
+
         //Buttons on default/after hours menu screen
         Button inventoryButton;
         Button kitButton;
@@ -74,38 +77,43 @@ namespace AlchemyTycoon
             rsRec = new Rectangle(0, 0, screenWidth, screenHeight); ;//Wont be real position change  the size and position
 
             //Load in text
-            text = content.Load<SpriteFont>("Tahoma_40.xnb");
+            text = content.Load<SpriteFont>("Tahoma_40");
 
             //Load in the buttons for each screen
+
+            //All screens
+            backButton = new Button(content.Load<Texture2D>("backButton"), graphics.GraphicsDevice);
+            backButton.setPos(new Vector2(400, 400));
+
             //Default screen
-            inventoryButton = new Button(content.Load<Texture2D>("invButton"), graphics.GraphicsDevice);
-            inventoryButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
+            inventoryButton = new Button(content.Load<Texture2D>("inventoryButton"), graphics.GraphicsDevice);
+            inventoryButton.setPos(new Vector2(0, 0));
             kitButton = new Button(content.Load<Texture2D>("kitButton"), graphics.GraphicsDevice);
-            kitButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
+            kitButton.setPos(new Vector2(400, 0));
             recipeBookButton = new Button(content.Load<Texture2D>("rbButton"), graphics.GraphicsDevice);
-            recipeBookButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
+            recipeBookButton.setPos(new Vector2(0, 400));
 
             //Kit screen
             makeButton = new Button(content.Load<Texture2D>("makeButton"), graphics.GraphicsDevice);
-            makeButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
+            makeButton.setPos(new Vector2(0, 0));
             clearButton = new Button(content.Load<Texture2D>("clearButton"), graphics.GraphicsDevice);
-            clearButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
+            clearButton.setPos(new Vector2(400, 0));
 
             //Recipe book screen
             recipesButton = new Button(content.Load<Texture2D>("recipesButton"), graphics.GraphicsDevice);
-            recipesButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
+            recipesButton.setPos(new Vector2(0, 0));
             guideButton = new Button(content.Load<Texture2D>("guideButton"), graphics.GraphicsDevice);
-            guideButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
+            guideButton.setPos(new Vector2(400, 0));
             availableButton = new Button(content.Load<Texture2D>("availButton"), graphics.GraphicsDevice);
-            availableButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
+            availableButton.setPos(new Vector2(0, 400));
             yourRecipeButton = new Button(content.Load<Texture2D>("yourButton"), graphics.GraphicsDevice);
-            yourRecipeButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
+            yourRecipeButton.setPos(new Vector2(400, 400));
 
             //Inventory/Ingredient screen
             storeButton = new Button(content.Load<Texture2D>("storeButton"), graphics.GraphicsDevice);
-            storeButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
+            storeButton.setPos(new Vector2(0, 0));
             guide2Button = new Button(content.Load<Texture2D>("guide2Button"), graphics.GraphicsDevice);
-            guide2Button.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
+            guide2Button.setPos(new Vector2(400, 0));
 
         }
 
@@ -114,6 +122,13 @@ namespace AlchemyTycoon
         {
             //Get the mouse position
             MouseState mouse = Mouse.GetState();
+
+            //Button to go back to Default State
+            backButton.Update(mouse);
+            if (backButton.isClicked && currentState != nightState.Default)
+            {
+                currentState = nightState.Default;
+            }
 
             //Changing the states based on where the player clicks on
             switch (currentState)
@@ -213,6 +228,8 @@ namespace AlchemyTycoon
 
             //spriteBatch.Draw(img, imgRec, Color.White);
             //spriteBatch.DrawString(nightFont, nightText, nighTextLocation, nightTextColor);
+            
+
 
             switch (currentState)
             {
@@ -241,6 +258,12 @@ namespace AlchemyTycoon
                     break;
                 default:
                     break;
+
+
+            }
+            if (currentState != nightState.Default)
+            {
+                backButton.Draw(spriteBatch);
             }
 
         }
