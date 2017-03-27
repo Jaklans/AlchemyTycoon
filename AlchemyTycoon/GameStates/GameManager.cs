@@ -32,6 +32,13 @@ namespace AlchemyTycoon
 
         private Button makePotion;
 
+        Text ingInv;
+        Text potInv;
+        Text inpInv;
+        Text outInv;
+
+        SpriteFont textFont;
+
         GameStates.MainMenu mM = new GameStates.MainMenu();
         GameStates.Day day = new GameStates.Day();
         Night night = new Night();
@@ -71,7 +78,22 @@ namespace AlchemyTycoon
             testIngredients.AddItem(testData.Ingrediants(004));
 
             makePotion = new Button(Content.Load<Texture2D>("potionButton"), graphics.GraphicsDevice);
-            makePotion.setPos(new Vector2(300, 500));
+            makePotion.setPos(new Vector2(400, 550));
+            textFont = Content.Load<SpriteFont>("Tahoma_40");
+
+            ingInv = new Text("This is your ingredient inventory. \nClick on things to add them to the input inventory.", textFont, Color.AntiqueWhite);
+            ingInv.setPos(new Vector2(5, 5));
+
+            inpInv = new Text("This is the input inventory. \nAdd everything but the green blob, \nthen press 'make potion' to make a potion.", textFont, Color.AntiqueWhite);
+            inpInv.setPos(new Vector2(5, 420));
+
+            outInv = new Text("This is the output inventory, where potions will appear when made.", textFont, Color.AntiqueWhite);
+            outInv.setPos(new Vector2(480, 480));
+
+            potInv = new Text("This is the potion inventory, where potions will be stored.", textFont, Color.AntiqueWhite);
+            potInv.setPos(new Vector2(480, 5));
+
+            
         }
 
         public void Update(GameTime gameTime, GraphicsDeviceManager graphics, int screenWidth, int screenHeight)
@@ -150,12 +172,26 @@ namespace AlchemyTycoon
                     testInventory2.Draw(spriteBatch, new Vector2(400, 450), 4, 3);
                     testInventory3.Draw(spriteBatch, new Vector2(600, 40), 4, 4);*/
 
-                    testIngredients.Draw(spriteBatch, new Vector2(25, 25), 3, 4);
-                    testInput.Draw(spriteBatch, new Vector2(25, 500), 2, 2);
-                    testOutput.Draw(spriteBatch, new Vector2(500, 500), 2, 2);
-                    testPotions.Draw(spriteBatch, new Vector2(500, 25), 3, 4);
+                    testIngredients.Draw(spriteBatch, new Vector2(50, 50), 3, 4);
+                    testInput.Draw(spriteBatch, new Vector2(50, 500), 2, 2);
+                    testOutput.Draw(spriteBatch, new Vector2(600, 550), 2, 2);
+                    testPotions.Draw(spriteBatch, new Vector2(500, 50), 3, 4);
 
                     makePotion.Draw(spriteBatch);
+                    Vector2 theScale2 = new Vector2(0.33f);
+                    ingInv.changeFont(spriteBatch, theScale2);
+                    outInv.changeFont(spriteBatch, theScale2);
+                    potInv.changeFont(spriteBatch, theScale2);
+                    inpInv.changeFont(spriteBatch, theScale2);
+
+                    /*inpInv.Draw(spriteBatch);
+                    outInv.Draw(spriteBatch);
+                    potInv.Draw(spriteBatch);
+                    ingInv.Draw(spriteBatch);*/
+
+                    
+
+                    
 
                     break;
                 default:

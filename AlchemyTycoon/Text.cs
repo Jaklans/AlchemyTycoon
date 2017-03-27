@@ -35,5 +35,11 @@ namespace AlchemyTycoon
             spriteBatch.DrawString(font, text, pos, color);
         }
 
+        public void changeFont(SpriteBatch spriteBatch, Vector2 theScale)
+        {
+            Vector2 forZero = new Vector2(0);
+            spriteBatch.DrawString(font, text, pos, color, 0, forZero, theScale, SpriteEffects.None, 0);
+        }
+
     }
 }
