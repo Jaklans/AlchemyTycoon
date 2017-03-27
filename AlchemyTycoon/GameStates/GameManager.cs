@@ -31,6 +31,7 @@ namespace AlchemyTycoon
         Vector2 potionButton = new Vector2();
 
         private Button makePotion;
+        private Button demoButton;
 
         Text ingInv;
         Text potInv;
@@ -50,6 +51,7 @@ namespace AlchemyTycoon
         {
 
             mM.LoadContent(Content, graphics);
+            night.LoadContent(Content, graphics);
 
             //TestEnvironment
             testData.LoadContent(Content, "../../../../itemfolder/Textures");
@@ -79,6 +81,10 @@ namespace AlchemyTycoon
 
             makePotion = new Button(Content.Load<Texture2D>("potionButton"), graphics.GraphicsDevice);
             makePotion.setPos(new Vector2(400, 550));
+
+            demoButton = new Button(Content.Load<Texture2D>("demoButton"), graphics.GraphicsDevice);
+            demoButton.setPos(new Vector2(1100, 50));
+
             textFont = Content.Load<SpriteFont>("Tahoma_40");
 
             ingInv = new Text("This is your ingredient inventory. \nClick on things to add them to the input inventory.", textFont, Color.AntiqueWhite);
@@ -93,7 +99,8 @@ namespace AlchemyTycoon
             potInv = new Text("This is the potion inventory, where potions will be stored.", textFont, Color.AntiqueWhite);
             potInv.setPos(new Vector2(480, 5));
 
-            
+            potInv = new Text("This button goes to where the the night class runs. All is very WIP, but basic navigation is covered.", textFont, Color.AntiqueWhite);
+            potInv.setPos(new Vector2(500, 5));
         }
 
         public void Update(GameTime gameTime, GraphicsDeviceManager graphics, int screenWidth, int screenHeight)
@@ -142,7 +149,14 @@ namespace AlchemyTycoon
                         }
                         
                     }
-                    
+
+                    demoButton.Update(ms);
+
+                    if (demoButton.isClicked)
+                    {
+                        current = PlayingEnum.Night;
+                    }
+
                     break;
                 default:
                     break;
@@ -184,6 +198,8 @@ namespace AlchemyTycoon
                     potInv.changeFont(spriteBatch, theScale2);
                     inpInv.changeFont(spriteBatch, theScale2);
 
+
+                    demoButton.Draw(spriteBatch);
                     /*inpInv.Draw(spriteBatch);
                     outInv.Draw(spriteBatch);
                     potInv.Draw(spriteBatch);
