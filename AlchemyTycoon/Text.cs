@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+//Written by Simeon Chang and Sam Sorensen
 namespace AlchemyTycoon
 {
     class Text

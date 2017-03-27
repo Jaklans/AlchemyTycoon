@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 
+//Written by Aiden Thinn, Simeon Chang, John Shull
 namespace AlchemyTycoon
 {
     public class Night

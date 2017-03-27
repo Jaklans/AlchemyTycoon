@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//Writen by Aiden Thinn
 namespace AlchemyTycoon
 {
     class PlayerData

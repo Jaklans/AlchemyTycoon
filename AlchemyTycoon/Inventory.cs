@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+//Written by John Shull, Aiden Thinn, and Sam Sorensen
 namespace AlchemyTycoon
 {
     //Handles either a potion or ingredient inventory

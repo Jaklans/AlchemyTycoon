@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Content;
 
+//Writen by Simeon Chang
 namespace AlchemyTycoon.GameStates
 {
     enum GlobalGameState

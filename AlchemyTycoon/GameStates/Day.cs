@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Content;
 
+//Written by Aaron Reiner
 namespace AlchemyTycoon.GameStates
 {
     class Day

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+//Written by John Shull
 namespace AlchemyTycoon.GameItems
 {
     abstract class GameItem

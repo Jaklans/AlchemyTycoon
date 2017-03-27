@@ -7,6 +7,7 @@
 //using Microsoft.Xna.Framework.Content;
 //using Microsoft.Xna.Framework.Graphics;
 //
+//Written by John Shull
 //namespace AlchemyTycoon
 //{
 //    class Data

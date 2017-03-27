@@ -7,6 +7,7 @@ using System.IO;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
+//Written by John Shull and Sam Sorensen
 namespace AlchemyTycoon
 {
     public struct potionHashValue
