@@ -21,11 +21,16 @@ namespace AlchemyTycoon
         }
 
         //Test Enviro Vars
-        protected Inventory<GameItems.BaseIngredient> testIngredients = new Inventory<GameItems.BaseIngredient>();
-        protected Inventory<GameItems.BasePotion> testPotions = new Inventory<GameItems.BasePotion>();
-        protected Inventory<GameItems.BasePotion> testOutput = new Inventory<GameItems.BasePotion>();
-        protected Inventory<GameItems.BaseIngredient> testInput = new Inventory<GameItems.BaseIngredient>();
-        protected Data testData = new Data("../../../../itemfolder");
+        public static Data testData = new Data("../../../../itemfolder");
+        protected Inventory<GameItems.BaseIngredient> testIngredients = new Inventory<GameItems.BaseIngredient>(testData);
+        protected Inventory<GameItems.BasePotion> testPotions = new Inventory<GameItems.BasePotion>(testData);
+        protected Inventory<GameItems.BasePotion> testOutput = new Inventory<GameItems.BasePotion>(testData);
+        protected Inventory<GameItems.BaseIngredient> testInput = new Inventory<GameItems.BaseIngredient>(testData);
+        
+
+        Vector2 potionButton = new Vector2();
+
+        private Button makePotion;
 
         GameStates.MainMenu mM = new GameStates.MainMenu();
         GameStates.Day day = new GameStates.Day();
@@ -64,6 +69,9 @@ namespace AlchemyTycoon
             testIngredients.AddItem(testData.Ingrediants(002));
             testIngredients.AddItem(testData.Ingrediants(003));
             testIngredients.AddItem(testData.Ingrediants(004));
+
+            makePotion = new Button(Content.Load<Texture2D>("potionButton"), graphics.GraphicsDevice);
+            makePotion.setPos(new Vector2(300, 500));
         }
 
         public void Update(GameTime gameTime, GraphicsDeviceManager graphics, int screenWidth, int screenHeight)
@@ -99,6 +107,19 @@ namespace AlchemyTycoon
                     testInput.Update(ms, testIngredients);
                     testOutput.Update(ms, testPotions);
                     testPotions.Update(ms);
+
+                    makePotion.Update(ms);
+                    
+                    if(makePotion.isClicked == true)
+                    {
+                        GameItems.BasePotion thePotion;
+                        thePotion = testInput.MakePotion();
+                        if(thePotion != null)
+                        {
+                            testOutput.AddItem(thePotion);
+                        }
+                        
+                    }
                     
                     break;
                 default:
@@ -131,8 +152,10 @@ namespace AlchemyTycoon
 
                     testIngredients.Draw(spriteBatch, new Vector2(25, 25), 3, 4);
                     testInput.Draw(spriteBatch, new Vector2(25, 500), 2, 2);
-                    testOutput.Draw(spriteBatch, new Vector2(500, 500), 1, 1);
+                    testOutput.Draw(spriteBatch, new Vector2(500, 500), 2, 2);
                     testPotions.Draw(spriteBatch, new Vector2(500, 25), 3, 4);
+
+                    makePotion.Draw(spriteBatch);
 
                     break;
                 default:

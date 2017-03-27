@@ -19,7 +19,7 @@ namespace AlchemyTycoon.GameItems
         {
             get { return effect; }
         }
-        private int[] PotionHashValue
+        public int[] PotionHashValue
         {
             get { return potionHashValue; }
         }

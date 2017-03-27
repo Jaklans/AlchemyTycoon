@@ -9,17 +9,47 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace AlchemyTycoon
 {
+    public struct potionHashValue
+    {
+        public int hash1;
+        public int hash2;
+        public int hash3;
+        public int hash4;
+
+        public potionHashValue(int h1, int h2, int h3, int h4)
+        {
+            hash1 = h1;
+            hash2 = h2;
+            hash3 = h3;
+            hash4 = h4;
+        }
+
+        public potionHashValue(int[] hashes)
+        {
+            hash1 = hashes[0];
+            hash2 = hashes[1];
+            hash3 = hashes[2];
+            hash4 = hashes[3];
+        }
+
+        public static bool operator ==(potionHashValue c1, potionHashValue c2)
+        {
+            return c1.Equals(c2);
+        }
+        public static bool operator !=(potionHashValue c1, potionHashValue c2)
+        {
+            return c1.Equals(c2);
+        }
+    }
     class Data
     {
-        //Declare Structures
-
         //All items have a hash value, which they are stored by here
         private Dictionary<int, GameItems.BasePotion> potions;
         private Dictionary<int, GameItems.BaseIngredient> ingrediants;
 
         //Potions have a potionHashValue comprised of their components,
         //which is mapped to their hash value here
-        private Dictionary<int[], int> potionHashValues;
+        private Dictionary<potionHashValue, int> potionHashValues;
 
 
         //Accessors
@@ -49,7 +79,7 @@ namespace AlchemyTycoon
             {
                 potions = new Dictionary<int, GameItems.BasePotion>();
                 ingrediants = new Dictionary<int, GameItems.BaseIngredient>();
-                potionHashValues = new Dictionary<int[], int>();
+                potionHashValues = new Dictionary<potionHashValue, int>();
 
                 //Get list of all files in directory
                 ReadAll(targetFolderName);
@@ -62,6 +92,10 @@ namespace AlchemyTycoon
                 AddPotions(targetFolderName);
                 AddIngredients(targetFolderName);
 
+                foreach(GameItems.BasePotion p in potions.Values)
+                {
+                    potionHashValues.Add(new potionHashValue(p.PotionHashValue), p.HashValue);
+                }
                 
                 // TO DO: Implement Recipies (Medium Priority)
 
@@ -105,9 +139,9 @@ namespace AlchemyTycoon
 
             Array.Sort(potion);
 
-            if (potionHashValues.ContainsKey(potion))
+            if (potionHashValues.ContainsKey(new potionHashValue(potion)))
             {
-                return potions[potionHashValues[potion]];
+                return potions[potionHashValues[new potionHashValue(potion)]];
             }
             else
             {
@@ -126,9 +160,9 @@ namespace AlchemyTycoon
 
             Array.Sort(potion);
 
-            if (potionHashValues.ContainsKey(potion))
+            if (potionHashValues.ContainsKey(new potionHashValue(potion)))
             {
-                return potions[potionHashValues[potion]];
+                return potions[potionHashValues[new potionHashValue(potion)]];
             }
             else
             {
