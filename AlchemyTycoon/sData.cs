@@ -44,6 +44,21 @@ namespace AlchemyTycoon
     }
     class Data
     {
+        private static Data instance;
+
+        public static Data Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Data("../../../../itemfolder");
+                }
+                return instance;
+            }
+        }
+
+
         //All items have a hash value, which they are stored by here
         private Dictionary<int, GameItems.BasePotion> potions;
         private Dictionary<int, GameItems.BaseIngredient> ingrediants;

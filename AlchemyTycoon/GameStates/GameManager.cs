@@ -78,7 +78,7 @@ namespace AlchemyTycoon
             testIngredients.AddItem(testData.Ingrediants(001));
             testIngredients.AddItem(testData.Ingrediants(002));
             testIngredients.AddItem(testData.Ingrediants(003));
-            testIngredients.AddItem(testData.Ingrediants(004));
+            testIngredients.AddItem(Data.Instance.Ingrediants(004));
 
             makePotion = new Button(Content.Load<Texture2D>("potionButton"), graphics.GraphicsDevice);
             makePotion.setPos(new Vector2(400, 550));

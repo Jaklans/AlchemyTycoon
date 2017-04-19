@@ -50,9 +50,8 @@ namespace AlchemyTycoon
             graphics.ApplyChanges();
 
 
-            //TestEnvironment
-            //testInventory = new Inventory<GameItems.BaseIngredient>();
-            //testData = new Data("../../../../itemfolder");
+            //Used to initialize data
+            Data.Instance.ToString();
 
             
             base.Initialize();
@@ -69,6 +68,7 @@ namespace AlchemyTycoon
 
             // TODO: use this.Content to load your game content here
             gM.Load(Content, graphics);
+            Data.Instance.LoadContent(Content, "../../../../itemfolder/Textures");
 
             ////TestEnvironment
             //testData.LoadContent(Content, "../../../../itemfolder/Textures");

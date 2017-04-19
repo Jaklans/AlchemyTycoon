@@ -10,6 +10,72 @@ using Microsoft.Xna.Framework.Input;
 //Written by Simeon Chang
 namespace AlchemyTycoon
 {
+    class newButton
+    {
+        private Texture2D texture;
+        private Texture2D highlightTexture;
+        private Rectangle position;
+
+        public bool active;
+
+        private bool mouseover;
+        private bool clicked;
+
+        public bool Mouseover { get { return mouseover; } }
+        public bool Clicked { get { return clicked; } }
+
+        public newButton(Texture2D texture, Texture2D highlightTexture)
+        {
+            this.texture = texture;
+            this.highlightTexture = highlightTexture;
+            position = new Rectangle(0, 0, texture.Width, texture.Height);
+
+            active = true;
+        }
+        public newButton(Texture2D texture, Texture2D highlightTexture, Vector2 position)
+        {
+            this.texture = texture;
+            this.highlightTexture = highlightTexture;
+            this.position = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+
+            active = true;
+        }
+
+
+
+        public void Update(MouseState mouse)
+        {
+            if (position.Contains(mouse.Position))
+            {
+                mouseover = true;
+                if (mouse.LeftButton.Equals(ButtonState.Pressed))
+                {
+                    clicked = true;
+                }
+                else
+                {
+                    clicked = false;
+                }
+            }
+            else
+            {
+                mouseover = false;
+                clicked = false;
+            }
+        }
+        public void Draw(SpriteBatch spritebatch)
+        {
+            if (active)
+            if (mouseover)
+            {
+                spritebatch.Draw(highlightTexture, position, Color.White);
+            }
+            else
+            {
+                spritebatch.Draw(texture, position, Color.White);
+            }
+        }
+    }
     class Button
     {
         Texture2D texture;

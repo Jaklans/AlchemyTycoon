@@ -16,7 +16,6 @@ namespace AlchemyTycoon
             //Feilds
         private List<T> data;
         private int selectedItemIndex;
-        private Data dataClass;
 
         private int xDepth;
         private int yDepth;
@@ -25,11 +24,9 @@ namespace AlchemyTycoon
         private MouseState previousMousestate;
 
             //Constructor
-        public Inventory(Data dataClass)
+        public Inventory()
         {
             data = new List<T>();
-
-            this.dataClass = dataClass;
 
             selectedItemIndex = -1;
         }
@@ -61,7 +58,7 @@ namespace AlchemyTycoon
 
 
                 GameItems.BasePotion thePotion;
-                thePotion = dataClass.CreatePotion2(data[0].HashValue, data[1].HashValue, data[2].HashValue, data[3].HashValue);
+                thePotion = Data.Instance.CreatePotion2(data[0].HashValue, data[1].HashValue, data[2].HashValue, data[3].HashValue);
                 
                 data.Remove(data[3]);
                 data.Remove(data[2]);
