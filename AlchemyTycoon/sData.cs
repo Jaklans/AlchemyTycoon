@@ -70,6 +70,10 @@ namespace AlchemyTycoon
             }
             return null;
         }
+        public int PotionCount
+        {
+            get { return potions.Count; }
+        }
 
 
 
