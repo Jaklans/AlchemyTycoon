@@ -18,7 +18,9 @@ namespace AlchemyTycoon
             Default,
             Inventory,
             Kit,
-            Recipes
+            Recipes,
+            IngrediantShop,
+            RecipeShop
         }
 
         private DrawableObject defaultScreen;
@@ -111,6 +113,8 @@ namespace AlchemyTycoon
                 nightState.Kit,
                 new List<DrawableObject>()
                 {
+                    defaultScreen,
+                    kitScreen,
                     makeButton,
                     clearButton,
                     backButton
@@ -129,10 +133,76 @@ namespace AlchemyTycoon
                 nightState.Recipes,
                 new List<DrawableObject>()
                 {
+                    defaultScreen,
                     recipeScreen,
                     recipeShopButton,
                     backButton
+                } );
+
+
+            //Recipe Shop Screen
+            recipeShop = new DrawableObject(
+                content.Load<Texture2D>(""),
+                new Rectangle(0, 0, screenWidth, screenHeight));
+            recipePurchace = new newButton(
+                content.Load<Texture2D>(""),
+                content.Load<Texture2D>(""));
+
+            drawlables.Add(
+                nightState.RecipeShop,
+                new List<DrawableObject>()
+                {
+                    defaultScreen,
+                    recipeScreen,
+                    recipeShop,
+                    recipePurchace,
+                    backButton
+                } );
+
+
+            //Inventory Screen
+            inventoryScreen = new DrawableObject(
+                content.Load<Texture2D>(""),
+                new Rectangle(0, 0, screenWidth, screenHeight));
+            storeButton = new newButton(
+                content.Load<Texture2D>(""),
+                content.Load<Texture2D>(""));
+
+            drawlables.Add(
+                nightState.Inventory,
+                new List<DrawableObject>()
+                {
+                    defaultScreen,
+                    inventoryScreen,
+                    storeButton,
+                    backButton
                 });
+
+
+            //Ingrediant Shop Screen
+            ingrediantShop = new DrawableObject(
+                content.Load<Texture2D>(""),
+                new Rectangle(0, 0, screenWidth, screenHeight));
+            ingredientPurchace = new newButton(
+                content.Load<Texture2D>(""),
+                content.Load<Texture2D>(""));
+
+            drawlables.Add(
+                nightState.IngrediantShop,
+                new List<DrawableObject>()
+                {
+                    defaultScreen,
+                    ingrediantShop,
+                    ingredientPurchace,
+                    backButton
+                });
+
+
+
+
+            //Ingrediant Shop Screen
+
+
             ////Buttons on recipe book screen
             //newButton recipeShopButton;
             //
