@@ -39,6 +39,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Button.cs" />
+    <Compile Include="DrawableObject.cs" />
+    <Compile Include="GameItems\Recipe.cs" />
     <Compile Include="NPC.cs" />
     <Compile Include="sData.cs" />
     <Compile Include="Text.cs" />

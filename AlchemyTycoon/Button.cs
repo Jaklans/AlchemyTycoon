@@ -10,13 +10,9 @@ using Microsoft.Xna.Framework.Input;
 //Written by Simeon Chang
 namespace AlchemyTycoon
 {
-    class newButton
+    class newButton : DrawableObject
     {
-        private Texture2D texture;
         private Texture2D highlightTexture;
-        private Rectangle position;
-
-        public bool active;
 
         private bool mouseover;
         private bool clicked;
@@ -25,25 +21,17 @@ namespace AlchemyTycoon
         public bool Clicked { get { return clicked; } }
 
         public newButton(Texture2D texture, Texture2D highlightTexture)
+            :base(texture, new Rectangle(0, 0, texture.Width, texture.Height))
         {
-            this.texture = texture;
             this.highlightTexture = highlightTexture;
-            position = new Rectangle(0, 0, texture.Width, texture.Height);
-
-            active = true;
         }
         public newButton(Texture2D texture, Texture2D highlightTexture, Vector2 position)
+            : base(texture, new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height))
         {
-            this.texture = texture;
             this.highlightTexture = highlightTexture;
-            this.position = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
-
-            active = true;
         }
-
-
-
-        public void Update(MouseState mouse)
+        
+        public override void Update(MouseState mouse)
         {
             if (position.Contains(mouse.Position))
             {
@@ -63,16 +51,25 @@ namespace AlchemyTycoon
                 clicked = false;
             }
         }
-        public void Draw(SpriteBatch spritebatch)
+        public override void Draw(SpriteBatch spritebatch)
         {
-            if (active)
-            if (mouseover)
+            if (visible)
             {
-                spritebatch.Draw(highlightTexture, position, Color.White);
-            }
-            else
-            {
-                spritebatch.Draw(texture, position, Color.White);
+                if (mouseover)
+                {
+                    if (highlightTexture.Equals(texture))
+                    {
+                        spritebatch.Draw(highlightTexture, position, Color.Green);
+                    }
+                    else
+                    {
+                        spritebatch.Draw(highlightTexture, position, Color.White);
+                    }
+                }
+                else
+                {
+                    spritebatch.Draw(texture, position, Color.White);
+                }
             }
         }
     }

@@ -117,7 +117,7 @@ namespace AlchemyTycoon
                     night.Update(gameTime);
                     break;
                 case PlayingEnum.MainMenu:
-                    mM.Update(gameTime, graphics);
+                    mM.Update(gameTime);
 
                     if (mM.ReturntheState() == GameStates.GlobalGameState.Playing)
                     {

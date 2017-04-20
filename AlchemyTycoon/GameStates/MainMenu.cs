@@ -17,7 +17,6 @@ namespace AlchemyTycoon.GameStates
         Playing,
         Fullscreen,
         Exit,
-
     }
     class MainMenu
     {
@@ -73,7 +72,7 @@ namespace AlchemyTycoon.GameStates
             return CurrentGameState;
         }
 
-        public void Update(GameTime gameTime, GraphicsDeviceManager graphics)
+        public void Update(GameTime gameTime)
         {
             MouseState mouse = Mouse.GetState();
             KeyboardState newKeyState = Keyboard.GetState();

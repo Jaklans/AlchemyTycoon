@@ -11,6 +11,169 @@ using Microsoft.Xna.Framework.Content;
 //Written by Aiden Thinn, Simeon Chang, John Shull
 namespace AlchemyTycoon
 {
+    public class NewNight
+    {
+        enum nightState
+        {
+            Default,
+            Inventory,
+            Kit,
+            Recipes
+        }
+
+        private DrawableObject defaultScreen;
+        private DrawableObject inventoryScreen;
+        private DrawableObject kitScreen;
+        private DrawableObject recipeScreen;
+        private DrawableObject ingrediantShop;
+        private DrawableObject recipeShop;
+
+        //Buttons on all non default screens
+        newButton backButton;
+
+        //Buttons on default screen
+        newButton inventoryButton;
+        newButton kitButton;
+        newButton recipeButton;
+
+        //Buttons on kit screen
+        newButton makeButton;
+        newButton clearButton;
+
+        //Buttons on recipe book screen
+        newButton recipeShopButton;
+
+        //Buttons on recipe purchace screen
+        newButton recipePurchace;
+
+        //Buttons on ingredients screen
+        newButton storeButton;
+
+        //Buttons on ingredient purchace screen
+        newButton ingredientPurchace;
+
+
+        int screenWidth = 1280;
+        int screenHeight = 800;
+
+        private SpriteFont text;
+
+        //Allows to itterate through and draw everything from a set group
+        private Dictionary<nightState, List<DrawableObject>> drawlables;
+
+
+
+        public void LoadContent(ContentManager content)
+        {
+            //Back Button
+            backButton = new newButton(
+                content.Load<Texture2D>(""),
+                content.Load<Texture2D>(""));
+
+
+            //Default Screen
+            defaultScreen = new DrawableObject(
+                content.Load<Texture2D>(""), 
+                new Rectangle(0, 0, screenWidth, screenHeight));
+            inventoryButton = new newButton(
+                content.Load<Texture2D>(""),
+                content.Load<Texture2D>(""));
+            kitButton = new newButton(
+                content.Load<Texture2D>(""),
+                content.Load<Texture2D>(""));
+            recipeButton = new newButton(
+                content.Load<Texture2D>(""),
+                content.Load<Texture2D>(""));
+
+            drawlables.Add(
+                nightState.Default,
+                new List<DrawableObject>()
+                {
+                    defaultScreen,
+                    inventoryButton,
+                    kitButton,
+                    recipeButton
+                });
+
+
+            //Kit Screen
+            kitScreen = new DrawableObject(
+                content.Load<Texture2D>(""), 
+                new Rectangle(0, 0, screenWidth, screenHeight));
+            makeButton = new newButton(
+                content.Load<Texture2D>(""),
+                content.Load<Texture2D>(""));
+            clearButton = new newButton(
+                content.Load<Texture2D>(""),
+                content.Load<Texture2D>(""));
+
+            drawlables.Add(
+                nightState.Kit,
+                new List<DrawableObject>()
+                {
+                    makeButton,
+                    clearButton,
+                    backButton
+                });
+
+            
+            //Recipe Screen
+            recipeScreen = new DrawableObject(
+                content.Load<Texture2D>(""),
+                new Rectangle(0, 0, screenWidth, screenHeight));
+            recipeShopButton = new newButton(
+                content.Load<Texture2D>(""),
+                content.Load<Texture2D>(""));
+
+            drawlables.Add(
+                nightState.Recipes,
+                new List<DrawableObject>()
+                {
+                    recipeScreen,
+                    recipeShopButton,
+                    backButton
+                });
+            ////Buttons on recipe book screen
+            //newButton recipeShopButton;
+            //
+            ////Buttons on recipe purchace screen
+            //newButton recipePurchace;
+            //
+            ////Buttons on ingredients screen
+            //newButton storeButton;
+            //
+            ////Buttons on ingredient purchace screen
+            //newButton ingredientPurchace;
+
+
+            inventoryScreen = new DrawableObject(
+                content.Load<Texture2D>(""), 
+                new Rectangle(0, 0, screenWidth, screenHeight));
+
+            
+
+            recipeScreen = new DrawableObject(
+                content.Load<Texture2D>(""),
+                new Rectangle(0, 0, screenWidth, screenHeight));
+
+            ingrediantShop = new DrawableObject(
+                content.Load<Texture2D>(""),
+                new Rectangle(0, 0, screenWidth, screenHeight));
+
+            recipeShop = new DrawableObject(
+                content.Load<Texture2D>(""), 
+                new Rectangle(0, 0, screenWidth, screenHeight));
+
+            //Default Objects
+            drawlables.Add(nightState.Default,
+                new List<DrawableObject>()
+                {
+                    defaultScreen,
+                    new newButton(content.Load<Texture2D>(""), content.Load<Texture2D>(""))
+                }
+                );
+        }
+    }
     public class Night
     {
         //Background images
