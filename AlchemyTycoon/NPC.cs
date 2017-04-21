@@ -15,7 +15,8 @@ namespace AlchemyTycoon
         List<GameItems.BasePotion> shoppingCart = new List<GameItems.BasePotion>();
 
         Inventory<GameItems.BasePotion> invent = new Inventory<GameItems.BasePotion>();
-        
+
+        int count = 0;
 
         public void MakeList()
         {
@@ -56,16 +57,28 @@ namespace AlchemyTycoon
                                 //if lower remove from inventory
                                 invent.RemoveItem(item.HashValue);
                                 //and increase gold by player price
-
+                                //needs to access player's gold and increase
                         }
                     //if buying attemp fails (Price too high) continue loooking though list
                 }
                 //if npc buys a potion escape loop, Each npc will only buy 1 potion
+                Leave();
                 return;
                 
             }
+            Leave();
         }
-
+        public bool Leave()
+        {
+            bool leave = false;
+            count++;
+            if (count == 10)
+            {
+                leave = true;
+                count = 0;
+            }
+            return leave;
+        }
 
 
 

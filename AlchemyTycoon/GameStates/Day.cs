@@ -31,6 +31,8 @@ namespace AlchemyTycoon.GameStates
         int screenWidth = 1280;
         int screenHeight = 800;
 
+        NPC npc = new NPC();
+
         //LoadContent method
         public void LoadContent(ContentManager content, GraphicsDevice graphics)
         {
@@ -43,6 +45,14 @@ namespace AlchemyTycoon.GameStates
             stockButton = new Button(content.Load<Texture2D>("stockButton"), graphics);
             stockButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
         }
+        private void CallNPCS()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                npc.MakeList();
+                npc.BuyPotion();
+            }
+        }
 
         //Update method
         public void Update()
@@ -52,6 +62,11 @@ namespace AlchemyTycoon.GameStates
 
             stockButton.Update(mouse);
 
+            //once all 10 come into shop swap to night state
+            if (npc.Leave() == true)
+            {
+
+            }
             //When clicked, will go to inventory of potions the player made for sale
             if(stockButton.isClicked == true)
             {
