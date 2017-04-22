@@ -23,6 +23,12 @@ namespace AlchemyTycoon
 
         private MouseState previousMousestate;
 
+
+        public List<T> inventoryData
+        {
+            get { return data; }
+        }
+
             //Constructor
         public Inventory()
         {
@@ -49,16 +55,8 @@ namespace AlchemyTycoon
         {
             if(data.Count >= 4)
             {
-                /*List<int> craftList = new List<int>();
-                craftList.Add(data[0].HashValue);
-                craftList.Add(data[1].HashValue);
-                craftList.Add(data[2].HashValue);
-                craftList.Add(data[3].HashValue);*/
-
-
-
                 GameItems.BasePotion thePotion;
-                thePotion = Data.Instance.CreatePotion2(data[0].HashValue, data[1].HashValue, data[2].HashValue, data[3].HashValue);
+                thePotion = Data.Instance.CreatePotion(data[0].HashValue, data[1].HashValue, data[2].HashValue, data[3].HashValue);
                 
                 data.Remove(data[3]);
                 data.Remove(data[2]);
@@ -186,6 +184,8 @@ namespace AlchemyTycoon
         {
             if (data.Count != 0)
             {
+                data.Sort();
+
                 xDepth = vXDepth;
                 yDepth = vYDepth;
 

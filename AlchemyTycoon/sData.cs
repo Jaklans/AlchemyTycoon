@@ -170,7 +170,8 @@ namespace AlchemyTycoon
             }
         }
 
-        public GameItems.BasePotion CreatePotion2(
+        //Please DONT change this, multiple methods can have the same name...
+        public GameItems.BasePotion CreatePotion(
             int input1,
             int input2,
             int input3,

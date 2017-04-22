@@ -9,15 +9,34 @@ namespace AlchemyTycoon
 {
     class PlayerData
     {
-        //Attributes - Factors pertaining to a specific user that need to be saved and loaded
-        string playerName;
-        int gold;
+        private static PlayerData instance;
 
+        public static PlayerData Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new PlayerData();
+                }
+                return instance;
+            }
+        }
+
+        //Attributes - Factors pertaining to a specific user that need to be saved and loaded
+        public string playerName;
+        public int gold;
+        public Inventory<GameItems.BasePotion> playerPotions;
+        public Inventory<GameItems.BaseIngredient> playerIngredients;
 
         //Constructor - Requires a name
-        public PlayerData(string name)
+        public PlayerData()
         {
-            playerName = name;
+            playerName = "I am a feild and I have no purpous atm. Riperoni";
+            gold = 0;
+
+            playerIngredients = new Inventory<GameItems.BaseIngredient>();
+            playerPotions = new Inventory<GameItems.BasePotion>();
         }
     }
 }

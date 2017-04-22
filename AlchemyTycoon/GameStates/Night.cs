@@ -23,6 +23,8 @@ namespace AlchemyTycoon
             RecipeShop
         }
 
+        nightState state;
+
         private DrawableObject defaultScreen;
         private DrawableObject inventoryScreen;
         private DrawableObject kitScreen;
@@ -41,6 +43,9 @@ namespace AlchemyTycoon
         //Buttons on kit screen
         newButton makeButton;
         newButton clearButton;
+            //Miscilanious kit itmes
+            Inventory<GameItems.BaseIngredient> craftingTable;
+            Inventory<GameItems.BasePotion> craftingOutput;
 
         //Buttons on recipe book screen
         newButton recipeShopButton;
@@ -63,6 +68,14 @@ namespace AlchemyTycoon
         //Allows to itterate through and draw everything from a set group
         private Dictionary<nightState, List<DrawableObject>> drawlables;
 
+
+        public NewNight()
+        {
+            state = nightState.Default;
+
+            craftingTable = new Inventory<GameItems.BaseIngredient>();
+            craftingOutput = new Inventory<GameItems.BasePotion>();
+        }
 
 
         public void LoadContent(ContentManager content)
@@ -198,50 +211,88 @@ namespace AlchemyTycoon
                 });
 
 
+            //Text Font
+            text = content.Load<SpriteFont>("Tahoma_40");
+        }
+
+        public void Update(MouseState mouse)
+        {
+            switch (state)
+            {
+                //Default Screen
+                case nightState.Default:
+                    inventoryButton.Update(mouse);
+                    kitButton.Update(mouse);
+                    recipeButton.Update(mouse);
+
+                    if (inventoryButton.Clicked) { state = nightState.Inventory; }
+                    else if (kitButton.Clicked) { state = nightState.Kit; }
+                    else if ( recipeButton.Clicked) { state = nightState.Recipes; } 
+                    
+                    break;
+                
+                //Inventory Screen
+                case nightState.Inventory:
+                    backButton.Update(mouse);
+                    makeButton.Update(mouse);
+                    clearButton.Update(mouse);
+
+                    if (backButton.Clicked || clearButton.Clicked)
+                    {
+                        if (backButton.Clicked) { state = nightState.Default; }
+
+                        //Clears the table (done in either case)
+                        while(craftingTable.inventoryData.Count != 0)
+                        {
+                            PlayerData.Instance.
+                                playerIngredients.AddItem(
+                                craftingTable.RemoveItem(0)
+                                );
+                        }
+                        while(craftingOutput.inventoryData.Count != 0)
+                        {
+                            PlayerData.Instance.
+                                playerPotions.AddItem(
+                                craftingOutput.RemoveItem(0)
+                                );
+                        }
+                    }
+
+                    if (makeButton.Clicked && craftingOutput.inventoryData.Count != 0)
+                    {
+                        GameItems.BasePotion temp = craftingTable.MakePotion();
+                        if(temp != null)
+                        {
+                            craftingOutput.AddItem(temp);
+                        }
+                        else
+                        {
+                            //Should add a garbage potion, need sam to write that in
+                        }
+                    }
+
+                    break;
+
+                //Recipe Book Screen
+                case nightState.Recipes:
+                    backButton.Update(mouse);
+                    recipeShopButton.Update(mouse);
+
+                    if (backButton.Clicked) { state = nightState.Default; }
+                    if (recipeShopButton.Clicked) { state = nightState.RecipeShop; }
+                    
 
 
-            //Ingrediant Shop Screen
+                    break;
+
+                case nightState.RecipeShop:
 
 
-            ////Buttons on recipe book screen
-            //newButton recipeShopButton;
-            //
-            ////Buttons on recipe purchace screen
-            //newButton recipePurchace;
-            //
-            ////Buttons on ingredients screen
-            //newButton storeButton;
-            //
-            ////Buttons on ingredient purchace screen
-            //newButton ingredientPurchace;
+                    break;
 
-
-            inventoryScreen = new DrawableObject(
-                content.Load<Texture2D>(""), 
-                new Rectangle(0, 0, screenWidth, screenHeight));
-
-            
-
-            recipeScreen = new DrawableObject(
-                content.Load<Texture2D>(""),
-                new Rectangle(0, 0, screenWidth, screenHeight));
-
-            ingrediantShop = new DrawableObject(
-                content.Load<Texture2D>(""),
-                new Rectangle(0, 0, screenWidth, screenHeight));
-
-            recipeShop = new DrawableObject(
-                content.Load<Texture2D>(""), 
-                new Rectangle(0, 0, screenWidth, screenHeight));
-
-            //Default Objects
-            drawlables.Add(nightState.Default,
-                new List<DrawableObject>()
-                {
-                    defaultScreen,
-                    new newButton(content.Load<Texture2D>(""), content.Load<Texture2D>(""))
-                }
-                );
+                default:
+                    break;
+            }
         }
     }
     public class Night

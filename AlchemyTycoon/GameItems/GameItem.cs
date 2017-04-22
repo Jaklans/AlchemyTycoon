@@ -61,5 +61,18 @@ namespace AlchemyTycoon.GameItems
         {
             spriteBatch.Draw(texture, position, Color.White);
         }
+
+        //Compairer (for sorting)
+        public int CompareTo(GameItem compareItem)
+        {
+            if(compareItem == null)
+            {
+                return 1;
+            }
+            else
+            {
+                return this.hashValue.CompareTo(compareItem.hashValue);
+            }
+        }
     }
 }

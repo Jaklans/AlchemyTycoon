@@ -28,6 +28,7 @@ namespace AlchemyTycoon
                 shoppingCart.Add(Data.Instance.Potions(rng.Next(0, Data.Instance.PotionCount + 1)));
             }
         }
+
         public void BuyPotion()
         {
             //look though if you have that potion in your inventory
