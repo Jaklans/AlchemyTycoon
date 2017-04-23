@@ -1,0 +1,5 @@
+6
+Snowbee's Honey
+30
+The honey of the rare and friendly Snowbees, a certain species of bee bred to survive the harsh winters of the far north. 
+honeyTex

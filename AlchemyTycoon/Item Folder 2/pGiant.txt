@@ -1,0 +1,10 @@
+017
+Giant Medicine
+275
+2
+5
+10
+13
+The fact that Giant Medecine was not invented by giants themselves is a source of un-ending sadness and disappointment for many aspiring alchemists the world over. Rather, it was such powerful medicine that it was believed for many years that it could heal a giant as well as it could any humanoid.
+Many healing potions exist, but the regenerative powers of Giant medicine are unmatched. It is used mostly by military medics to heal their wounded soldiers, as a few swallows of the drink can cause an arm or leg to regrow, bones to come together, and blind eyes to see.
+giantTex

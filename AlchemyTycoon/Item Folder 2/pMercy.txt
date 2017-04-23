@@ -1,0 +1,10 @@
+002
+Concoction of Mercy
+225
+9
+10
+11
+12
+The Concoction of Mercy has been outlawed in many places, as it can do immense harm without leaving a trace. Assassins will sometimes use it as a kind of circumspect poison, as its results can often drive the subject to madness and suicide.
+Once it hits the bloodstream, this potion compels the drinker to call upon their oldest, deepest memories. These are frequently intense, personal feelings of fear, love, and sadness, which can often paralyze someone with emotion. 
+mercyTex

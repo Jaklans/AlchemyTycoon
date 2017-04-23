@@ -1,0 +1,10 @@
+018
+Devil's Libation
+300
+3
+8
+11
+16
+The Devil's Libation is claimed to have been first concocted by the Great Goat himself, but there is some dispute of this. Most scholars attribute the start of the drink to the somewhat infamous wizard Malachi of Medelvan, who was unceasingly fond of the darker arts.
+While potions with multiple simultaneous effects are not unheard-of, the Devil's Libation boasts the most by far. The abilities to see in the dark, go without sleep, run a bit quicker, hold one's breath for longer, dance ever more nimbly, and be unceasingly charming are the most prominent effects, with many minor others as well.
+devilTex
