@@ -28,12 +28,13 @@ namespace AlchemyTycoon
         public int gold;
         public Inventory<GameItems.BasePotion> playerPotions;
         public Inventory<GameItems.BaseIngredient> playerIngredients;
+        public Inventory<GameItems.BasePotion> playerKnownRecipies;
 
         //Constructor - Requires a name
         public PlayerData()
         {
             playerName = "I am a feild and I have no purpous atm. Riperoni";
-            gold = 0;
+            gold = 500;
 
             playerIngredients = new Inventory<GameItems.BaseIngredient>();
             playerPotions = new Inventory<GameItems.BasePotion>();

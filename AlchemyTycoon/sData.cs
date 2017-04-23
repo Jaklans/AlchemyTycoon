@@ -57,7 +57,7 @@ namespace AlchemyTycoon
                 return instance;
             }
         }
-
+        private Random rng;
 
         //All items have a hash value, which they are stored by here
         private Dictionary<int, GameItems.BasePotion> potions;
@@ -77,6 +77,7 @@ namespace AlchemyTycoon
             }
             return null;
         }
+
         public GameItems.BaseIngredient Ingrediants(int hash)
         {
             if (ingrediants.ContainsKey(hash))
@@ -85,6 +86,17 @@ namespace AlchemyTycoon
             }
             return null;
         }
+
+        public GameItems.BaseIngredient RandomIngredient
+        {
+            get { return ingrediants.Values.ToList()[rng.Next(0, ingrediants.Count)]; }
+        }
+
+        public GameItems.BasePotion RandomPotion
+        {
+            get { return potions.Values.ToList()[rng.Next(0, potions.Count)]; }
+        }
+
         public int PotionCount
         {
             get { return potions.Count; }
@@ -95,6 +107,7 @@ namespace AlchemyTycoon
         //Constructor and Initialization
         public Data(string targetFolderName)
         {
+            rng = new Random();
             try
             {
                 potions = new Dictionary<int, GameItems.BasePotion>();

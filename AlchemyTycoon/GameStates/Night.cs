@@ -32,6 +32,8 @@ namespace AlchemyTycoon
         private DrawableObject ingrediantShop;
         private DrawableObject recipeShop;
 
+        private Random rng;
+
         //Buttons on all non default screens
         newButton backButton;
 
@@ -52,12 +54,20 @@ namespace AlchemyTycoon
 
         //Buttons on recipe purchace screen
         newButton recipePurchace;
+            //Miscillanious recipe purchace items
+            Inventory<GameItems.BasePotion> recipeStore;
 
-        //Buttons on ingredients screen
+        //Buttons on Inventory screen
         newButton storeButton;
+            //Micilanious Inventory items
+            GameItems.BaseIngredient displayIngredient;
+            GameItems.BasePotion displayPotion;
+            GameItems.GameItem displayingItem;
 
         //Buttons on ingredient purchace screen
         newButton ingredientPurchace;
+            //Miscillanious ing. purchace items
+            Inventory<GameItems.BaseIngredient> itemStore;
 
 
         int screenWidth = 1280;
@@ -73,10 +83,23 @@ namespace AlchemyTycoon
         {
             state = nightState.Default;
 
+            rng = new Random();
+
             craftingTable = new Inventory<GameItems.BaseIngredient>();
             craftingOutput = new Inventory<GameItems.BasePotion>();
-        }
 
+            itemStore = new Inventory<GameItems.BaseIngredient>();
+            recipeStore = new Inventory<GameItems.BasePotion>();
+
+            for(int i = 0; i < 10; i++)
+            {
+                itemStore.AddItem(Data.Instance.RandomIngredient);
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                recipeStore.AddItem(Data.Instance.RandomPotion);
+            }
+        }
 
         public void LoadContent(ContentManager content)
         {
@@ -221,6 +244,7 @@ namespace AlchemyTycoon
             {
                 //Default Screen
                 case nightState.Default:
+                    //Buttons
                     inventoryButton.Update(mouse);
                     kitButton.Update(mouse);
                     recipeButton.Update(mouse);
@@ -231,8 +255,9 @@ namespace AlchemyTycoon
                     
                     break;
                 
-                //Inventory Screen
-                case nightState.Inventory:
+                //Kit Screen
+                case nightState.Kit:
+                    //Buttons
                     backButton.Update(mouse);
                     makeButton.Update(mouse);
                     clearButton.Update(mouse);
@@ -267,8 +292,60 @@ namespace AlchemyTycoon
                         }
                         else
                         {
-                            //Should add a garbage potion, need sam to write that in
+                            //Should add a junk potion, need sam to write that in
                         }
+                    }
+
+                    //Inventories
+                    craftingOutput.Update(mouse, PlayerData.Instance.playerPotions);
+                    craftingTable.Update(mouse, PlayerData.Instance.playerIngredients);
+                    if (craftingTable.inventoryData.Count < 4)
+                    {
+                        PlayerData.Instance.playerIngredients.Update(mouse, craftingTable);
+                    }
+                    
+                    break;
+
+                //Inventory Screen
+                case nightState.Inventory:
+                    //Buttons
+                    backButton.Update(mouse);
+
+                    if (backButton.Clicked) { state = nightState.Default; }
+
+                    //Inventories
+                    GameItems.BaseIngredient tempIngredient = PlayerData.Instance.playerIngredients.Update(mouse);
+                    GameItems.BasePotion tempPotion =  PlayerData.Instance.playerPotions.Update(mouse);
+
+                    //Logic to determine which gameItem should be displayed, potion or ingredient
+                    if(tempIngredient != displayIngredient)
+                    {
+                        displayIngredient = tempIngredient;
+                        displayingItem = tempIngredient;
+                    }
+                    else if(tempPotion != displayPotion)
+                    {
+                        displayPotion = tempPotion;
+                        displayingItem = tempPotion;
+                    }
+
+                    break;
+
+                //Inventory Purchace Screen
+                case nightState.IngrediantShop:
+                    //Buttons
+                    backButton.Update(mouse);
+                    ingredientPurchace.Update(mouse);
+
+                    if (backButton.Clicked) { state = nightState.Inventory; }
+
+                    //Inventories
+                    GameItems.BaseIngredient selectedItem = itemStore.Update(mouse);
+                    if (ingredientPurchace.Clicked && selectedItem != null && PlayerData.Instance.gold >= selectedItem.Value)
+                    {
+                        PlayerData.Instance.playerIngredients.AddItem(
+                            itemStore.RemoveItem(selectedItem));
+                        PlayerData.Instance.gold -= selectedItem.Value;
                     }
 
                     break;
@@ -281,16 +358,72 @@ namespace AlchemyTycoon
                     if (backButton.Clicked) { state = nightState.Default; }
                     if (recipeShopButton.Clicked) { state = nightState.RecipeShop; }
                     
-
+//! Find way to display recipies
 
                     break;
-
+                    
+                //Recipe Purchace Screen
                 case nightState.RecipeShop:
+                    backButton.Update(mouse);
+                    recipePurchace.Update(mouse);
 
+                    if (backButton.Clicked) { state = nightState.Recipes; }
 
                     break;
 
                 default:
+                    break;
+            }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            //Draws all basic objects for each gamestate (buttons and backgrounds)
+            foreach(DrawableObject drawlable in drawlables[state])
+            {
+                drawlable.Draw(spriteBatch);
+            }
+
+            //Draws everything else :|
+            switch (state)
+            {
+                //Default Screen
+                case nightState.Default:
+                    break;
+
+                //Kit Screen
+                case nightState.Kit:
+                    PlayerData.Instance.playerIngredients.Draw(spriteBatch, new Vector2(0, 0), 5, 7);
+                    PlayerData.Instance.playerPotions.Draw(spriteBatch, new Vector2(0, 500), 5, 3);
+                    craftingTable.Draw(spriteBatch, new Vector2(500, 0), 2, 2);
+                    craftingOutput.Draw(spriteBatch, new Vector2(500, 250), 1, 1);
+                    break;
+
+                //Inventory Screen
+                case nightState.Inventory:
+                    PlayerData.Instance.playerIngredients.Draw(spriteBatch, new Vector2(0, 0), 5, 7);
+                    PlayerData.Instance.playerPotions.Draw(spriteBatch, new Vector2(0, 500), 5, 3);
+//! Draw item info
+                    break;
+
+                //Ingredient Purchace Screen
+                case nightState.IngrediantShop:
+                    PlayerData.Instance.playerIngredients.Draw(spriteBatch, new Vector2(0, 0), 5, 10);
+                    itemStore.Draw(spriteBatch, new Vector2(500, 0), 5, 2);
+//! Draw item info
+                    break;
+
+                //Recipe Book Screen
+                case nightState.Recipes:
+                    PlayerData.Instance.playerKnownRecipies.Draw(spriteBatch, new Vector2(0, 0), 5, 10);
+//! Draw recipe info
+                    break;
+
+                //Recipe Shop Screen
+                case nightState.RecipeShop:
+                    PlayerData.Instance.playerKnownRecipies.Draw(spriteBatch, new Vector2(0, 0), 5, 10);
+                    recipeStore.Draw(spriteBatch, new Vector2(500, 0), 5, 1);
+//! Draw recipe info
                     break;
             }
         }

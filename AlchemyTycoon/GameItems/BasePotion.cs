@@ -31,6 +31,10 @@ namespace AlchemyTycoon.GameItems
             this.effect = effect;
             this.potionHashValue = potionHashValue;
         }
-        
+
+        public override void DrawInfo()
+        {
+            //Needs filled out
+        }
     }
 }

@@ -45,6 +45,17 @@ namespace AlchemyTycoon
             data.RemoveAt(index);
             return temp;
         }
+        public T RemoveItem(T item)
+        {
+            if (data.Remove(item))
+            {
+                return item;
+            }
+            else
+            {
+                return null;
+            }
+        }
         
         public void AddItem(T item)
         {
