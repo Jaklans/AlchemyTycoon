@@ -77,7 +77,7 @@ namespace AlchemyTycoon
         {
             bool leave = false;
             count++;
-            if (count == 10)
+            if (count == 11)
             {
                 leave = true;
                 count = 0;
