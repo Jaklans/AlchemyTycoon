@@ -31,21 +31,21 @@ namespace AlchemyTycoon
 
         public void BuyPotion()
         {
-            //look though if you have that potion in your inventory
+            //look though if you have that potion inNPC wishlist
             foreach (var item in shoppingCart)
             {
+                //Loop through your inventory
 
-
-                //finds it attempt to buy
-                if (true/* Potion is in inventory run calculation whether NPC will buy */)
+                foreach (var playerItem in PlayerData.Instance.playerPotions.inventoryData)
                 {
-
-                
+                    //Find if Potion Values match
+                    if (item.HashValue == playerItem.HashValue)
+                    {
                         //Recommended Pricing 50/50
                         int baseChance = 50;
 
-                        int playerPrice = 120;//fake for now
-                    int recommendedPrice = Data.Instance.Potions(item.HashValue).Value;
+                        int playerPrice = Data.Instance.Potions(item.HashValue).Value;//fake for now
+                        int recommendedPrice = Data.Instance.Potions(item.HashValue).Value;//Potion's base value
 
                         //the higher the price chance lowers
                         //the cheaper the price the higher the chance
@@ -55,18 +55,22 @@ namespace AlchemyTycoon
                         //if RNG(0, 101) Less than Chance Npc will buy.
                         if (rng.Next(0, 101) >= chanceTime)
                         {
-                                //if lower remove from inventory
-                                PlayerData.Instance.playerPotions.RemoveItem(item.HashValue);
-                                //and increase gold by player price
-                                //needs to access player's gold and increase
+                            //if lower remove from inventory
+                            PlayerData.Instance.playerPotions.RemoveItem(item.HashValue);
+                            //and increase gold by player price
+                            //needs to access player's gold and increase
+                            PlayerData.Instance.gold += playerPrice;
+
+                            //if npc buys a potion escape loop, Each npc will only buy 1 potion
+                            Leave();
+                            return;
                         }
-                    //if buying attemp fails (Price too high) continue loooking though list
-                }
-                //if npc buys a potion escape loop, Each npc will only buy 1 potion
-                Leave();
-                return;
+                        //if buying attemp fails (Price too high) continue loooking though list
+                    }
+                }   
                 
             }
+            //leaves if looked through all inventories and finds nothing
             Leave();
         }
         public bool Leave()
