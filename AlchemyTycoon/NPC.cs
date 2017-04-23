@@ -45,7 +45,7 @@ namespace AlchemyTycoon
                         int baseChance = 50;
 
                         int playerPrice = 120;//fake for now
-                        int recommendedPrice = 100;//fake for now
+                    int recommendedPrice = Data.Instance.Potions(item.HashValue).Value;
 
                         //the higher the price chance lowers
                         //the cheaper the price the higher the chance
@@ -56,7 +56,7 @@ namespace AlchemyTycoon
                         if (rng.Next(0, 101) >= chanceTime)
                         {
                                 //if lower remove from inventory
-                                invent.RemoveItem(item.HashValue);
+                                PlayerData.Instance.playerPotions.RemoveItem(item.HashValue);
                                 //and increase gold by player price
                                 //needs to access player's gold and increase
                         }
