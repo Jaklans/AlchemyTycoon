@@ -1,0 +1,10 @@
+000
+Sugartongue Potion
+200
+1
+2
+3
+4
+This potion was first created by the arcanist Balthazar Van Krout, a famously fouled-mouth man. He was seeking to court a beauty he admired, and so devised the Sugartongue. Many courtiers now will put a drop of it in their wine before going before their ruler.
+When consumed, one finds oneself unable to utter anything but the most flattering and delightsome of compliments, whether they be true or false. While this can cause downsides, many less-eloquent folk find it extremely useful.
+sugartongueTex

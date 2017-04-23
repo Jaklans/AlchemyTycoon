@@ -1,0 +1,5 @@
+5
+Giant Hermit's Slime
+25
+The slime of the deadly and oft-unseen Giant Hermit Crab, a truly monstrous crustacean that leaves a sticky residue on any shell it resides in, such as shipwrecks, coral reefs, and fallen meteors.
+slimeTex

@@ -1,0 +1,10 @@
+010
+Whizzing Cordial
+175
+1
+8
+11
+14
+Whizzing Cordial has its roots in the legendary Elvish trickster Ferinthal Finefinger's laboratories. It was initially presented as a fortifying brew for mountain explorers, who found its other properties less than helpful, much to Ferinthal's delight.
+As the user's belly fills with the slowly-exzpanding drink, they find themselves able to jump far higher than normal. At a certain point, simply bouncing along is a fair degree faster than the best sprinter's pace.
+whizzTex

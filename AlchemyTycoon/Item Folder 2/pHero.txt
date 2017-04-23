@@ -1,0 +1,10 @@
+009
+Draught of Heroes
+70
+4
+7
+10
+13
+A cruel drink, first devised by the vllainous sorcerer Dorzan Dackronex, the Lord Paramount of the City of Ironmoot. Many heroes would set out to slay the dark sorcerer, and drink the Draught, believing it to be a magical aid in their quest.
+If the subject breathes a lungful of the gases coming off a Draught of Heroes, they find themselves deathly afraid of nothing in particular. If the subject gets a few drops on their skin, they find themselves weak at the knees, unable to run. If the subject drinks a whole swig, they will collapse to the floor, locked in a nightmare-fueled sleep.
+heroTex

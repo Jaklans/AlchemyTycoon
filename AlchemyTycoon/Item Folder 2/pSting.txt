@@ -1,0 +1,10 @@
+022
+Stinging Soda
+115
+3
+6
+11
+14
+Stinging Soda, unsurprisingly, began in the Orcish raiding camps deep in the hills, where there is little else to do. It was initially a test of machismo and naught else, but the tradition spread, and its other uses were discovered.
+While it does have a painful effect on the throat while being drunk, Stinging Soda's main benefit is that is an extremely effective purgative--any remnants of disease or plague remaining in the gut are expelled within a day or two, without issue.
+stingTex

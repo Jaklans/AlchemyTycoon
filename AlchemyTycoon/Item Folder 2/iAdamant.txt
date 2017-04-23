@@ -1,0 +1,5 @@
+10
+Adamantium Ore
+30
+A lump of raw, unprocessed adamantium ore. If smelted correctly, adamantium can make incredibly tough and resilient armor.
+adamantTex
