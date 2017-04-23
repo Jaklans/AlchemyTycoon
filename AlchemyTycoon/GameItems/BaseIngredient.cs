@@ -25,10 +25,6 @@ namespace AlchemyTycoon.GameItems
         {
 
         }
-
-        public override void DrawInfo()
-        {
-            //Needs filled out
-        }
+        
     }
 }

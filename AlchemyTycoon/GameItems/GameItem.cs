@@ -62,9 +62,28 @@ namespace AlchemyTycoon.GameItems
             spriteBatch.Draw(texture, position, Color.White);
         }
 
-        public virtual void DrawInfo()
+        public virtual void DrawInfo(SpriteBatch spriteBatch, Rectangle infoBox, SpriteFont font)
         {
-
+            //Image
+            spriteBatch.Draw(texture, new Vector2(
+                (float)(infoBox.X + .5 * (infoBox.Width - texture.Width)), 
+                (float)(infoBox.Y + .1 * infoBox.Height)), 
+                Color.White);
+            //Name
+            spriteBatch.DrawString(font, name, new Vector2(
+                infoBox.X,
+                (float)(infoBox.Y + texture.Height + .2 * infoBox.Height)),
+                Color.White);
+            //FlavorText
+            spriteBatch.DrawString(font, flavorText, new Vector2(
+                infoBox.X,
+                (float)(infoBox.Y + texture.Height + .4 * infoBox.Height)),
+                Color.White);
+            //Value
+            spriteBatch.DrawString(font, value.ToString(), new Vector2(
+                infoBox.X,
+                (float)(infoBox.Y + texture.Height + .9 * infoBox.Height)),
+                Color.White);
         }
 
         //Compairer (for sorting)
