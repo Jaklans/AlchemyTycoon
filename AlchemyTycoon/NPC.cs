@@ -14,7 +14,7 @@ namespace AlchemyTycoon
         //Set the list of potions the NPC Wants
         List<GameItems.BasePotion> shoppingCart = new List<GameItems.BasePotion>();
 
-        Inventory<GameItems.BasePotion> invent = new Inventory<GameItems.BasePotion>();
+        //Inventory<GameItems.BasePotion> invent = new Inventory<GameItems.BasePotion>();
 
         int count = 0;
 
@@ -25,12 +25,13 @@ namespace AlchemyTycoon
             {
                 //for 10 times add a random potion into NPC ShoppingCart
                 //shoppingCart.Add(dt.Potions(rng.Next(0, dt.PotionCount + 1)));
-                shoppingCart.Add(Data.Instance.Potions(rng.Next(0, Data.Instance.PotionCount + 1)));
+                shoppingCart.Add(Data.Instance.RandomPotion);
             }
         }
 
         public void BuyPotion()
         {
+            bool done = false;
             //look though if you have that potion inNPC wishlist
             foreach (var item in shoppingCart)
             {
@@ -39,7 +40,7 @@ namespace AlchemyTycoon
                 foreach (var playerItem in PlayerData.Instance.playerPotions.inventoryData)
                 {
                     //Find if Potion Values match
-                    if (item.HashValue == playerItem.HashValue)
+                    if (item.HashValue == playerItem.HashValue && !done)
                     {
                         //Recommended Pricing 50/50
                         int baseChance = 50;
@@ -62,7 +63,7 @@ namespace AlchemyTycoon
                             PlayerData.Instance.gold += playerPrice;
 
                             //if npc buys a potion escape loop, Each npc will only buy 1 potion
-                            Leave();
+                            done = true;
                             return;
                         }
                         //if buying attemp fails (Price too high) continue loooking though list
@@ -71,18 +72,6 @@ namespace AlchemyTycoon
                 
             }
             //leaves if looked through all inventories and finds nothing
-            Leave();
-        }
-        public bool Leave()
-        {
-            bool leave = false;
-            count++;
-            if (count == 11)
-            {
-                leave = true;
-                count = 0;
-            }
-            return leave;
         }
 
 
