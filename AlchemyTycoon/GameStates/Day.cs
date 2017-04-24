@@ -30,6 +30,8 @@ namespace AlchemyTycoon.GameStates
         Text stock;
         Text dialouge;
         Text npcInfo;
+        SpriteFont spriteFont;
+        Vector2 textPos;
 
         //Set the initial game screen size
         int screenWidth = 1280;
@@ -42,6 +44,9 @@ namespace AlchemyTycoon.GameStates
         public void LoadContent(ContentManager content, GraphicsDevice graphics)
         {
             //gold = new Text()
+            spriteFont = content.Load<SpriteFont>("Tahoma_40");
+            textPos = new Vector2(screenWidth / 10, 3 * screenHeight / 4);
+
             //Load in the screen
             bgScreen = content.Load<Texture2D>("daytime");
             screenPos = new Rectangle(0, 0, screenWidth, screenHeight);
@@ -52,17 +57,8 @@ namespace AlchemyTycoon.GameStates
 
             //Load in the NPC
             npcTexture = content.Load<Texture2D>();
-            npcPos = new Rectangle(-200, 0, 200, 600);
 
             dO = new DrawableObject(npcTexture, npcPos);
-        }
-        private void CallNPCS()
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                npc.MakeList();
-                npc.BuyPotion();
-            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -70,25 +66,31 @@ namespace AlchemyTycoon.GameStates
             spriteBatch.Draw(bgScreen, screenPos, Color.White);
             stockButton.Draw(spriteBatch);
             dO.Draw(spriteBatch);
+            spriteBatch.DrawString(spriteFont, "Gold: " + PlayerData.Instance.gold.ToString(), textPos, Color.White);
+            npcPos = new Rectangle(-200, 0, 200, 600);
         }
-        public void Update(Rectangle position)
+        public void Update()
         {
-
+            
+            //fields
             bool interacting = false;
             bool moving = true;
             bool leaving = false;
 
             //move NPC to center
-            while (moving == true) { position.X += 5; }
-            if(position.X == screenWidth/2 - 100) { moving = false; }
+            while (moving == true) { npcPos.X += 5; }
+            if(npcPos.X == screenWidth/2 - 100) { moving = false; }
 
             //start interaction
             while(moving == false) { interacting = true; }
 
+            npc.MakeList();
+            npc.BuyPotion();
+
             //NPC leaves shop
             if (moving == false && interacting == false) { leaving = true; }
-            while (leaving == true) { position.X += 5; }
-            if(position.X == screenWidth)
+            while (leaving == true) { npcPos.X += 5; }
+            if(npcPos.X == screenWidth)
             {
                 leaving = false;
             }
