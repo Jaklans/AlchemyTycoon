@@ -25,7 +25,7 @@ namespace AlchemyTycoon
 
         Rectangle newNPCPos;
         Rectangle npcPos;
-        Texture2D npc;
+        List<Texture2D> npc = new List<Texture2D>();
 
         public void MakeList()
         {
@@ -85,13 +85,20 @@ namespace AlchemyTycoon
 
         public void LoadContent(ContentManager content, GraphicsDevice graphics)
         {
-            npc = content.Load<Texture2D>("");
+            for (int i = 0; i < 10; i++)
+            {
+                npc.Add(content.Load<Texture2D>("npc_standin.jpg"));
+            }
             npcPos = new Rectangle(-200, 0, 200, 600);
             newNPCPos = npcPos;
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(npc, newNPCPos, Color.White);
+            for (int i = 0; i < 10; i++)
+            {
+
+                spriteBatch.Draw(npc[i], newNPCPos, Color.White);
+            }
 
         }
         public void Update()
