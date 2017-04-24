@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Content;
 
 namespace AlchemyTycoon
 {
@@ -15,8 +19,13 @@ namespace AlchemyTycoon
         List<GameItems.BasePotion> shoppingCart = new List<GameItems.BasePotion>();
 
         //Inventory<GameItems.BasePotion> invent = new Inventory<GameItems.BasePotion>();
-
+        int screenWidth = 1280;
+        int screenHeight = 800;
         int count = 0;
+
+        Rectangle newNPCPos;
+        Rectangle npcPos;
+        Texture2D npc;
 
         public void MakeList()
         {
@@ -74,7 +83,48 @@ namespace AlchemyTycoon
             //leaves if looked through all inventories and finds nothing
         }
 
+        public void LoadContent(ContentManager content, GraphicsDevice graphics)
+        {
+            npc = content.Load<Texture2D>("");
+            npcPos = new Rectangle(-200, 0, 200, 600);
+            newNPCPos = npcPos;
+        }
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(npc, newNPCPos, Color.White);
 
+        }
+        public void Update()
+        {
+            #region by aaron
+            //fields
+            bool interacting = false;
+            bool moving = true;
+            bool leaving = false;
+
+            //move NPC to center
+            while (moving == true) { newNPCPos.X += 5; }
+            if (newNPCPos.X == screenWidth / 2 - 100) { moving = false; }
+
+            //start interaction
+            while (moving == false) { interacting = true; }
+
+            MakeList();
+            BuyPotion();
+
+            //NPC leaves shop
+            if (moving == false && interacting == false) { leaving = true; }
+            while (leaving == true) { newNPCPos.X += 5; }
+            if (newNPCPos.X == screenWidth)
+            {
+                leaving = false;
+            }
+            #endregion
+            if (newNPCPos.X == screenWidth)
+            {
+                newNPCPos = npcPos;
+            }
+        }
 
     }
 }
