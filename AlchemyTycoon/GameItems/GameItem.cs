@@ -98,5 +98,23 @@ namespace AlchemyTycoon.GameItems
                 return this.hashValue.CompareTo(compareItem.hashValue);
             }
         }
+
+        public void CustomDrawString(SpriteBatch spriteBatch, SpriteFont font, string text, Vector2 fontPosition)
+        {
+            string temp = text;
+            List<string> lines = new List<string>();
+            while(temp.Length > 40)
+            {
+//This might not work, cant test now
+                lines.Add(temp.Remove(39, temp.Count() - 40));
+                temp.Remove(0, 40);
+            }
+
+            foreach (string s in lines)
+            {
+                Vector2 fontOrigin = font.MeasureString(s) / 2;
+                spriteBatch.DrawString(font, s, fontPosition, Color.White, 0, fontOrigin, 1f, SpriteEffects.None, .5f);
+            }
+        }
     }
 }
