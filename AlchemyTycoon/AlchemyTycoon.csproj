@@ -79,6 +79,7 @@
     <Content Include="Content\Buttons\makeButtonHL.png" />
     <Content Include="Content\Buttons\recipe.png" />
     <Content Include="Content\Buttons\recipeHighlighted.png" />
+    <Content Include="Content\npc_standin.jpg" />
     <Content Include="Content\Screens\daytimeScreen.png" />
     <Content Include="Content\Screens\ingredientShop.png" />
     <Content Include="Content\Screens\kitScreen.png" />

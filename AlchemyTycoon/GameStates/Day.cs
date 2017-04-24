@@ -18,24 +18,31 @@ namespace AlchemyTycoon.GameStates
         Rectangle screenPos;
 
         //NPC
-        private Texture2D npcTexture;
-        private Rectangle npcPos;
+        Texture2D npcTexture1;
+        Texture2D npcTexture2;
+        Texture2D npcTexture3;
+        Texture2D npcTexture4;
+        Texture2D npcTexture5;
+        Texture2D npcTexture6;
+        Texture2D npcTexture7;
+        Texture2D npcTexture8;
+        Texture2D npcTexture9;
+        Texture2D npcTexture10;
+        Rectangle npcPos;
 
         //Buttons
         Button stockButton;
 
         //Text
-        Text gold;
-        Text time;
-        Text stock;
-        Text dialouge;
-        Text npcInfo;
         SpriteFont spriteFont;
         Vector2 textPos;
 
         //Set the initial game screen size
         int screenWidth = 1280;
         int screenHeight = 800;
+
+        //list of NPC textures
+        List<Texture2D> textures = new List<Texture2D>();
 
         NPC npc = new NPC();
         DrawableObject dO;
@@ -56,9 +63,18 @@ namespace AlchemyTycoon.GameStates
             stockButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
 
             //Load in the NPC
-            npcTexture = content.Load<Texture2D>();
+            npcTexture1 = content.Load<Texture2D>("npc_standin.jpg");
+            npcTexture2 = content.Load<Texture2D>("npc_standin.jpg");
+            npcTexture3 = content.Load<Texture2D>("npc_standin.jpg");
+            npcTexture4 = content.Load<Texture2D>("npc_standin.jpg");
+            npcTexture5 = content.Load<Texture2D>("npc_standin.jpg");
+            npcTexture6 = content.Load<Texture2D>("npc_standin.jpg");
+            npcTexture7 = content.Load<Texture2D>("npc_standin.jpg");
+            npcTexture8 = content.Load<Texture2D>("npc_standin.jpg");
+            npcTexture9 = content.Load<Texture2D>("npc_standin.jpg");
+            npcTexture10 = content.Load<Texture2D>("npc_standin.jpg");
 
-            dO = new DrawableObject(npcTexture, npcPos);
+            dO = new DrawableObject(npcTexture1, npcPos);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -69,9 +85,11 @@ namespace AlchemyTycoon.GameStates
             spriteBatch.DrawString(spriteFont, "Gold: " + PlayerData.Instance.gold.ToString(), textPos, Color.White);
             npcPos = new Rectangle(-200, 0, 200, 600);
         }
+
         public void Update()
         {
-            
+
+
             //fields
             bool interacting = false;
             bool moving = true;
@@ -95,6 +113,7 @@ namespace AlchemyTycoon.GameStates
                 leaving = false;
             }
 
+            
         }
     }
 }
