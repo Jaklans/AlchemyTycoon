@@ -17,6 +17,10 @@ namespace AlchemyTycoon.GameStates
         Texture2D bgScreen;
         Rectangle screenPos;
 
+        //NPC
+        private Texture2D npcTexture;
+        private Rectangle npcPos;
+
         //Buttons
         Button stockButton;
 
@@ -32,6 +36,7 @@ namespace AlchemyTycoon.GameStates
         int screenHeight = 800;
 
         NPC npc = new NPC();
+        DrawableObject dO;
 
         //LoadContent method
         public void LoadContent(ContentManager content, GraphicsDevice graphics)
@@ -44,6 +49,12 @@ namespace AlchemyTycoon.GameStates
             //Load in the button
             stockButton = new Button(content.Load<Texture2D>("stockButton"), graphics);
             stockButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
+
+            //Load in the NPC
+            npcTexture = content.Load<Texture2D>();
+            npcPos = new Rectangle(-200, 0, 200, 600);
+
+            dO = new DrawableObject(npcTexture, npcPos);
         }
         private void CallNPCS()
         {
@@ -54,30 +65,34 @@ namespace AlchemyTycoon.GameStates
             }
         }
 
-        //Update method
-        public void Update()
-        {
-            //Get the mouse position
-            MouseState mouse = Mouse.GetState();
-
-            stockButton.Update(mouse);
-
-            //once all 10 come into shop swap to night state
-            if (npc.Leave() == true)
-            {
-
-            }
-            //When clicked, will go to inventory of potions the player made for sale
-            if(stockButton.isClicked == true)
-            {
-
-            }
-        }
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(bgScreen, screenPos, Color.White);
             stockButton.Draw(spriteBatch);
+            dO.Draw(spriteBatch);
         }
+        public void Update(Rectangle position)
+        {
 
+            bool interacting = false;
+            bool moving = true;
+            bool leaving = false;
+
+            //move NPC to center
+            while (moving == true) { position.X += 5; }
+            if(position.X == screenWidth/2 - 100) { moving = false; }
+
+            //start interaction
+            while(moving == false) { interacting = true; }
+
+            //NPC leaves shop
+            if (moving == false && interacting == false) { leaving = true; }
+            while (leaving == true) { position.X += 5; }
+            if(position.X == screenWidth)
+            {
+                leaving = false;
+            }
+
+        }
     }
 }
