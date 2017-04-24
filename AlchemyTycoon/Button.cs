@@ -53,7 +53,7 @@ namespace AlchemyTycoon
         }
         public override void Draw(SpriteBatch spritebatch)
         {
-            if (visible)
+            if (true)
             {
                 if (mouseover)
                 {

@@ -70,8 +70,8 @@ namespace AlchemyTycoon
             Inventory<GameItems.BaseIngredient> itemStore;
 
 
-        int screenWidth = 1280;
-        int screenHeight = 800;
+        int screenWidth = 1920;
+        int screenHeight = 1080;
 
         private SpriteFont text;
 
@@ -82,6 +82,8 @@ namespace AlchemyTycoon
         public NewNight()
         {
             state = nightState.Default;
+
+            drawlables = new Dictionary<nightState, List<DrawableObject>>();
 
             rng = new Random();
 
@@ -105,23 +107,25 @@ namespace AlchemyTycoon
         {
             //Back Button
             backButton = new newButton(
-                content.Load<Texture2D>(""),
-                content.Load<Texture2D>(""));
+                content.Load<Texture2D>("TempButton.jpg"),
+                content.Load<Texture2D>("TempButton.jpg"));
 
 
             //Default Screen
             defaultScreen = new DrawableObject(
-                content.Load<Texture2D>("nightScreen.png"), 
+                content.Load<Texture2D>("Screens/nightScreen"), 
                 new Rectangle(0, 0, screenWidth, screenHeight));
             inventoryButton = new newButton(
-                content.Load<Texture2D>("ingredients.png"),
-                content.Load<Texture2D>("ingHighlighted.png"));
+                content.Load<Texture2D>("Buttons/allTemp"),
+                content.Load<Texture2D>("Buttons/ingredientsTemp"));
             kitButton = new newButton(
-                content.Load<Texture2D>("kit.png"),
-                content.Load<Texture2D>("kitHIghlighted.png"));
+                content.Load<Texture2D>("Buttons/allTemp"),
+                content.Load<Texture2D>("Buttons/kitTemp"),
+                new Vector2(660, 0));
             recipeButton = new newButton(
-                content.Load<Texture2D>("recipe.png"),
-                content.Load<Texture2D>("recipeHighlighted.png"));
+                content.Load<Texture2D>("Buttons/allTemp"),
+                content.Load<Texture2D>("Buttons/recipeTemp"),
+                new Vector2(1260, 0));
 
             drawlables.Add(
                 nightState.Default,
@@ -136,14 +140,14 @@ namespace AlchemyTycoon
 
             //Kit Screen
             kitScreen = new DrawableObject(
-                content.Load<Texture2D>("kitScreen.png"), 
+                content.Load<Texture2D>("Screens/kitScreen"), 
                 new Rectangle(0, 0, screenWidth, screenHeight));
             makeButton = new newButton(
-                content.Load<Texture2D>("makeButton.png"),
-                content.Load<Texture2D>("makeButtonHL.png"));
+                content.Load<Texture2D>("Buttons/makeButton"),
+                content.Load<Texture2D>("Buttons/makeButtonHL"));
             clearButton = new newButton(
-                content.Load<Texture2D>("clearButton.png"),
-                content.Load<Texture2D>("clearButtonHL.png"));
+                content.Load<Texture2D>("Buttons/clearButton"),
+                content.Load<Texture2D>("Buttons/clearButtonHL"));
 
             drawlables.Add(
                 nightState.Kit,
@@ -159,11 +163,11 @@ namespace AlchemyTycoon
             
             //Recipe Screen
             recipeScreen = new DrawableObject(
-                content.Load<Texture2D>("recipeScreen.png"),
+                content.Load<Texture2D>("Screens/recipeScreen"),
                 new Rectangle(0, 0, screenWidth, screenHeight));
             recipeShopButton = new newButton(
-                content.Load<Texture2D>(""),
-                content.Load<Texture2D>(""));
+                content.Load<Texture2D>("Buttons/shop"),
+                content.Load<Texture2D>("Buttons/shopHL"));
 
             drawlables.Add(
                 nightState.Recipes,
@@ -178,11 +182,11 @@ namespace AlchemyTycoon
 
             //Recipe Shop Screen
             recipeShop = new DrawableObject(
-                content.Load<Texture2D>("recipeShop.png"),
+                content.Load<Texture2D>("Screens/recipeShop"),
                 new Rectangle(0, 0, screenWidth, screenHeight));
             recipePurchace = new newButton(
-                content.Load<Texture2D>("shop.png"),
-                content.Load<Texture2D>("shopHL.png"));
+                content.Load<Texture2D>("Buttons/shop"),
+                content.Load<Texture2D>("Buttons/shopHL"));
 
             drawlables.Add(
                 nightState.RecipeShop,
@@ -198,11 +202,11 @@ namespace AlchemyTycoon
 
             //Inventory Screen
             inventoryScreen = new DrawableObject(
-                content.Load<Texture2D>("inventoryScreen.png"),
+                content.Load<Texture2D>("Screens/inventoryScreen"),
                 new Rectangle(0, 0, screenWidth, screenHeight));
             storeButton = new newButton(
-                content.Load<Texture2D>("shop.png"),
-                content.Load<Texture2D>("shopHL.png"));
+                content.Load<Texture2D>("Buttons/shop"),
+                content.Load<Texture2D>("Buttons/shopHL"));
 
             drawlables.Add(
                 nightState.Inventory,
@@ -217,11 +221,11 @@ namespace AlchemyTycoon
 
             //Ingrediant Shop Screen
             ingrediantShop = new DrawableObject(
-                content.Load<Texture2D>("ingredientShop.png"),
+                content.Load<Texture2D>("Screens/ingredientShop"),
                 new Rectangle(0, 0, screenWidth, screenHeight));
             ingredientPurchace = new newButton(
-                content.Load<Texture2D>("purhase.png"),
-                content.Load<Texture2D>("purchaseHL.png"));
+                content.Load<Texture2D>("Buttons/purchase"),
+                content.Load<Texture2D>("Buttons/purchaseHL"));
 
             drawlables.Add(
                 nightState.IngrediantShop,

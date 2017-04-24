@@ -18,31 +18,24 @@ namespace AlchemyTycoon.GameStates
         Rectangle screenPos;
 
         //NPC
-        Texture2D npcTexture1;
-        Texture2D npcTexture2;
-        Texture2D npcTexture3;
-        Texture2D npcTexture4;
-        Texture2D npcTexture5;
-        Texture2D npcTexture6;
-        Texture2D npcTexture7;
-        Texture2D npcTexture8;
-        Texture2D npcTexture9;
-        Texture2D npcTexture10;
-        Rectangle npcPos;
+        private Texture2D npcTexture;
+        private Rectangle npcPos;
 
         //Buttons
         Button stockButton;
 
         //Text
+        Text gold;
+        Text time;
+        Text stock;
+        Text dialouge;
+        Text npcInfo;
         SpriteFont spriteFont;
         Vector2 textPos;
 
         //Set the initial game screen size
         int screenWidth = 1280;
         int screenHeight = 800;
-
-        //list of NPC textures
-        List<Texture2D> textures = new List<Texture2D>();
 
         NPC npc = new NPC();
         DrawableObject dO;
@@ -63,9 +56,9 @@ namespace AlchemyTycoon.GameStates
             stockButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
 
             //Load in the NPC
-            npc.LoadContent(content, graphics);
+            //npcTexture = content.Load<Texture2D>();
 
-            dO = new DrawableObject(npcTexture1, npcPos);
+            dO = new DrawableObject(npcTexture, npcPos);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -74,15 +67,34 @@ namespace AlchemyTycoon.GameStates
             stockButton.Draw(spriteBatch);
             dO.Draw(spriteBatch);
             spriteBatch.DrawString(spriteFont, "Gold: " + PlayerData.Instance.gold.ToString(), textPos, Color.White);
-            npc.Draw(spriteBatch);
+            npcPos = new Rectangle(-200, 0, 200, 600);
         }
-
         public void Update()
         {
-            for (int i = 0; i < 10; i++)
+            
+            //fields
+            bool interacting = false;
+            bool moving = true;
+            bool leaving = false;
+
+            //move NPC to center
+            while (moving == true) { npcPos.X += 5; }
+            if(npcPos.X == screenWidth/2 - 100) { moving = false; }
+
+            //start interaction
+            while(moving == false) { interacting = true; }
+
+            npc.MakeList();
+            npc.BuyPotion();
+
+            //NPC leaves shop
+            if (moving == false && interacting == false) { leaving = true; }
+            while (leaving == true) { npcPos.X += 5; }
+            if(npcPos.X == screenWidth)
             {
-                npc.Update();
+                leaving = false;
             }
+
         }
     }
 }
