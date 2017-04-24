@@ -12,14 +12,12 @@ namespace AlchemyTycoon
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
-        Data testData;
-        Inventory<GameItems.BaseIngredient> testInventory;
+        
         
         KeyboardState kbs;
         //set the initial game screen size
-        int screenWidth = 1280;
-        int screenHeight = 800;
+        int screenWidth = 1920;
+        int screenHeight = 1080;
 
 
 
@@ -69,6 +67,7 @@ namespace AlchemyTycoon
             // TODO: use this.Content to load your game content here
             gM.Load(Content, graphics);
             Data.Instance.LoadContent(Content, "../../../../itemfolder/Textures");
+
 
             ////TestEnvironment
             //testData.LoadContent(Content, "../../../../itemfolder/Textures");

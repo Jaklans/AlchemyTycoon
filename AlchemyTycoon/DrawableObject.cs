@@ -19,6 +19,7 @@ namespace AlchemyTycoon
         {
             this.texture = texture;
             position = new Rectangle(x, y, texture.Width, texture.Height);
+            visible = true;
         }
         public DrawableObject(Texture2D texture, Rectangle position)
         {
@@ -28,7 +29,7 @@ namespace AlchemyTycoon
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            if (visible)
+            if (true)
             {
                 spriteBatch.Draw(texture, position, Color.White);
             }

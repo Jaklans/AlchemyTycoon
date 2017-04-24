@@ -56,7 +56,7 @@ namespace AlchemyTycoon.GameStates
             stockButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
 
             //Load in the NPC
-            npcTexture = content.Load<Texture2D>();
+            //npcTexture = content.Load<Texture2D>();
 
             dO = new DrawableObject(npcTexture, npcPos);
         }

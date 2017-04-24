@@ -46,7 +46,7 @@ namespace AlchemyTycoon
         NewNight night = new NewNight();
 
         //start the game in the NightMenu
-        PlayingEnum current = PlayingEnum.TestEnvironment;
+        PlayingEnum current = PlayingEnum.Night;
 
         public void Load(ContentManager Content, GraphicsDeviceManager graphics)
         {
@@ -111,7 +111,7 @@ namespace AlchemyTycoon
             switch (current)
             {
                 case PlayingEnum.Day:
-                    day.Update();
+                    //day.Update();
                     break;
                 case PlayingEnum.Night:
                     night.Update(ms);
