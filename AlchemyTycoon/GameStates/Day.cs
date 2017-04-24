@@ -63,16 +63,7 @@ namespace AlchemyTycoon.GameStates
             stockButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
 
             //Load in the NPC
-            npcTexture1 = content.Load<Texture2D>("npc_standin.jpg");
-            npcTexture2 = content.Load<Texture2D>("npc_standin.jpg");
-            npcTexture3 = content.Load<Texture2D>("npc_standin.jpg");
-            npcTexture4 = content.Load<Texture2D>("npc_standin.jpg");
-            npcTexture5 = content.Load<Texture2D>("npc_standin.jpg");
-            npcTexture6 = content.Load<Texture2D>("npc_standin.jpg");
-            npcTexture7 = content.Load<Texture2D>("npc_standin.jpg");
-            npcTexture8 = content.Load<Texture2D>("npc_standin.jpg");
-            npcTexture9 = content.Load<Texture2D>("npc_standin.jpg");
-            npcTexture10 = content.Load<Texture2D>("npc_standin.jpg");
+            npc.LoadContent(content, graphics);
 
             dO = new DrawableObject(npcTexture1, npcPos);
         }
@@ -83,37 +74,15 @@ namespace AlchemyTycoon.GameStates
             stockButton.Draw(spriteBatch);
             dO.Draw(spriteBatch);
             spriteBatch.DrawString(spriteFont, "Gold: " + PlayerData.Instance.gold.ToString(), textPos, Color.White);
-            npcPos = new Rectangle(-200, 0, 200, 600);
+            npc.Draw(spriteBatch);
         }
 
         public void Update()
         {
-
-
-            //fields
-            bool interacting = false;
-            bool moving = true;
-            bool leaving = false;
-
-            //move NPC to center
-            while (moving == true) { npcPos.X += 5; }
-            if(npcPos.X == screenWidth/2 - 100) { moving = false; }
-
-            //start interaction
-            while(moving == false) { interacting = true; }
-
-            npc.MakeList();
-            npc.BuyPotion();
-
-            //NPC leaves shop
-            if (moving == false && interacting == false) { leaving = true; }
-            while (leaving == true) { npcPos.X += 5; }
-            if(npcPos.X == screenWidth)
+            for (int i = 0; i < 10; i++)
             {
-                leaving = false;
+                npc.Update();
             }
-
-            
         }
     }
 }
