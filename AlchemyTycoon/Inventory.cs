@@ -195,7 +195,7 @@ namespace AlchemyTycoon
         {
             if (data.Count != 0)
             {
-                data.Sort();
+                //data.Sort();
 
                 xDepth = vXDepth;
                 yDepth = vYDepth;

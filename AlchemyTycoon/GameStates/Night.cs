@@ -111,8 +111,8 @@ namespace AlchemyTycoon
         {
             //Back Button
             backButton = new newButton(
-                content.Load<Texture2D>("TempButton.jpg"),
-                content.Load<Texture2D>("TempButton.jpg"),
+                content.Load<Texture2D>("Buttons/backButton"),
+                content.Load<Texture2D>("Buttons/backButtonHL"),
                 new Vector2(1400, 0));
 
 
