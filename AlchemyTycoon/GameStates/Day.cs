@@ -48,15 +48,13 @@ namespace AlchemyTycoon.GameStates
             textPos = new Vector2(screenWidth / 10, 3 * screenHeight / 4);
 
             //Load in the screen
-            bgScreen = content.Load<Texture2D>("daytime");
+            bgScreen = content.Load<Texture2D>("Screens/daytimeScreen");
             screenPos = new Rectangle(0, 0, screenWidth, screenHeight);
 
-            //Load in the button
-            stockButton = new Button(content.Load<Texture2D>("stockButton"), graphics);
-            stockButton.setPos(new Vector2(screenWidth / 2, screenHeight / 2));
-
             //Load in the NPC
-            //npcTexture = content.Load<Texture2D>();
+            npcTexture = content.Load<Texture2D>("npc_standin");
+
+            npc.LoadContent(content, graphics);
 
             dO = new DrawableObject(npcTexture, npcPos);
         }
@@ -64,21 +62,20 @@ namespace AlchemyTycoon.GameStates
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(bgScreen, screenPos, Color.White);
-            stockButton.Draw(spriteBatch);
             dO.Draw(spriteBatch);
             spriteBatch.DrawString(spriteFont, "Gold: " + PlayerData.Instance.gold.ToString(), textPos, Color.White);
             npcPos = new Rectangle(-200, 0, 200, 600);
+            for (int i = 0; i < 10; i++)
+            {
+                npc.Draw(spriteBatch);
+            }  
         }
 
         public bool finished;
-        public void Update(SpriteBatch spriteBatch)
+        public void Update()
         {
-            
-            for (int i = 0; i < 10; i++)
-            {
-                npc.Draw(spriteBatch, i);
-                npc.Update();
-            }      
+            npc.Update();   
+                
         }
     }
 }

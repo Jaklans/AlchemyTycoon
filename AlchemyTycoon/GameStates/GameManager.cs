@@ -53,6 +53,7 @@ namespace AlchemyTycoon
 
             menu.LoadContent(Content, graphics);
             night.LoadContent(Content);
+            day.LoadContent(Content, graphics.GraphicsDevice);
 
             //TestEnvironment
             //testData.LoadContent(Content, "../../../../itemfolder/Textures");
@@ -111,7 +112,7 @@ namespace AlchemyTycoon
             switch (current)
             {
                 case PlayingEnum.Day:
-                    //day.Update();
+                    day.Update();
                     //if (day.finished) { current = PlayingEnum.Night; }
                     break;
                 case PlayingEnum.Night:

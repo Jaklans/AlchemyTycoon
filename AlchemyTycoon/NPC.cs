@@ -87,7 +87,7 @@ namespace AlchemyTycoon
         {
             for (int i = 0; i < 10; i++)
             {
-                npcList.Add(content.Load<Texture2D>("npc_standin.jpg"));
+                npcList.Add(content.Load<Texture2D>("npc_standin"));
             }
             npcPos = new Rectangle(-200, 0, 200, 600);
             newNPCPos = npcPos;
@@ -95,10 +95,12 @@ namespace AlchemyTycoon
 
         public bool finished = false;
         Texture2D currentNPC;
-        public void Draw(SpriteBatch spriteBatch, int i)
+        public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(npcList[i], newNPCPos, Color.White);
-            currentNPC = npcList[i];
+            for (int i = 0; i < 10; i++)
+            {
+                spriteBatch.Draw(npcList[i], newNPCPos, Color.White);
+            }
         }
         public void Update()
         {
