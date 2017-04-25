@@ -112,9 +112,11 @@ namespace AlchemyTycoon
             {
                 case PlayingEnum.Day:
                     //day.Update();
+                    if (day.finished) { current = PlayingEnum.Night; }
                     break;
                 case PlayingEnum.Night:
                     night.Update(ms);
+                    if (night.done) { current = PlayingEnum.Day; }
                     break;
                 case PlayingEnum.MainMenu:
                     menu.Update(gameTime);
@@ -168,6 +170,7 @@ namespace AlchemyTycoon
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            MouseState mouse = Mouse.GetState();
             switch (current)
             {
                 case PlayingEnum.Day:

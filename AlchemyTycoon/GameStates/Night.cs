@@ -27,6 +27,8 @@ namespace AlchemyTycoon
         nightState previousState;
         int stateChangeCooldown;
 
+        public bool done;
+
         private DrawableObject defaultScreen;
         private DrawableObject inventoryScreen;
         private DrawableObject kitScreen;
@@ -43,6 +45,7 @@ namespace AlchemyTycoon
         newButton inventoryButton;
         newButton kitButton;
         newButton recipeButton;
+        newButton dayButton;
 
         //Buttons on kit screen
         newButton makeButton;
@@ -131,6 +134,10 @@ namespace AlchemyTycoon
                 content.Load<Texture2D>("Buttons/allTemp"),
                 content.Load<Texture2D>("Buttons/recipeTemp"),
                 new Vector2(1260, 0));
+            dayButton = new newButton(
+                content.Load<Texture2D>("Buttons/goToDay"),
+                content.Load<Texture2D>("Buttons/goToDayHL"),
+                new Vector2(1800, 1000));
 
             drawlables.Add(
                 nightState.Default,
@@ -261,6 +268,10 @@ namespace AlchemyTycoon
                 return;
             }
 
+            dayButton.Update(mouse);
+
+            if (dayButton.Clicked){ done = true; }
+
             switch (state)
             {
                 //Default Screen
@@ -331,8 +342,10 @@ namespace AlchemyTycoon
                 case nightState.Inventory:
                     //Buttons
                     backButton.Update(mouse);
+                    storeButton.Update(mouse);
 
                     if (backButton.Clicked) { state = nightState.Default; }
+                    if (storeButton.Clicked) { state = nightState.IngrediantShop; }
 
                     //Inventories
                     GameItems.BaseIngredient tempIngredient = PlayerData.Instance.playerIngredients.Update(mouse);
@@ -378,8 +391,7 @@ namespace AlchemyTycoon
 
                     if (backButton.Clicked) { state = nightState.Default; }
                     if (recipeShopButton.Clicked) { state = nightState.RecipeShop; }
-
-                    //! Find way to display recipies
+                    
 
                     break;
 
@@ -405,6 +417,7 @@ namespace AlchemyTycoon
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            
             //Draws all basic objects for each gamestate (buttons and backgrounds)
             foreach(DrawableObject drawlable in drawlables[state])
             {
@@ -420,36 +433,42 @@ namespace AlchemyTycoon
 
                 //Kit Screen
                 case nightState.Kit:
-                    PlayerData.Instance.playerIngredients.Draw(spriteBatch, new Vector2(0, 0), 5, 7);
-                    PlayerData.Instance.playerPotions.Draw(spriteBatch, new Vector2(0, 500), 5, 3);
-                    craftingTable.Draw(spriteBatch, new Vector2(500, 0), 2, 2);
-                    craftingOutput.Draw(spriteBatch, new Vector2(500, 250), 1, 1);
+                    PlayerData.Instance.playerIngredients.Draw(spriteBatch, new Vector2(325, 170), 5, 7);
+                    PlayerData.Instance.playerPotions.Draw(spriteBatch, new Vector2(325, 705), 5, 3);
+                    craftingTable.Draw(spriteBatch, new Vector2(1160, 375), 2, 2);
+                    craftingOutput.Draw(spriteBatch, new Vector2(1155, 700), 1, 1);
                     break;
 
                 //Inventory Screen
                 case nightState.Inventory:
-                    PlayerData.Instance.playerIngredients.Draw(spriteBatch, new Vector2(0, 0), 5, 7);
-                    PlayerData.Instance.playerPotions.Draw(spriteBatch, new Vector2(0, 500), 5, 3);
-//! Draw item info
+                    PlayerData.Instance.playerIngredients.Draw(spriteBatch, new Vector2(330, 165), 5, 7);
+                    PlayerData.Instance.playerPotions.Draw(spriteBatch, new Vector2(330, 700), 5, 3);
+
+                    GameItems.BaseIngredient temp = PlayerData.Instance.playerIngredients.Update(Mouse.GetState());
+                    if (temp != null)
+                    { 
+                        temp.Draw(new Vector2(400, 0), spriteBatch);
+                    }
+
                     break;
 
                 //Ingredient Purchace Screen
                 case nightState.IngrediantShop:
-                    PlayerData.Instance.playerIngredients.Draw(spriteBatch, new Vector2(0, 0), 5, 10);
-                    itemStore.Draw(spriteBatch, new Vector2(500, 0), 5, 2);
+                    PlayerData.Instance.playerIngredients.Draw(spriteBatch, new Vector2(305, 165), 5, 10);
+                    itemStore.Draw(spriteBatch, new Vector2(1015, 190), 5, 2);
 //! Draw item info
                     break;
 
                 //Recipe Book Screen
                 case nightState.Recipes:
-                    PlayerData.Instance.playerKnownRecipies.Draw(spriteBatch, new Vector2(0, 0), 5, 10);
+                    PlayerData.Instance.playerKnownRecipies.Draw(spriteBatch, new Vector2(305, 165), 5, 10);
 //! Draw recipe info
                     break;
 
                 //Recipe Shop Screen
                 case nightState.RecipeShop:
-                    PlayerData.Instance.playerKnownRecipies.Draw(spriteBatch, new Vector2(0, 0), 5, 10);
-                    recipeStore.Draw(spriteBatch, new Vector2(500, 0), 5, 1);
+                    PlayerData.Instance.playerKnownRecipies.Draw(spriteBatch, new Vector2(315, 165), 5, 10);
+                    recipeStore.Draw(spriteBatch, new Vector2(1005, 265), 5, 1);
 //! Draw recipe info
                     break;
             }
