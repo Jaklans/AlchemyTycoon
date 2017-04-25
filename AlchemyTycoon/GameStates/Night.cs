@@ -113,7 +113,7 @@ namespace AlchemyTycoon
             backButton = new newButton(
                 content.Load<Texture2D>("Buttons/backButton"),
                 content.Load<Texture2D>("Buttons/backButtonHL"),
-                new Vector2(1400, 0));
+                new Vector2(1400, 85));
 
 
             //Default Screen
@@ -150,10 +150,11 @@ namespace AlchemyTycoon
             makeButton = new newButton(
                 content.Load<Texture2D>("Buttons/makeButton"),
                 content.Load<Texture2D>("Buttons/makeButtonHL"),
-                new Vector2());
+                new Vector2(1300, 700));
             clearButton = new newButton(
                 content.Load<Texture2D>("Buttons/clearButton"),
-                content.Load<Texture2D>("Buttons/clearButtonHL"));
+                content.Load<Texture2D>("Buttons/clearButtonHL"),
+                new Vector2(1100, 700));
 
             drawlables.Add(
                 nightState.Kit,
@@ -173,7 +174,8 @@ namespace AlchemyTycoon
                 new Rectangle(280, 140, 1300, 800));
             recipeShopButton = new newButton(
                 content.Load<Texture2D>("Buttons/shop"),
-                content.Load<Texture2D>("Buttons/shopHL"));
+                content.Load<Texture2D>("Buttons/shopHL"),
+                new Vector2(300, 85));
 
             drawlables.Add(
                 nightState.Recipes,
@@ -192,7 +194,8 @@ namespace AlchemyTycoon
                 new Rectangle(280, 140, 1300, 800));
             recipePurchace = new newButton(
                 content.Load<Texture2D>("Buttons/shop"),
-                content.Load<Texture2D>("Buttons/shopHL"));
+                content.Load<Texture2D>("Buttons/shopHL"),
+                new Vector2(1400, 740));
 
             drawlables.Add(
                 nightState.RecipeShop,
@@ -212,7 +215,8 @@ namespace AlchemyTycoon
                 new Rectangle(280, 140, 1300, 800));
             storeButton = new newButton(
                 content.Load<Texture2D>("Buttons/shop"),
-                content.Load<Texture2D>("Buttons/shopHL"));
+                content.Load<Texture2D>("Buttons/shopHL"),
+                new Vector2(300, 85));
 
             drawlables.Add(
                 nightState.Inventory,
@@ -231,7 +235,8 @@ namespace AlchemyTycoon
                 new Rectangle(280, 140, 1300, 800));
             ingredientPurchace = new newButton(
                 content.Load<Texture2D>("Buttons/purchase"),
-                content.Load<Texture2D>("Buttons/purchaseHL"));
+                content.Load<Texture2D>("Buttons/purchaseHL"),
+                new Vector2(1400, 740));
 
             drawlables.Add(
                 nightState.IngrediantShop,
