@@ -146,7 +146,8 @@ namespace AlchemyTycoon
                     defaultScreen,
                     inventoryButton,
                     kitButton,
-                    recipeButton
+                    recipeButton,
+                    dayButton
                 });
 
 

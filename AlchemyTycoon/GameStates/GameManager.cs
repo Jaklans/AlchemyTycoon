@@ -112,7 +112,7 @@ namespace AlchemyTycoon
             {
                 case PlayingEnum.Day:
                     //day.Update();
-                    if (day.finished) { current = PlayingEnum.Night; }
+                    //if (day.finished) { current = PlayingEnum.Night; }
                     break;
                 case PlayingEnum.Night:
                     night.Update(ms);
