@@ -1,0 +1,10 @@
+024
+Dried Whiskey
+60
+1
+7
+10
+16
+While popular potions created by accident are not unheard of, Dried Whiskey is certainly the most iconic. It's first inception came from dragonfire meeting Bughelzof's Ultra-Hop Dwarven Whiskey, which, rather than simply burning away the alcohol, left behind a dense powder that turns to liquor when added to water.
+Dried Whiskey has precisely the same effects as any other top-shelf whiskey. It's only interesting trait is it's lack of liquid until time of consumption.
+driedTex

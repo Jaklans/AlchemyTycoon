@@ -1,0 +1,10 @@
+008
+Nectar of the Night
+190
+1
+6
+11
+16
+"Thief's Friend," as the Nectar of the Night is sometimes called, was born in a basement of a local lord, as a nearly-caught thief began frantically drinking any and all potions he could find, in the hope that one of them might aid him. As a matter of fact, it did.
+Once an entire bottle has been drunk, the subject will find the night as bright, warm, and clear as a summer day. They can see great distances, tell the time based on the moon, and, in rare cases, talk to night-time animals.
+nightTex

@@ -1,0 +1,10 @@
+019
+Stoneheart Draft
+220
+4
+7
+13
+15
+First created by the somewhat mysterious brewery known as Jotunwaft, Stonheart Draft quickly gained popularity among pit fighters, wrestlers, and showy mercenaries. It's now largely banned in competitive sport, but sees some underground usage.
+Once consumed, the Draft takes an hour or two to fully take effect. As it does, the skin becomes harder, more brittle, almost like that of stone or solid clay. This makes the skin incredibly repellant to most blunt force, making ideal for fighters of all kinds.
+stoneTex

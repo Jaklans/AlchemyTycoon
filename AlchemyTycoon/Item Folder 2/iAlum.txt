@@ -1,5 +1,0 @@
-12
-Powdered Aluminum
-25
-Aluminum, once powdered to the proper fineness, is incredibly explosive. As such, it's extremely popular with alchemists.
-alumTex

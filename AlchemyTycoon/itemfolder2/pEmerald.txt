@@ -1,0 +1,10 @@
+025
+Emerald Fountain
+70
+2
+8
+11
+13
+Emerald Fountains have their origins in druidic circles, born out of a desire to bond even further with nature and the wilds. It eventually entered the main markets, where it was popular with carefree youths, as well as the extreme elderly.
+Once consumed, the subject will suddenly have an immense and inescapable desire to wander into a forest, lie amongst the plants, and frolic with the creatures therein. Interestingly, those under the Fountain's effects are usually safe from wild beasts and other dangers forests typically present.
+emeraldTex

@@ -1,0 +1,5 @@
+3
+Ambergris
+10
+The strange, yellowed slime that grows deep inside a whale. It has a pleasant smell.
+amberTex

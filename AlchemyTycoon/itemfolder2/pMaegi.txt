@@ -1,0 +1,10 @@
+012
+Maegi's Cup
+210
+3
+6
+9
+16
+Brewed deep within the mysterious haven known as Farwind, Maegi's Cup was first created by a number of ambitious of warlocks seeking to delve ever deeper into the mysteries of the arcane. They quickly found that any time not under its effects to be utterly miserable and without value, leading to a mad, desperate search for more, which led to their eventual doom.
+In the belly of an experienced magician, the effects are potent and immediate. Maegi's Cup allows the subject to see the very strands and weaves of magic itself, allowing new insight and discoveries to be made with ease.
+maegiTex
