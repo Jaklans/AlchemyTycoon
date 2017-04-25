@@ -75,10 +75,9 @@ namespace AlchemyTycoon.GameItems
                 (float)(infoBox.Y + texture.Height + .2 * infoBox.Height)),
                 Color.White);
             //FlavorText
-            spriteBatch.DrawString(font, flavorText, new Vector2(
+            this.CustomDrawString(spriteBatch, font, flavorText, new Vector2(
                 infoBox.X,
-                (float)(infoBox.Y + texture.Height + .4 * infoBox.Height)),
-                Color.White);
+                (float)(infoBox.Y + texture.Height + .4 * infoBox.Height)));
             //Value
             spriteBatch.DrawString(font, value.ToString(), new Vector2(
                 infoBox.X,

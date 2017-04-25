@@ -24,6 +24,8 @@ namespace AlchemyTycoon
         }
 
         nightState state;
+        nightState previousState;
+        int stateChangeCooldown;
 
         private DrawableObject defaultScreen;
         private DrawableObject inventoryScreen;
@@ -82,6 +84,8 @@ namespace AlchemyTycoon
         public NewNight()
         {
             state = nightState.Default;
+            previousState = nightState.Default;
+            stateChangeCooldown = 0;
 
             drawlables = new Dictionary<nightState, List<DrawableObject>>();
 
@@ -108,7 +112,8 @@ namespace AlchemyTycoon
             //Back Button
             backButton = new newButton(
                 content.Load<Texture2D>("TempButton.jpg"),
-                content.Load<Texture2D>("TempButton.jpg"));
+                content.Load<Texture2D>("TempButton.jpg"),
+                new Vector2(1400, 0));
 
 
             //Default Screen
@@ -141,10 +146,11 @@ namespace AlchemyTycoon
             //Kit Screen
             kitScreen = new DrawableObject(
                 content.Load<Texture2D>("Screens/kitScreen"), 
-                new Rectangle(0, 0, screenWidth, screenHeight));
+                new Rectangle(280, 140, 1300, 800));
             makeButton = new newButton(
                 content.Load<Texture2D>("Buttons/makeButton"),
-                content.Load<Texture2D>("Buttons/makeButtonHL"));
+                content.Load<Texture2D>("Buttons/makeButtonHL"),
+                new Vector2());
             clearButton = new newButton(
                 content.Load<Texture2D>("Buttons/clearButton"),
                 content.Load<Texture2D>("Buttons/clearButtonHL"));
@@ -164,7 +170,7 @@ namespace AlchemyTycoon
             //Recipe Screen
             recipeScreen = new DrawableObject(
                 content.Load<Texture2D>("Screens/recipeScreen"),
-                new Rectangle(0, 0, screenWidth, screenHeight));
+                new Rectangle(280, 140, 1300, 800));
             recipeShopButton = new newButton(
                 content.Load<Texture2D>("Buttons/shop"),
                 content.Load<Texture2D>("Buttons/shopHL"));
@@ -183,7 +189,7 @@ namespace AlchemyTycoon
             //Recipe Shop Screen
             recipeShop = new DrawableObject(
                 content.Load<Texture2D>("Screens/recipeShop"),
-                new Rectangle(0, 0, screenWidth, screenHeight));
+                new Rectangle(280, 140, 1300, 800));
             recipePurchace = new newButton(
                 content.Load<Texture2D>("Buttons/shop"),
                 content.Load<Texture2D>("Buttons/shopHL"));
@@ -203,7 +209,7 @@ namespace AlchemyTycoon
             //Inventory Screen
             inventoryScreen = new DrawableObject(
                 content.Load<Texture2D>("Screens/inventoryScreen"),
-                new Rectangle(0, 0, screenWidth, screenHeight));
+                new Rectangle(280, 140, 1300, 800));
             storeButton = new newButton(
                 content.Load<Texture2D>("Buttons/shop"),
                 content.Load<Texture2D>("Buttons/shopHL"));
@@ -222,7 +228,7 @@ namespace AlchemyTycoon
             //Ingrediant Shop Screen
             ingrediantShop = new DrawableObject(
                 content.Load<Texture2D>("Screens/ingredientShop"),
-                new Rectangle(0, 0, screenWidth, screenHeight));
+                new Rectangle(280, 140, 1300, 800));
             ingredientPurchace = new newButton(
                 content.Load<Texture2D>("Buttons/purchase"),
                 content.Load<Texture2D>("Buttons/purchaseHL"));
@@ -244,6 +250,12 @@ namespace AlchemyTycoon
 
         public void Update(MouseState mouse)
         {
+            if(stateChangeCooldown > 0)
+            {
+                stateChangeCooldown--;
+                return;
+            }
+
             switch (state)
             {
                 //Default Screen
@@ -254,11 +266,11 @@ namespace AlchemyTycoon
                     recipeButton.Update(mouse);
 
                     if (inventoryButton.Clicked) { state = nightState.Inventory; }
-                    else if (kitButton.Clicked) { state = nightState.Kit; }
-                    else if ( recipeButton.Clicked) { state = nightState.Recipes; } 
-                    
+                    else if (kitButton.Clicked) { state = nightState.Kit;}
+                    else if (recipeButton.Clicked) { state = nightState.Recipes; }
+
                     break;
-                
+
                 //Kit Screen
                 case nightState.Kit:
                     //Buttons
@@ -271,14 +283,14 @@ namespace AlchemyTycoon
                         if (backButton.Clicked) { state = nightState.Default; }
 
                         //Clears the table (done in either case)
-                        while(craftingTable.inventoryData.Count != 0)
+                        while (craftingTable.inventoryData.Count != 0)
                         {
                             PlayerData.Instance.
                                 playerIngredients.AddItem(
                                 craftingTable.RemoveItem(0)
                                 );
                         }
-                        while(craftingOutput.inventoryData.Count != 0)
+                        while (craftingOutput.inventoryData.Count != 0)
                         {
                             PlayerData.Instance.
                                 playerPotions.AddItem(
@@ -290,7 +302,7 @@ namespace AlchemyTycoon
                     if (makeButton.Clicked && craftingOutput.inventoryData.Count != 0)
                     {
                         GameItems.BasePotion temp = craftingTable.MakePotion();
-                        if(temp != null)
+                        if (temp != null)
                         {
                             craftingOutput.AddItem(temp);
                         }
@@ -307,7 +319,7 @@ namespace AlchemyTycoon
                     {
                         PlayerData.Instance.playerIngredients.Update(mouse, craftingTable);
                     }
-                    
+
                     break;
 
                 //Inventory Screen
@@ -319,15 +331,15 @@ namespace AlchemyTycoon
 
                     //Inventories
                     GameItems.BaseIngredient tempIngredient = PlayerData.Instance.playerIngredients.Update(mouse);
-                    GameItems.BasePotion tempPotion =  PlayerData.Instance.playerPotions.Update(mouse);
+                    GameItems.BasePotion tempPotion = PlayerData.Instance.playerPotions.Update(mouse);
 
                     //Logic to determine which gameItem should be displayed, potion or ingredient
-                    if(tempIngredient != displayIngredient)
+                    if (tempIngredient != displayIngredient)
                     {
                         displayIngredient = tempIngredient;
                         displayingItem = tempIngredient;
                     }
-                    else if(tempPotion != displayPotion)
+                    else if (tempPotion != displayPotion)
                     {
                         displayPotion = tempPotion;
                         displayingItem = tempPotion;
@@ -361,11 +373,11 @@ namespace AlchemyTycoon
 
                     if (backButton.Clicked) { state = nightState.Default; }
                     if (recipeShopButton.Clicked) { state = nightState.RecipeShop; }
-                    
-//! Find way to display recipies
+
+                    //! Find way to display recipies
 
                     break;
-                    
+
                 //Recipe Purchace Screen
                 case nightState.RecipeShop:
                     backButton.Update(mouse);
@@ -378,6 +390,12 @@ namespace AlchemyTycoon
                 default:
                     break;
             }
+            if(state != previousState)
+            {
+                stateChangeCooldown = 15;
+                previousState = state;
+            }
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)

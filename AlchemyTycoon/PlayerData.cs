@@ -38,6 +38,7 @@ namespace AlchemyTycoon
 
             playerIngredients = new Inventory<GameItems.BaseIngredient>();
             playerPotions = new Inventory<GameItems.BasePotion>();
+            playerKnownRecipies = new Inventory<GameItems.BasePotion>();
         }
     }
 }
