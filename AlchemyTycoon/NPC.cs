@@ -25,7 +25,7 @@ namespace AlchemyTycoon
 
         Rectangle newNPCPos;
         Rectangle npcPos;
-        List<Texture2D> npc = new List<Texture2D>();
+        public List<Texture2D> npcList = new List<Texture2D>();
 
         public void MakeList()
         {
@@ -87,47 +87,51 @@ namespace AlchemyTycoon
         {
             for (int i = 0; i < 10; i++)
             {
-                npc.Add(content.Load<Texture2D>("npc_standin.jpg"));
+                npcList.Add(content.Load<Texture2D>("npc_standin.jpg"));
             }
             npcPos = new Rectangle(-200, 0, 200, 600);
             newNPCPos = npcPos;
         }
-        public void Draw(SpriteBatch spriteBatch)
+
+        public bool finished = false;
+        Texture2D currentNPC;
+        public void Draw(SpriteBatch spriteBatch, int i)
         {
-            for (int i = 0; i < 10; i++)
-            {
-
-                spriteBatch.Draw(npc[i], newNPCPos, Color.White);
-            }
-
+            spriteBatch.Draw(npcList[i], newNPCPos, Color.White);
+            currentNPC = npcList[i];
         }
         public void Update()
         {
-            #region by aaron
+
             //fields
             bool interacting = false;
             bool moving = true;
             bool leaving = false;
 
             //move NPC to center
-            while (moving == true) { newNPCPos.X += 5; }
-            if (newNPCPos.X == screenWidth / 2 - 100) { moving = false; }
+            while (moving == true) { npcPos.X += 5; }
+            if (npcPos.X == screenWidth / 2 - 100) { moving = false; }
 
             //start interaction
             while (moving == false) { interacting = true; }
 
-            MakeList();
-            BuyPotion();
+            this.MakeList();
+            this.BuyPotion();
 
             //NPC leaves shop
             if (moving == false && interacting == false) { leaving = true; }
-            while (leaving == true) { newNPCPos.X += 5; }
-            if (newNPCPos.X == screenWidth)
+            while (leaving == true) { npcPos.X += 5; }
+            if (npcPos.X == screenWidth)
             {
                 leaving = false;
             }
-            #endregion
-            if (newNPCPos.X == screenWidth)
+
+            if(newNPCPos.X == screenWidth && currentNPC == npcList[9])
+            {
+                finished = true;
+            }
+
+            else if (newNPCPos.X == screenWidth && currentNPC != npcList[9])
             {
                 newNPCPos = npcPos;
             }

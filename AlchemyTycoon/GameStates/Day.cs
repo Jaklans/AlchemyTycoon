@@ -69,32 +69,16 @@ namespace AlchemyTycoon.GameStates
             spriteBatch.DrawString(spriteFont, "Gold: " + PlayerData.Instance.gold.ToString(), textPos, Color.White);
             npcPos = new Rectangle(-200, 0, 200, 600);
         }
-        public void Update()
+
+        public bool finished;
+        public void Update(SpriteBatch spriteBatch)
         {
             
-            //fields
-            bool interacting = false;
-            bool moving = true;
-            bool leaving = false;
-
-            //move NPC to center
-            while (moving == true) { npcPos.X += 5; }
-            if(npcPos.X == screenWidth/2 - 100) { moving = false; }
-
-            //start interaction
-            while(moving == false) { interacting = true; }
-
-            npc.MakeList();
-            npc.BuyPotion();
-
-            //NPC leaves shop
-            if (moving == false && interacting == false) { leaving = true; }
-            while (leaving == true) { npcPos.X += 5; }
-            if(npcPos.X == screenWidth)
+            for (int i = 0; i < 10; i++)
             {
-                leaving = false;
-            }
-
+                npc.Draw(spriteBatch, i);
+                npc.Update();
+            }      
         }
     }
 }
