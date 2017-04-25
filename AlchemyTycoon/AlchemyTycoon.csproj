@@ -68,12 +68,16 @@
     <Content Include="Content\Buttons\allTemp.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Buttons\backButton.png" />
+    <Content Include="Content\Buttons\backButtonHL.png" />
     <Content Include="Content\Buttons\clearButton.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Buttons\clearButtonHL.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Buttons\goToDay.png" />
+    <Content Include="Content\Buttons\gotoDayHL.png" />
     <Content Include="Content\Buttons\ingHighligthed.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -122,28 +126,17 @@
     <Content Include="Content\Screens\daytimeScreen.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Screens\ingredientShop.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Screens\kitScreen.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Content\Screens\ingredientShop.png" />
+    <Content Include="Content\Screens\inventoryScreen.png" />
+    <Content Include="Content\Screens\kitScreen.png" />
     <Content Include="Content\Screens\nightScreen.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Screens\recipeScreen.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Screens\recipeShop.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Content\Screens\recipeScreen.png" />
     <Content Include="Content\TempButton.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\TempMenu.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Screens\inventoryScreen.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
