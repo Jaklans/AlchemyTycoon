@@ -1,5 +1,0 @@
-15
-Stranglevine Leaf
-35
-The leaves that grow on the outgrowths of the rare and exceedingly dangerous stranglevine plant, which can throttle a person from 20 feet.
-vineTex

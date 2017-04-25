@@ -36,27 +36,27 @@ namespace AlchemyTycoon
             playerName = "I am a feild and I have no purpous atm. Riperoni";
             gold = 500;
 
-           playerIngredients = new Inventory<GameItems.BaseIngredient>();
-           playerPotions = new Inventory<GameItems.BasePotion>();
-           playerKnownRecipies = new Inventory<GameItems.BasePotion>();
-           //
-           //playerIngredients.AddItem(Data.Instance.Ingrediants(1));
-           //playerIngredients.AddItem(Data.Instance.Ingrediants(2));
-           //playerIngredients.AddItem(Data.Instance.Ingrediants(3));
-           //playerIngredients.AddItem(Data.Instance.Ingrediants(4));
-           //playerIngredients.AddItem(Data.Instance.Ingrediants(5));
-           //
-           //playerPotions.AddItem(Data.Instance.Potions(1));
-           //playerPotions.AddItem(Data.Instance.Potions(2));
-           //playerPotions.AddItem(Data.Instance.Potions(3));
-           //playerPotions.AddItem(Data.Instance.Potions(4));
-           //playerPotions.AddItem(Data.Instance.Potions(5));
-           //
-           //playerKnownRecipies.AddItem(Data.Instance.Potions(1));
-           //playerKnownRecipies.AddItem(Data.Instance.Potions(2));
-           //playerKnownRecipies.AddItem(Data.Instance.Potions(3));
-           //playerKnownRecipies.AddItem(Data.Instance.Potions(4));
-           //playerKnownRecipies.AddItem(Data.Instance.Potions(5));
+            playerIngredients = new Inventory<GameItems.BaseIngredient>();
+            playerPotions = new Inventory<GameItems.BasePotion>();
+            playerKnownRecipies = new Inventory<GameItems.BasePotion>();
+           
+            playerIngredients.AddItem(Data.Instance.Ingrediants(1));
+            playerIngredients.AddItem(Data.Instance.Ingrediants(2));
+            playerIngredients.AddItem(Data.Instance.Ingrediants(3));
+            playerIngredients.AddItem(Data.Instance.Ingrediants(4));
+            playerIngredients.AddItem(Data.Instance.Ingrediants(5));
+           
+            playerPotions.AddItem(Data.Instance.Potions(1));
+            playerPotions.AddItem(Data.Instance.Potions(2));
+            playerPotions.AddItem(Data.Instance.Potions(3));
+            playerPotions.AddItem(Data.Instance.Potions(4));
+            playerPotions.AddItem(Data.Instance.Potions(5));
+           
+            playerKnownRecipies.AddItem(Data.Instance.Potions(1));
+            playerKnownRecipies.AddItem(Data.Instance.Potions(2));
+            playerKnownRecipies.AddItem(Data.Instance.Potions(3));
+            playerKnownRecipies.AddItem(Data.Instance.Potions(4));
+            playerKnownRecipies.AddItem(Data.Instance.Potions(5));
 
         }
     }

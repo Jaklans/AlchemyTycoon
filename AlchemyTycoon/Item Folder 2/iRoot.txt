@@ -1,5 +1,0 @@
-2
-Eldergnarl Root
-20
-The curled and twisted root of an ancient Eldergnarl Tree, found only on the warmest of mountain peaks.
-rootTex

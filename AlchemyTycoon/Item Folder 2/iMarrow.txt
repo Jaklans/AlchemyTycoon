@@ -1,5 +1,0 @@
-11
-Widow's Marrow
-20
-Marrow from the bones of a victim of the Widow's Plague, which causes foul growths to spout all over the body.
-marrowTex

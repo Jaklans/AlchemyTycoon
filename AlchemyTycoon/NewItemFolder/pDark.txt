@@ -1,0 +1,10 @@
+014
+The Dark Drink
+125
+3
+8
+9
+14
+The Dark Drink is something of misnomer. The name comes entirely from the physical appearance of the potion, rather than any effects it has. Despite this, it's quite popular with teenagers, fresh mercenaries, and others wishing to make themselves appear tough and seasoned.
+Contrary to its rather bleak-sounding name, the Dark Drink actually fills the subject with a supreme feeling of relaxation, confidence, and optimism. It's widely popular among those going on first dates, rookie politicians, and expectant parents.
+darkTex

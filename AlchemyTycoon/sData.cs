@@ -52,7 +52,7 @@ namespace AlchemyTycoon
             {
                 if (instance == null)
                 {
-                    instance = new Data("../../../../itemfolder");
+                    instance = new Data("../../../../itemfolder2");
                 }
                 return instance;
             }

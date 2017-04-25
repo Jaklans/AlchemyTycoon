@@ -1,5 +1,0 @@
-7
-Moose Antler
-10
-A hunk of the tough, bony fiber that makes up the antlers of a bull moose.
-antlerTex

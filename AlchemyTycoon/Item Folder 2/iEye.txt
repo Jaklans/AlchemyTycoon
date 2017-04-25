@@ -1,5 +1,0 @@
-9
-Toad's Eye
-5
-An eyeball from a toad. Witches say that the wartier the toad, the better the eye.
-eyeTex

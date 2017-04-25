@@ -1,5 +1,0 @@
-14
-Ground Bat
-25
-Bats, to the surprise of many, have a multitude of alchemical properties. As such, bats ground to a pulp have a bounty of uses in potion-making.
-batTex

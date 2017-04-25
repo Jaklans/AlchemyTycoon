@@ -1,0 +1,10 @@
+020
+Liquid Shame
+140
+1
+8
+9
+16
+While the great Frederyck van Volokrann created a wide array of useful and fascinating potions, Liquid Shame was not counted among them. It was supposed to entice a feeling of elation and joy, to help the depressed and deeply saddened. This, as it is now known, does not work.
+While some potions can induce specific feelings in a user, Liquid Shame instead simply amplifies whatever emotion the subject is currently feeling. Anger, happiness, fear, sadness, all are expanded and grown to previously-unseen degrees.
+shameTex

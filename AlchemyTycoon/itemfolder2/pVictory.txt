@@ -1,0 +1,10 @@
+011
+Waft of Victory
+160
+2
+5
+12
+15
+"Winner's Brew," as the potion was first called, began in military alchemy labs, where they hoped to devise a drink that would allow their generals and commanders to see the enemy's movements and plans hours or days before they happened. While this was an entirely unfeasible goal, the ensuing potion was still quite beneficial.
+At the first taste, the subject can suddenly see a few moments into the future, with the effects lasting the better part of a day. This is amazingly helpful, as one might imagine, and is much sought-after by assassins, gamblers, and high-risk couriers.
+victoryTex

@@ -66,7 +66,7 @@ namespace AlchemyTycoon
 
             // TODO: use this.Content to load your game content here
             gM.Load(Content, graphics);
-            Data.Instance.LoadContent(Content, "../../../../itemfolder/Textures");
+            Data.Instance.LoadContent(Content, "ItemTextures");
 
 
             ////TestEnvironment
