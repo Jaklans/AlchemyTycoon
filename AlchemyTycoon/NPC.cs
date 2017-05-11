@@ -15,6 +15,9 @@ namespace AlchemyTycoon
         Random rng = new Random();
         //Data dt = new Data("potions");
 
+        List<DrawableObject> npcList = new List<DrawableObject>();
+        DrawableObject currentNPC;
+
         //Set the list of potions the NPC Wants
         List<GameItems.BasePotion> shoppingCart = new List<GameItems.BasePotion>();
 
@@ -25,7 +28,7 @@ namespace AlchemyTycoon
 
         Rectangle newNPCPos;
         Rectangle npcPos;
-        public List<Texture2D> npcList = new List<Texture2D>();
+        public List<Texture2D> npcTextures = new List<Texture2D>();
 
         public void MakeList()
         {
@@ -87,21 +90,26 @@ namespace AlchemyTycoon
         {
             for (int i = 0; i < 10; i++)
             {
-                npcList.Add(content.Load<Texture2D>("npc_standin"));
+                npcTextures.Add(content.Load<Texture2D>("npc_standin"));
             }
             npcPos = new Rectangle(-200, 0, 200, 600);
-            newNPCPos = npcPos;
+            
+            for(int i = 0; i < 10; i++)
+            {
+                DrawableObject dO = new DrawableObject(npcTextures[i], npcPos);
+                npcList.Add(dO);
+            }
         }
-
-        public bool finished = false;
-        Texture2D currentNPC;
+        
         public void Draw(SpriteBatch spriteBatch)
         {
             for (int i = 0; i < 10; i++)
             {
-                spriteBatch.Draw(npcList[i], newNPCPos, Color.White);
+                npcList[i].Draw(spriteBatch);
             }
         }
+
+        public bool finished = false;
         public void Update()
         {
 
@@ -109,6 +117,8 @@ namespace AlchemyTycoon
             bool interacting = false;
             bool moving = true;
             bool leaving = false;
+
+            currentNPC = npcList[count];
 
             //move NPC to center
             while (moving == true) { npcPos.X += 5; }
@@ -135,7 +145,7 @@ namespace AlchemyTycoon
 
             else if (newNPCPos.X == screenWidth && currentNPC != npcList[9])
             {
-                newNPCPos = npcPos;
+                count++;
             }
         }
 

@@ -17,10 +17,6 @@ namespace AlchemyTycoon.GameStates
         Texture2D bgScreen;
         Rectangle screenPos;
 
-        //NPC
-        private Texture2D npcTexture;
-        private Rectangle npcPos;
-
         //Buttons
         Button stockButton;
 
@@ -51,12 +47,7 @@ namespace AlchemyTycoon.GameStates
             bgScreen = content.Load<Texture2D>("Screens/daytimeScreen");
             screenPos = new Rectangle(0, 0, screenWidth, screenHeight);
 
-            //Load in the NPC
-            npcTexture = content.Load<Texture2D>("npc_standin");
-
             npc.LoadContent(content, graphics);
-
-            dO = new DrawableObject(npcTexture, npcPos);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -64,18 +55,15 @@ namespace AlchemyTycoon.GameStates
             spriteBatch.Draw(bgScreen, screenPos, Color.White);
             dO.Draw(spriteBatch);
             spriteBatch.DrawString(spriteFont, "Gold: " + PlayerData.Instance.gold.ToString(), textPos, Color.White);
-            npcPos = new Rectangle(-200, 0, 200, 600);
-            for (int i = 0; i < 10; i++)
-            {
-                npc.Draw(spriteBatch);
-            }  
+
+            //draw NPCs
+            npc.Draw(spriteBatch);
         }
 
-        public bool finished;
+        //NPCs enter and exit the shop
         public void Update()
         {
-            npc.Update();   
-                
+            npc.Update();                            
         }
     }
 }
