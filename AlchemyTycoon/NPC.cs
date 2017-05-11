@@ -96,7 +96,7 @@ namespace AlchemyTycoon
             
             for(int i = 0; i < 10; i++)
             {
-                DrawableObject dO = new DrawableObject(npcTextures[i], npcPos);
+                DrawableObject dO = new DrawableObject(npcTextures[i], newNPCPos);
                 npcList.Add(dO);
             }
         }
@@ -121,8 +121,8 @@ namespace AlchemyTycoon
             currentNPC = npcList[count];
 
             //move NPC to center
-            while (moving == true) { npcPos.X += 5; }
-            if (npcPos.X == screenWidth / 2 - 100) { moving = false; }
+            while (moving == true) { newNPCPos.X += 5; }
+            if (currentNPC.Position.X == screenWidth / 2 - 100) { moving = false; }
 
             //start interaction
             while (moving == false) { interacting = true; }
@@ -132,8 +132,8 @@ namespace AlchemyTycoon
 
             //NPC leaves shop
             if (moving == false && interacting == false) { leaving = true; }
-            while (leaving == true) { npcPos.X += 5; }
-            if (npcPos.X == screenWidth)
+            while (leaving == true) { newNPCPos.X += 5; }
+            if (currentNPC.Position.X == screenWidth)
             {
                 leaving = false;
             }

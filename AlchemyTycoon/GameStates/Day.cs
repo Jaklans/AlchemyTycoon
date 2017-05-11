@@ -34,7 +34,6 @@ namespace AlchemyTycoon.GameStates
         int screenHeight = 800;
 
         NPC npc = new NPC();
-        DrawableObject dO;
 
         //LoadContent method
         public void LoadContent(ContentManager content, GraphicsDevice graphics)
@@ -53,7 +52,6 @@ namespace AlchemyTycoon.GameStates
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(bgScreen, screenPos, Color.White);
-            dO.Draw(spriteBatch);
             spriteBatch.DrawString(spriteFont, "Gold: " + PlayerData.Instance.gold.ToString(), textPos, Color.White);
 
             //draw NPCs

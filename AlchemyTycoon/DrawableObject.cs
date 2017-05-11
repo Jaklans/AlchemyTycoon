@@ -27,6 +27,9 @@ namespace AlchemyTycoon
             this.position = position;
         }
 
+        //properties
+        public Rectangle Position { get; }
+
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             if (true)
