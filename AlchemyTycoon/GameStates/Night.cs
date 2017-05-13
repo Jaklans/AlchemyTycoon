@@ -259,6 +259,7 @@ namespace AlchemyTycoon
 
             //Text Font
             text = content.Load<SpriteFont>("Tahoma_40");
+            text = content.Load<SpriteFont>("font");
         }
 
         public void Update(MouseState mouse)
@@ -316,7 +317,7 @@ namespace AlchemyTycoon
                         }
                     }
 
-                    if (makeButton.Clicked && craftingOutput.inventoryData.Count != 0)
+                    if (makeButton.Clicked && craftingTable.inventoryData.Count != 0)
                     {
                         GameItems.BasePotion temp = craftingTable.MakePotion();
                         if (temp != null)
@@ -353,14 +354,12 @@ namespace AlchemyTycoon
                     GameItems.BasePotion tempPotion = PlayerData.Instance.playerPotions.Update(mouse);
 
                     //Logic to determine which gameItem should be displayed, potion or ingredient
-                    if (tempIngredient != displayIngredient)
+                    if (tempIngredient != null)
                     {
-                        displayIngredient = tempIngredient;
                         displayingItem = tempIngredient;
                     }
-                    else if (tempPotion != displayPotion)
+                    else if (tempPotion != null)
                     {
-                        displayPotion = tempPotion;
                         displayingItem = tempPotion;
                     }
 
@@ -434,10 +433,10 @@ namespace AlchemyTycoon
 
                 //Kit Screen
                 case nightState.Kit:
-                    PlayerData.Instance.playerIngredients.Draw(spriteBatch, new Vector2(325, 170), 5, 7);
-                    PlayerData.Instance.playerPotions.Draw(spriteBatch, new Vector2(325, 705), 5, 3);
+                    PlayerData.Instance.playerIngredients.Draw(spriteBatch, new Vector2(325, 170), 7, 7);
+                    PlayerData.Instance.playerPotions.Draw(spriteBatch, new Vector2(325, 705), 7, 3);
                     craftingTable.Draw(spriteBatch, new Vector2(1160, 375), 2, 2);
-                    craftingOutput.Draw(spriteBatch, new Vector2(1155, 700), 1, 1);
+                    craftingOutput.Draw(spriteBatch, new Vector2(1200, 775), 1, 1);
                     break;
 
                 //Inventory Screen
@@ -449,6 +448,11 @@ namespace AlchemyTycoon
                     if (temp != null)
                     { 
                         temp.Draw(new Vector2(400, 0), spriteBatch);
+                    }
+
+                    if(displayingItem != null)
+                    {
+                        displayingItem.DrawInfo(spriteBatch, new Rectangle(1015, 100, 500, 650), text);
                     }
 
                     break;

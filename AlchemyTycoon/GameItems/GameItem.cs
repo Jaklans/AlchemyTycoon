@@ -72,17 +72,18 @@ namespace AlchemyTycoon.GameItems
             //Name
             spriteBatch.DrawString(font, name, new Vector2(
                 infoBox.X,
-                (float)(infoBox.Y + texture.Height + .2 * infoBox.Height)),
-                Color.White);
+                (float)(infoBox.Y + texture.Height + .1 * infoBox.Height)),
+                Color.Black);
             //FlavorText
             this.CustomDrawString(spriteBatch, font, flavorText, new Vector2(
                 infoBox.X,
-                (float)(infoBox.Y + texture.Height + .4 * infoBox.Height)));
+                (float)(infoBox.Y + texture.Height + .2 * infoBox.Height)),
+                500);
             //Value
             spriteBatch.DrawString(font, value.ToString(), new Vector2(
                 infoBox.X,
                 (float)(infoBox.Y + texture.Height + .9 * infoBox.Height)),
-                Color.White);
+                Color.Black);
         }
 
         //Compairer (for sorting)
@@ -98,22 +99,45 @@ namespace AlchemyTycoon.GameItems
             }
         }
 
-        public void CustomDrawString(SpriteBatch spriteBatch, SpriteFont font, string text, Vector2 fontPosition)
+        public void CustomDrawString(SpriteBatch spriteBatch, SpriteFont font, string text, Vector2 fontPosition, int maxLineWidth)
         {
-            string temp = text;
-            List<string> lines = new List<string>();
-            while(temp.Length > 40)
+            string[] words = text.Split(' ');
+            StringBuilder sb = new StringBuilder();
+            float lineWidth = 0f;
+            float spaceWidth = font.MeasureString(" ").X;
+
+            foreach (string word in words)
             {
-//This might not work, cant test now
-                lines.Add(temp.Remove(39, temp.Count() - 40));
-                temp.Remove(0, 40);
+                Vector2 size = font.MeasureString(word);
+
+                if (lineWidth + size.X < maxLineWidth)
+                {
+                    sb.Append(word + " ");
+                    lineWidth += size.X + spaceWidth;
+                }
+                else
+                {
+                    sb.Append("\n" + word + " ");
+                    lineWidth = size.X + spaceWidth;
+                }
             }
 
-            foreach (string s in lines)
-            {
-                Vector2 fontOrigin = font.MeasureString(s) / 2;
-                spriteBatch.DrawString(font, s, fontPosition, Color.White, 0, fontOrigin, 1f, SpriteEffects.None, .5f);
-            }
-        }
+            spriteBatch.DrawString(font, sb.ToString(),fontPosition, Color.Black);
+            
+
+        //spriteBatch.DrawString()
+
+        //string temp = text;
+        //List<string> lines = new List<string>();
+        //while(temp.Length > 40)
+        //{
+        //}
+        //
+        //foreach (string s in lines)
+        //{
+        //    Vector2 fontOrigin = font.MeasureString(s) / 2;
+        //    spriteBatch.DrawString(font, s, fontPosition, Color.White, 0, fontOrigin, 1f, SpriteEffects.None, .5f);
+        //}
+    }
     }
 }

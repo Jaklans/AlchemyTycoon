@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 //Written by John Shull
@@ -25,12 +26,18 @@ namespace AlchemyTycoon.GameItems
         }
 
         //Constructor
-        public BasePotion(int hashValue, string name, int value, int[] potionHashValue, string flavorText, string effect,  string textureName) 
+        public BasePotion(int hashValue, string name, int value, int[] potionHashValue, string flavorText, string effect, string textureName)
             : base(hashValue, name, value, flavorText, textureName)
         {
             this.effect = effect;
             this.potionHashValue = potionHashValue;
         }
-        
+
+
+        public override void DrawInfo(SpriteBatch spriteBatch, Rectangle infoBox, SpriteFont font)   
+        {
+            base.DrawInfo(spriteBatch, infoBox, font);
+
+        }
     }
 }
