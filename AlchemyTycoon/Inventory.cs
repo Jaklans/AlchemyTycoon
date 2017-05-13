@@ -15,7 +15,7 @@ namespace AlchemyTycoon
     {
             //Feilds
         private List<T> data;
-        private int selectedItemIndex;
+        public int selectedItemIndex;
 
         private int xDepth;
         private int yDepth;
@@ -215,7 +215,7 @@ namespace AlchemyTycoon
                 {
                     for (int j = 0; j < xDepth; j++)
                     {
-                        if (index < data.Count)
+                        if (index < data.Count && data[index] != null)
                         {
                             if (index != selectedItemIndex)
                             {
