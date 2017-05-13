@@ -13,6 +13,8 @@ namespace AlchemyTycoon.GameStates
 {
     class Day
     {
+        public bool finished;
+
         //Background image
         Texture2D bgScreen;
         Rectangle screenPos;
@@ -29,11 +31,20 @@ namespace AlchemyTycoon.GameStates
         SpriteFont spriteFont;
         Vector2 textPos;
 
-        //Set the initial game screen size
-        int screenWidth = 1280;
-        int screenHeight = 800;
+        //NPC
+        List<NPC> npcList = new List<NPC>();
 
-        NPC npc = new NPC();
+        public Day()
+        {
+            for(int i = 0; i < 10; i++)
+            {
+                npcList.Add(new NPC());
+            }
+        }
+
+        //Set the initial game screen size
+        int screenWidth = 1920;
+        int screenHeight = 1080;
 
         //LoadContent method
         public void LoadContent(ContentManager content, GraphicsDevice graphics)
@@ -46,7 +57,10 @@ namespace AlchemyTycoon.GameStates
             bgScreen = content.Load<Texture2D>("Screens/daytimeScreen");
             screenPos = new Rectangle(0, 0, screenWidth, screenHeight);
 
-            npc.LoadContent(content, graphics);
+            foreach(NPC i in npcList)
+            {
+                i.LoadContent(content);
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -54,14 +68,21 @@ namespace AlchemyTycoon.GameStates
             spriteBatch.Draw(bgScreen, screenPos, Color.White);
             spriteBatch.DrawString(spriteFont, "Gold: " + PlayerData.Instance.gold.ToString(), textPos, Color.White);
 
-            //draw NPCs
-            npc.Draw(spriteBatch);
+            foreach(NPC i in npcList)
+            {
+                i.Draw(spriteBatch);
+            }
         }
 
         //NPCs enter and exit the shop
         public void Update()
         {
-            npc.Update();                            
+            npcList[0].Move();
+            for(int i = 1; i < 10; i++)
+            {
+                if (npcList[i - 1].NpcPos.X >= screenWidth) { npcList[i].Move(); }
+                Console.WriteLine(npcList[i].NpcPos.X);
+            }
         }
     }
 }

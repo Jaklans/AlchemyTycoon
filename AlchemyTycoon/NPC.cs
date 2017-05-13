@@ -15,20 +15,21 @@ namespace AlchemyTycoon
         Random rng = new Random();
         //Data dt = new Data("potions");
 
-        List<DrawableObject> npcList = new List<DrawableObject>();
-        DrawableObject currentNPC;
-
         //Set the list of potions the NPC Wants
         List<GameItems.BasePotion> shoppingCart = new List<GameItems.BasePotion>();
 
         //Inventory<GameItems.BasePotion> invent = new Inventory<GameItems.BasePotion>();
-        int screenWidth = 1280;
-        int screenHeight = 800;
-        int count = 0;
+        int screenWidth = 1920;
 
-        Rectangle newNPCPos;
+        Texture2D npcTexture;
         Rectangle npcPos;
-        public List<Texture2D> npcTextures = new List<Texture2D>();
+
+        public NPC()
+        {
+
+        }
+
+        public Rectangle NpcPos { get { return npcPos; } }
 
         public void MakeList()
         {
@@ -86,67 +87,33 @@ namespace AlchemyTycoon
             //leaves if looked through all inventories and finds nothing
         }
 
-        public void LoadContent(ContentManager content, GraphicsDevice graphics)
+        public void LoadContent(ContentManager content)
         {
-            for (int i = 0; i < 10; i++)
-            {
-                npcTextures.Add(content.Load<Texture2D>("npc_standin"));
-            }
-            npcPos = new Rectangle(-200, 0, 200, 600);
-            
-            for(int i = 0; i < 10; i++)
-            {
-                DrawableObject dO = new DrawableObject(npcTextures[i], newNPCPos);
-                npcList.Add(dO);
-            }
+            npcTexture = content.Load<Texture2D>("npc_standin");
+            npcPos = new Rectangle(-500, 0, 500, 1000);
         }
-        
+
         public void Draw(SpriteBatch spriteBatch)
         {
-            for (int i = 0; i < 10; i++)
-            {
-                npcList[i].Draw(spriteBatch);
-            }
+            spriteBatch.Draw(npcTexture, npcPos, Color.White);
         }
 
-        public bool finished = false;
-        public void Update()
+        public void Move()
         {
-
-            //fields
-            bool interacting = false;
             bool moving = true;
-            bool leaving = false;
 
-            currentNPC = npcList[count];
+            if(moving == true) { npcPos.X += 5; }
+            if(npcPos.X == screenWidth/2 - 250) { moving = false; }
 
-            //move NPC to center
-            while (moving == true) { newNPCPos.X += 5; }
-            if (currentNPC.Position.X == screenWidth / 2 - 100) { moving = false; }
-
-            //start interaction
-            while (moving == false) { interacting = true; }
-
-            this.MakeList();
-            this.BuyPotion();
-
-            //NPC leaves shop
-            if (moving == false && interacting == false) { leaving = true; }
-            while (leaving == true) { newNPCPos.X += 5; }
-            if (currentNPC.Position.X == screenWidth)
+            if(moving == false)
             {
-                leaving = false;
+                this.MakeList();
+                this.BuyPotion();
             }
 
-            if(newNPCPos.X == screenWidth && currentNPC == npcList[9])
-            {
-                finished = true;
-            }
+            npcPos.X += 5;
 
-            else if (newNPCPos.X == screenWidth && currentNPC != npcList[9])
-            {
-                count++;
-            }
+            if(npcPos.X == screenWidth) { return; }
         }
 
     }
