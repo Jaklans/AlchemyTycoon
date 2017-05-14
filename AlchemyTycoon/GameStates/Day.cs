@@ -66,7 +66,7 @@ namespace AlchemyTycoon.GameStates
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(bgScreen, screenPos, Color.White);
-            spriteBatch.DrawString(spriteFont, "Gold: " + PlayerData.Instance.gold.ToString(), textPos, Color.White);
+            spriteBatch.DrawString(spriteFont, "Gold: " + PlayerData.Instance.gold.ToString(), textPos, Color.Black);
 
             foreach(NPC i in npcList)
             {
