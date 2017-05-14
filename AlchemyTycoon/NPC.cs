@@ -22,11 +22,17 @@ namespace AlchemyTycoon
         int screenWidth = 1920;
 
         Texture2D npcTexture;
+        Texture2D npcSatisfied;
+        Texture2D npcDisSatisfied;
         Rectangle npcPos;
 
-        public NPC()
-        {
+        int satisfaction;
 
+        int npcNumber;
+
+        public NPC(int npcNumber)
+        {
+            this.npcNumber = npcNumber;
         }
 
         public Rectangle NpcPos { get { return npcPos; } }
@@ -42,7 +48,7 @@ namespace AlchemyTycoon
             }
         }
 
-        public void BuyPotion()
+        public bool BuyPotion()
         {
             bool done = false;
             //look though if you have that potion inNPC wishlist
@@ -64,48 +70,73 @@ namespace AlchemyTycoon
                         //the higher the price chance lowers
                         //the cheaper the price the higher the chance
                         //calculation (BaseChance)50 + (100*((Recommened Price - Player Price)/Recommened Price))
-                        int chanceTime = baseChance + (100 * ((recommendedPrice - playerPrice) / recommendedPrice));
+                        int chanceTime = baseChance + (100 * ((playerPrice - playerPrice) / recommendedPrice));
 
                         //if RNG(0, 101) Less than Chance Npc will buy.
                         if (rng.Next(0, 101) >= chanceTime)
                         {
                             //if lower remove from inventory
-                            PlayerData.Instance.playerPotions.RemoveItem(item.HashValue);
+                            PlayerData.Instance.playerPotions.RemoveItem(item);
                             //and increase gold by player price
                             //needs to access player's gold and increase
                             PlayerData.Instance.gold += playerPrice;
 
                             //if npc buys a potion escape loop, Each npc will only buy 1 potion
                             done = true;
-                            return;
+                            return true;
                         }
                         //if buying attemp fails (Price too high) continue loooking though list
                     }
-                }   
-                
+                }
+                return false;
             }
             //leaves if looked through all inventories and finds nothing
         }
 
         public void LoadContent(ContentManager content)
         {
-            npcTexture = content.Load<Texture2D>("npc_standin");
-            npcPos = new Rectangle(-500, 0, 500, 1000);
+            if(npcNumber == 1)
+            {
+                npcTexture = content.Load<Texture2D>("npc1");
+                npcSatisfied = content.Load<Texture2D>("npc1_satisfied");
+                npcDisSatisfied = content.Load<Texture2D>("npc1_disappointed");
+            }
+            else
+            {
+                npcTexture = content.Load<Texture2D>("npc2");
+                npcSatisfied = content.Load<Texture2D>("npc2_satisfied");
+                npcDisSatisfied = content.Load<Texture2D>("npc2_disappointed");
+            }
+            
+            npcPos = new Rectangle(-1000, 0, npcTexture.Width, npcTexture.Height);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(npcTexture, npcPos, Color.White);
+            if(satisfaction == -1)
+            {
+                spriteBatch.Draw(npcDisSatisfied, npcPos, Color.White);
+            }
+            if(satisfaction == 1)
+            {
+                spriteBatch.Draw(npcSatisfied, npcPos, Color.White);
+            }
+            else
+            {
+                spriteBatch.Draw(npcTexture, npcPos, Color.White);
+            }
+
         }
 
-        public void Move()
+        bool moving = true;
+
+        public bool Move()
         {
-            bool moving = true;
+            
+            if(npcPos.X >= screenWidth) { return true; }
 
             if(moving == true) { npcPos.X += 5; }
-            if(npcPos.X == screenWidth/2 - 250) { moving = false; }
-
-            if(moving == false)
+            if(npcPos.X == screenWidth/2 - 255)
             {
                 this.MakeList();
                 this.BuyPotion();
@@ -113,7 +144,7 @@ namespace AlchemyTycoon
 
             npcPos.X += 5;
 
-            if(npcPos.X == screenWidth) { return; }
+            return false;
         }
 
     }

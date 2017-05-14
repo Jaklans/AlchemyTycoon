@@ -15,19 +15,17 @@ namespace AlchemyTycoon.GameStates
     {
         public bool finished;
 
+        Random rng;
+
         //Background image
         Texture2D bgScreen;
         Rectangle screenPos;
 
+        Texture2D infoBox;
+
         //Buttons
-        Button stockButton;
 
         //Text
-        Text gold;
-        Text time;
-        Text stock;
-        Text dialouge;
-        Text npcInfo;
         SpriteFont spriteFont;
         Vector2 textPos;
 
@@ -36,9 +34,21 @@ namespace AlchemyTycoon.GameStates
 
         public Day()
         {
+            rng = new Random();
+
             for(int i = 0; i < 10; i++)
             {
-                npcList.Add(new NPC());
+                npcList.Add(new NPC(rng.Next(0, 2)));
+            }
+        }
+
+        public void Reset()
+        {
+            npcList = new List<NPC>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                npcList.Add(new NPC(rng.Next(0, 50)));
             }
         }
 
@@ -57,21 +67,28 @@ namespace AlchemyTycoon.GameStates
             bgScreen = content.Load<Texture2D>("Screens/daytimeScreen");
             screenPos = new Rectangle(0, 0, screenWidth, screenHeight);
 
+            infoBox = content.Load<Texture2D>("Screens/daytimeInfoBox");
+
             foreach(NPC i in npcList)
             {
                 i.LoadContent(content);
             }
         }
-
+        //praise mys
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(bgScreen, screenPos, Color.White);
-            spriteBatch.DrawString(spriteFont, "Gold: " + PlayerData.Instance.gold.ToString(), textPos, Color.Black);
-
+            
             foreach(NPC i in npcList)
             {
                 i.Draw(spriteBatch);
             }
+            
+            spriteBatch.Draw(infoBox, new Rectangle(0, 675, 1920, 800), Color.White);
+
+            spriteBatch.DrawString(spriteFont, "Gold: " + PlayerData.Instance.gold.ToString(), textPos, Color.Black);
+
+            PlayerData.Instance.playerPotions.Draw(spriteBatch, new Vector2(500, 800), 7, 3);
         }
 
         //NPCs enter and exit the shop
@@ -80,8 +97,13 @@ namespace AlchemyTycoon.GameStates
             npcList[0].Move();
             for(int i = 1; i < 10; i++)
             {
-                if (npcList[i - 1].NpcPos.X >= screenWidth) { npcList[i].Move(); }
-                Console.WriteLine(npcList[i].NpcPos.X);
+                if (npcList[i - 1].NpcPos.X >= screenWidth)
+                {
+                    if (npcList[i].Move() && i == 9)
+                    {
+                        finished = true;
+                    }
+                }
             }
         }
     }

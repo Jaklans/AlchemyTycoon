@@ -98,14 +98,31 @@ namespace AlchemyTycoon
             itemStore = new Inventory<GameItems.BaseIngredient>();
             recipeStore = new Inventory<GameItems.BasePotion>();
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 14; i++)
             {
                 itemStore.AddItem(Data.Instance.RandomIngredient);
             }
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 7; i++)
             {
                 recipeStore.AddItem(Data.Instance.RandomPotion);
             }
+        }
+
+        public void Clear()
+        {
+            itemStore = new Inventory<GameItems.BaseIngredient>();
+            recipeStore = new Inventory<GameItems.BasePotion>();
+
+            for (int i = 0; i < 14; i++)
+            {
+                itemStore.AddItem(Data.Instance.RandomIngredient);
+            }
+            for (int i = 0; i < 7; i++)
+            {
+                recipeStore.AddItem(Data.Instance.RandomPotion);
+            }
+
+            done = false;
         }
 
         public void LoadContent(ContentManager content)

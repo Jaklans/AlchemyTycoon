@@ -50,59 +50,9 @@ namespace AlchemyTycoon
 
         public void Load(ContentManager Content, GraphicsDeviceManager graphics)
         {
-
             menu.LoadContent(Content, graphics);
             night.LoadContent(Content);
             day.LoadContent(Content, graphics.GraphicsDevice);
-
-            //TestEnvironment
-            //testData.LoadContent(Content, "../../../../itemfolder/Textures");
-            /*testInventory.AddItem(testData.Ingrediants(005));
-            testInventory.AddItem(testData.Ingrediants(001));
-            testInventory.AddItem(testData.Ingrediants(002));
-            testInventory.AddItem(testData.Ingrediants(003));
-            testInventory.AddItem(testData.Ingrediants(004));
-
-            testInventory2.AddItem(testData.Ingrediants(003));
-            testInventory2.AddItem(testData.Ingrediants(001));
-            testInventory2.AddItem(testData.Ingrediants(004));
-            testInventory2.AddItem(testData.Ingrediants(003));
-            testInventory2.AddItem(testData.Ingrediants(004));
-
-            testInventory3.AddItem(testData.Ingrediants(003));
-            testInventory3.AddItem(testData.Ingrediants(001));
-            testInventory3.AddItem(testData.Ingrediants(004));
-            testInventory3.AddItem(testData.Ingrediants(003));
-            testInventory3.AddItem(testData.Ingrediants(004));*/
-
-            //testIngredients.AddItem(testData.Ingrediants(005));
-            //testIngredients.AddItem(testData.Ingrediants(001));
-            //testIngredients.AddItem(testData.Ingrediants(002));
-            //testIngredients.AddItem(testData.Ingrediants(003));
-            //testIngredients.AddItem(Data.Instance.Ingrediants(004));
-            //
-            //makePotion = new Button(Content.Load<Texture2D>("potionButton"), graphics.GraphicsDevice);
-            //makePotion.setPos(new Vector2(400, 550));
-            //
-            //demoButton = new Button(Content.Load<Texture2D>("demoButton"), graphics.GraphicsDevice);
-            //demoButton.setPos(new Vector2(1100, 50));
-            //
-            //textFont = Content.Load<SpriteFont>("Tahoma_40");
-            //
-            //ingInv = new Text("This is your ingredient inventory. \nClick on things to add them to the input inventory.", textFont, Color.AntiqueWhite);
-            //ingInv.setPos(new Vector2(5, 5));
-            //
-            //inpInv = new Text("This is the input inventory. \nAdd everything but the green blob, \nthen press 'make potion' to make a potion.", textFont, Color.AntiqueWhite);
-            //inpInv.setPos(new Vector2(5, 420));
-            //
-            //outInv = new Text("This is the output inventory, where potions will appear when made.", textFont, Color.AntiqueWhite);
-            //outInv.setPos(new Vector2(480, 480));
-            //
-            //potInv = new Text("This is the potion inventory, where potions will be stored.", textFont, Color.AntiqueWhite);
-            //potInv.setPos(new Vector2(480, 5));
-            //
-            //potInv = new Text("This button goes to where the the night class runs. All is very WIP, but basic navigation is covered.", textFont, Color.AntiqueWhite);
-            //potInv.setPos(new Vector2(500, 5));
         }
 
         public void Update(GameTime gameTime, GraphicsDeviceManager graphics, int screenWidth, int screenHeight)
@@ -113,7 +63,7 @@ namespace AlchemyTycoon
             {
                 case PlayingEnum.Day:
                     day.Update();
-                    //if (day.finished) { current = PlayingEnum.Night; }
+                    if (day.finished) { current = PlayingEnum.Night; night.Clear(); }
                     break;
                 case PlayingEnum.Night:
                     night.Update(ms);
