@@ -351,7 +351,12 @@ namespace AlchemyTycoon
                         PlayerData.Instance.playerPotions.selectedItemIndex = -1;
                     }
 
-                    if (storeButton.Clicked) { state = nightState.IngrediantShop; }
+                    if (storeButton.Clicked)
+                    {
+                        state = nightState.IngrediantShop;
+                        PlayerData.Instance.playerIngredients.selectedItemIndex = -1;
+                        PlayerData.Instance.playerPotions.selectedItemIndex = -1;
+                    }
 
                     //Inventories
                     GameItems.BaseIngredient tempIngredient = PlayerData.Instance.playerIngredients.Update(mouse);
