@@ -1,5 +1,0 @@
-1
-Cod's Tongue
-5
-A useful bit of the fish's body, the Tongue of Cod can be used for all manners of potions invovled in healing, restoration, and the like.
-codTex

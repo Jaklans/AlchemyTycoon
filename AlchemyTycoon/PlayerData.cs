@@ -33,7 +33,7 @@ namespace AlchemyTycoon
         //Constructor - Requires a name
         public PlayerData()
         {
-            playerName = "I am a feild and I have no purpous atm. Riperoni";
+            playerName = "I am a feild and I have no purpous. Riperoni";
             gold = 500;
 
             playerIngredients = new Inventory<GameItems.BaseIngredient>();

@@ -125,11 +125,11 @@ namespace AlchemyTycoon
                 AddPotions(targetFolderName);
                 AddIngredients(targetFolderName);
 
-                foreach(GameItems.BasePotion p in potions.Values)
+                foreach (GameItems.BasePotion p in potions.Values)
                 {
                     potionHashValues.Add(new potionHashValue(p.PotionHashValue), p.HashValue);
                 }
-                
+
                 // TO DO: Implement Recipies (Medium Priority)
 
             }
@@ -221,9 +221,9 @@ namespace AlchemyTycoon
         // Adds potions strings to be used
         private void ReadPotions()
         {
-            foreach(string file in allFiles)
+            foreach (string file in allFiles)
             {
-                if(file[0] == 'p')
+                if (file[0] == 'p')
                 {
                     potionFiles.Add(file);
                 }
@@ -233,9 +233,9 @@ namespace AlchemyTycoon
         // Adds ingredients strings to then be pulled 
         private void ReadIngredients()
         {
-            foreach(string file in allFiles)
+            foreach (string file in allFiles)
             {
-                if(file[0] == 'i')
+                if (file[0] == 'i')
                 {
                     ingredientFiles.Add(file);
                 }
@@ -311,80 +311,4 @@ namespace AlchemyTycoon
             }
         }
     }
-
-    // JOHN'S OLD CODE
-
-    /*Stream inStream = new FileStream(targetFileName, FileMode.Open);
-                StreamReader reader = new StreamReader(inStream);*/
-
-    //-------------Data Reading--------------
-
-    //(Input files should match up to this spec)
-
-    // (1) Data about how many of each item exists is recorded
-
-    // (i) Potion Count
-    // int potionCount = int.Parse(reader.ReadLine());
-
-    // (ii) Ingrediant Count
-    // int ingrediantCount = int.Parse(reader.ReadLine());
-
-    // (iii) Recipie Count
-    // int recipieCount = int.Parse(reader.ReadLine());
-
-    // (2) Create objects baised on recorded counts
-
-    // (i) Potion Data
-    /*for (int i = 0; i < potionCount; i++)
-    {
-        GameItems.BasePotion potion =
-            new GameItems.BasePotion
-                (
-                    // (a) Hash Value
-                    int.Parse(reader.ReadLine()),
-                    // (b) Name
-                    reader.ReadLine(),
-                    // (c) Value
-                    int.Parse(reader.ReadLine()),
-                    // (d, e, f, g) Portion Hash Value
-                    // Comprised of the hash values 
-                    // of the potions ingrediants
-                    new int[4]
-                    {
-                                int.Parse(reader.ReadLine()),
-                                int.Parse(reader.ReadLine()),
-                                int.Parse(reader.ReadLine()),
-                                int.Parse(reader.ReadLine()),
-                    },
-                    // (h) Flavor Text
-                    reader.ReadLine(),
-                    // (i) String of Effect Description
-                    reader.ReadLine(),
-                    // (j) Name of Texture File
-                    reader.ReadLine()
-                );
-        potions.Add(potion.HashValue, potion);
-    }*/
-
-    // (ii) Ingrediant Data
-    /*for (int i = 0; i < ingrediantCount; i++)
-    {
-        ingrediants.Add
-        (
-            i,
-            new GameItems.BaseIngredient
-                (
-                    // (a) Hash Value
-                    int.Parse(reader.ReadLine()),
-                    // (b) Name
-                    int.Parse(reader.ReadLine()),
-                    // (c) Value
-                    int.Parse(reader.ReadLine()),
-                    // (d) Flavor Text
-                    int.Parse(reader.ReadLine()),
-                    // (e) Name of Texture File
-                    int.Parse(reader.ReadLine())
-                )
-        );
-    }*/
 }
