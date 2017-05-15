@@ -216,8 +216,8 @@ namespace AlchemyTycoon
                 content.Load<Texture2D>("Screens/recipeShop"),
                 new Rectangle(280, 140, 1300, 800));
             recipePurchace = new newButton(
-                content.Load<Texture2D>("Buttons/shop"),
-                content.Load<Texture2D>("Buttons/shopHL"),
+                content.Load<Texture2D>("Buttons/purchase"),
+                content.Load<Texture2D>("Buttons/purchaseHL"),
                 new Vector2(1400, 740));
 
             drawlables.Add(
@@ -453,6 +453,16 @@ namespace AlchemyTycoon
                     if(selectedRecipies != null)
                     {
                         displayingItem = selectedRecipies;
+                    }
+
+                    if(displayingItem != null && recipePurchace.Clicked && PlayerData.Instance.gold > 3 * displayingItem.Value)
+                    {
+                        PlayerData.Instance.playerKnownRecipies.AddItem((GameItems.BasePotion)displayingItem);
+
+                        PlayerData.Instance.gold -= displayingItem.Value * 3;
+
+                        displayingItem = null;
+                        recipeStore.selectedItemIndex = -1;
                     }
 
                     break;
