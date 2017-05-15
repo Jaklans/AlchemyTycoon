@@ -35,6 +35,19 @@ namespace AlchemyTycoon
             this.npcNumber = npcNumber;
         }
 
+        public void Reset()
+        {
+            npcPos.X = -1000;
+            satisfaction = 0;
+
+            shoppingCart = new List<GameItems.BasePotion>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                shoppingCart.Add(Data.Instance.RandomPotion);
+            }
+        }
+
         public Rectangle NpcPos { get { return npcPos; } }
 
         public void MakeList()
@@ -88,9 +101,10 @@ namespace AlchemyTycoon
                         //if buying attemp fails (Price too high) continue loooking though list
                     }
                 }
-                return false;
+
             }
-            //leaves if looked through all inventories and finds nothing
+            //leaves if looked through all inventories and finds nothing                
+            return false;
         }
 
         public void LoadContent(ContentManager content)
@@ -117,7 +131,7 @@ namespace AlchemyTycoon
             {
                 spriteBatch.Draw(npcDisSatisfied, npcPos, Color.White);
             }
-            if(satisfaction == 1)
+            else if(satisfaction == 1)
             {
                 spriteBatch.Draw(npcSatisfied, npcPos, Color.White);
             }
@@ -139,7 +153,15 @@ namespace AlchemyTycoon
             if(npcPos.X == screenWidth/2 - 255)
             {
                 this.MakeList();
-                this.BuyPotion();
+                if (this.BuyPotion())
+                {
+                    satisfaction = 1;
+                }
+                else
+                {
+                    satisfaction = -1;
+                }
+                
             }
 
             npcPos.X += 5;

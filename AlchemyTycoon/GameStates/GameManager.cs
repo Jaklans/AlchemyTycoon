@@ -67,7 +67,7 @@ namespace AlchemyTycoon
                     break;
                 case PlayingEnum.Night:
                     night.Update(ms);
-                    if (night.done) { current = PlayingEnum.Day; }
+                    if (night.done) { current = PlayingEnum.Day; day.Reset(); }
                     break;
                 case PlayingEnum.MainMenu:
                     menu.Update(gameTime);

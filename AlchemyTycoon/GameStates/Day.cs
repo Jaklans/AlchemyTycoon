@@ -44,12 +44,12 @@ namespace AlchemyTycoon.GameStates
 
         public void Reset()
         {
-            npcList = new List<NPC>();
-
-            for (int i = 0; i < 10; i++)
+            foreach (NPC n in npcList)
             {
-                npcList.Add(new NPC(rng.Next(0, 50)));
+                n.Reset();
             }
+
+            finished = false;
         }
 
         //Set the initial game screen size
