@@ -53,7 +53,6 @@
     <Compile Include="GameItems\BaseIngredient.cs" />
     <Compile Include="GameStates\GameManager.cs" />
     <Compile Include="GameStates\Day.cs" />
-    <Compile Include="GameStates\MainMenu.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="GameStates\Night.cs" />
     <Compile Include="PlayerData.cs" />
@@ -295,6 +294,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Screens\recipeShop.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Screens\Untitled.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\TempButton.jpg">

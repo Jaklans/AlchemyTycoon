@@ -26,8 +26,7 @@ namespace AlchemyTycoon
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
-        //Create the Objects
-        GameStates.MainMenu mM = new GameStates.MainMenu();
+
         GameManager gM = new GameManager();
 
         /// <summary>
@@ -42,8 +41,8 @@ namespace AlchemyTycoon
 
             // TODO: Add your initialization logic here
             //set the prefered window size to the values (Can be changed
-            graphics.PreferredBackBufferWidth = screenWidth;
-            graphics.PreferredBackBufferHeight = screenHeight;
+            graphics.PreferredBackBufferWidth = 1920;
+            graphics.PreferredBackBufferHeight = 1080;
             
             graphics.ApplyChanges();
 
@@ -94,6 +93,8 @@ namespace AlchemyTycoon
 
         protected override void Update(GameTime gameTime)
         {
+            Mouse.WindowHandle = Window.Handle;
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             // TODO: Add your update logic here
